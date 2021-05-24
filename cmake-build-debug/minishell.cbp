@@ -98,7 +98,13 @@
 		<Unit filename="/Users/ftinkere/prj/minishell/include/types.h">
 			<Option target="minishell"/>
 		</Unit>
-		<Unit filename="/Users/ftinkere/prj/minishell/include/vector.h">
+		<Unit filename="/Users/ftinkere/prj/minishell/srcs/env.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/ftinkere/prj/minishell/srcs/executor.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/ftinkere/prj/minishell/srcs/expander.c">
 			<Option target="minishell"/>
 		</Unit>
 		<Unit filename="/Users/ftinkere/prj/minishell/srcs/lexer.c">
@@ -107,7 +113,10 @@
 		<Unit filename="/Users/ftinkere/prj/minishell/srcs/main.c">
 			<Option target="minishell"/>
 		</Unit>
-		<Unit filename="/Users/ftinkere/prj/minishell/srcs/vector.c">
+		<Unit filename="/Users/ftinkere/prj/minishell/srcs/parser.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/ftinkere/prj/minishell/srcs/vecl.c">
 			<Option target="minishell"/>
 		</Unit>
 		<Unit filename="/Users/ftinkere/prj/minishell/CMakeLists.txt">

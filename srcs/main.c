@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "minishell.h"
 #include "libft.h"
 
@@ -21,14 +22,31 @@ void	print_lexes(t_vecl *vec)
 		printf("%s:%i ", vec->arr[i].str, vec->arr[i].token);
 		i++;
 	}
+	printf("\n");
 }
 
-int	main(int argc, char *argv[], char *env[]) {
-	char	*str;
-	t_vecl	*vec;
+/*
+** move semantics
+*/
+void	do_line(char *str, char **env)
+{
+	t_vecl	*lexes;
 
-	get_next_line(0, &str);
-	vec = lexer(str);
-	print_lexes(vec);
+	lexes = lexer(str);
+	expander(lexes, env);
+	executor(parser(lexes, env), env);
+	vecl_free(lexes);
+	free(str);
+}
+
+int	main(int argc, char *argv[], char *env[])
+{
+	char	*str;
+
+	while (get_next_line(0, &str))
+	{
+		do_line(str, env);
+	}
+	free(str);
 	return (0);
 }

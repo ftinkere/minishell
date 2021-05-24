@@ -155,6 +155,87 @@ libft/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libft.dir/build.make CMakeFiles/libft.dir/build
 .PHONY : libft/fast
 
+srcs/env.o: srcs/env.c.o
+
+.PHONY : srcs/env.o
+
+# target to build an object file
+srcs/env.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/env.c.o
+.PHONY : srcs/env.c.o
+
+srcs/env.i: srcs/env.c.i
+
+.PHONY : srcs/env.i
+
+# target to preprocess a source file
+srcs/env.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/env.c.i
+.PHONY : srcs/env.c.i
+
+srcs/env.s: srcs/env.c.s
+
+.PHONY : srcs/env.s
+
+# target to generate assembly for a file
+srcs/env.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/env.c.s
+.PHONY : srcs/env.c.s
+
+srcs/executor.o: srcs/executor.c.o
+
+.PHONY : srcs/executor.o
+
+# target to build an object file
+srcs/executor.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/executor.c.o
+.PHONY : srcs/executor.c.o
+
+srcs/executor.i: srcs/executor.c.i
+
+.PHONY : srcs/executor.i
+
+# target to preprocess a source file
+srcs/executor.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/executor.c.i
+.PHONY : srcs/executor.c.i
+
+srcs/executor.s: srcs/executor.c.s
+
+.PHONY : srcs/executor.s
+
+# target to generate assembly for a file
+srcs/executor.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/executor.c.s
+.PHONY : srcs/executor.c.s
+
+srcs/expander.o: srcs/expander.c.o
+
+.PHONY : srcs/expander.o
+
+# target to build an object file
+srcs/expander.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/expander.c.o
+.PHONY : srcs/expander.c.o
+
+srcs/expander.i: srcs/expander.c.i
+
+.PHONY : srcs/expander.i
+
+# target to preprocess a source file
+srcs/expander.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/expander.c.i
+.PHONY : srcs/expander.c.i
+
+srcs/expander.s: srcs/expander.c.s
+
+.PHONY : srcs/expander.s
+
+# target to generate assembly for a file
+srcs/expander.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/expander.c.s
+.PHONY : srcs/expander.c.s
+
 srcs/lexer.o: srcs/lexer.c.o
 
 .PHONY : srcs/lexer.o
@@ -209,32 +290,59 @@ srcs/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/main.c.s
 .PHONY : srcs/main.c.s
 
-srcs/vector.o: srcs/vector.c.o
+srcs/parser.o: srcs/parser.c.o
 
-.PHONY : srcs/vector.o
+.PHONY : srcs/parser.o
 
 # target to build an object file
-srcs/vector.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/vector.c.o
-.PHONY : srcs/vector.c.o
+srcs/parser.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/parser.c.o
+.PHONY : srcs/parser.c.o
 
-srcs/vector.i: srcs/vector.c.i
+srcs/parser.i: srcs/parser.c.i
 
-.PHONY : srcs/vector.i
+.PHONY : srcs/parser.i
 
 # target to preprocess a source file
-srcs/vector.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/vector.c.i
-.PHONY : srcs/vector.c.i
+srcs/parser.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/parser.c.i
+.PHONY : srcs/parser.c.i
 
-srcs/vector.s: srcs/vector.c.s
+srcs/parser.s: srcs/parser.c.s
 
-.PHONY : srcs/vector.s
+.PHONY : srcs/parser.s
 
 # target to generate assembly for a file
-srcs/vector.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/vector.c.s
-.PHONY : srcs/vector.c.s
+srcs/parser.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/parser.c.s
+.PHONY : srcs/parser.c.s
+
+srcs/vecl.o: srcs/vecl.c.o
+
+.PHONY : srcs/vecl.o
+
+# target to build an object file
+srcs/vecl.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/vecl.c.o
+.PHONY : srcs/vecl.c.o
+
+srcs/vecl.i: srcs/vecl.c.i
+
+.PHONY : srcs/vecl.i
+
+# target to preprocess a source file
+srcs/vecl.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/vecl.c.i
+.PHONY : srcs/vecl.c.i
+
+srcs/vecl.s: srcs/vecl.c.s
+
+.PHONY : srcs/vecl.s
+
+# target to generate assembly for a file
+srcs/vecl.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/srcs/vecl.c.s
+.PHONY : srcs/vecl.c.s
 
 # Help Target
 help:
@@ -246,15 +354,27 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... libft"
 	@echo "... minishell"
+	@echo "... srcs/env.o"
+	@echo "... srcs/env.i"
+	@echo "... srcs/env.s"
+	@echo "... srcs/executor.o"
+	@echo "... srcs/executor.i"
+	@echo "... srcs/executor.s"
+	@echo "... srcs/expander.o"
+	@echo "... srcs/expander.i"
+	@echo "... srcs/expander.s"
 	@echo "... srcs/lexer.o"
 	@echo "... srcs/lexer.i"
 	@echo "... srcs/lexer.s"
 	@echo "... srcs/main.o"
 	@echo "... srcs/main.i"
 	@echo "... srcs/main.s"
-	@echo "... srcs/vector.o"
-	@echo "... srcs/vector.i"
-	@echo "... srcs/vector.s"
+	@echo "... srcs/parser.o"
+	@echo "... srcs/parser.i"
+	@echo "... srcs/parser.s"
+	@echo "... srcs/vecl.o"
+	@echo "... srcs/vecl.i"
+	@echo "... srcs/vecl.s"
 .PHONY : help
 
 

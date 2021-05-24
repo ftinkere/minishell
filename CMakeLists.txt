@@ -11,6 +11,6 @@ add_custom_target(libft
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/libft
         )
 
-add_executable(minishell srcs/main.c srcs/lexer.c include/types.h srcs/vector.c include/vector.h include/minishell.h)
+add_executable(minishell srcs/main.c srcs/lexer.c include/types.h srcs/vecl.c include/minishell.h srcs/env.c srcs/parser.c srcs/expander.c srcs/executor.c)
 add_dependencies(minishell libft)
 target_link_libraries(minishell ft)

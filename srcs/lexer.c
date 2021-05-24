@@ -1,6 +1,11 @@
-#include "types.h"
-#include "vector.h"
+#include "minishell.h"
 #include "libft.h"
+
+/*
+**
+** Обработка строки в набор лексем
+**
+*/
 
 enum e_token	get_token(char *str)
 {
@@ -24,14 +29,14 @@ enum e_token	get_token(char *str)
 		return (T_WORD);
 }
 
-int		get_len(char *str)
+int	get_len(char *str)
 {
 	int		ret;
 	char	quote;
 
 	ret = 0;
 	quote = 0;
-	while (!ft_strchr(" \t\n", str[ret]) || quote != 0)
+	while (str[ret] && (!ft_strchr(" \t\n", str[ret]) || quote != 0))
 	{
 		if (str[ret] == '"' && quote == 0)
 			quote = 1;
@@ -46,16 +51,17 @@ int		get_len(char *str)
 	return (ret);
 }
 
-void	get_lex(t_vecl *vec, char *str, int *i) {
-	int word_len;
-	t_lex lex;
+void	get_lex(t_vecl *vec, char *str, int *i)
+{
+	int		word_len;
+	t_lex	lex;
 
 	word_len = get_len(&str[*i]);
 	lex.str = ft_substr(str, *i, word_len);
 	lex.token = get_token(lex.str);
 	vecl_add(vec, lex);
 	*i += word_len;
-	while (str[*i] &&  ft_strchr(" \t", str[*i]))
+	while (str[*i] && ft_strchr(" \t", str[*i]))
 		(*i)++;
 }
 

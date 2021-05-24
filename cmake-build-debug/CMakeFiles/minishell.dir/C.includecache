@@ -6,23 +6,21 @@
 
 #IncludeRegexTransform: 
 
+../include/minishell.h
+types.h
+../include/types.h
+
 ../include/types.h
 stddef.h
 -
-
-../include/vector.h
-types.h
-../include/types.h
 
 ../libft/libft.h
 stddef.h
 -
 
-/Users/ftinkere/prj/minishell/srcs/lexer.c
-types.h
-/Users/ftinkere/prj/minishell/srcs/types.h
-vector.h
-/Users/ftinkere/prj/minishell/srcs/vector.h
+/Users/ftinkere/prj/minishell/srcs/parser.c
+minishell.h
+-
 libft.h
-/Users/ftinkere/prj/minishell/srcs/libft.h
+-
 

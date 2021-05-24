@@ -35,4 +35,28 @@ typedef struct s_vecl {
 	t_lex	*arr;
 }	t_vecl;
 
+/*
+**
+** Пара в args_index_pairs говорит начало команды в пайплайне и количество
+** лексем которые ей передаются
+** a b | c d e | f
+** [0; 2] [3; 3] [7; 1]
+** С нулевого аргумента два, с третьего три и с седьмого один
+**
+*/
+typedef struct s_exec {
+	t_vecl		*lexes;
+	size_t		size;
+	int			*args_index_pairs;
+
+	int			stdin;
+	int			stdout;
+	int			stderr;
+	int			wait;
+
+	char		*path;
+	char		**argv;
+	char		**env;
+}	t_exec;
+
 #endif

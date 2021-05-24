@@ -1,6 +1,12 @@
 #include <stdlib.h>
 #include <libft.h>
-#include "vector.h"
+#include "minishell.h"
+
+/*
+**
+** Обработка вектора лексем
+**
+*/
 
 t_vecl	*vecl_init(void)
 {
@@ -34,6 +40,14 @@ t_vecl	*vecl_add(t_vecl *vec, t_lex lex)
 
 void	vecl_free(t_vecl *vec)
 {
+	int	i;
+
+	i = 0;
+	while (i < vec->size)
+	{
+		free(vec->arr[i].str);
+		i++;
+	}
 	free(vec->arr);
 	free(vec);
 }
