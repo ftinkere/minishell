@@ -1,4 +1,0 @@
-/Users/ftinkere/prj/minishell/cmake-build-debug/CMakeFiles/minishell.dir
-/Users/ftinkere/prj/minishell/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/ftinkere/prj/minishell/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/ftinkere/prj/minishell/cmake-build-debug/CMakeFiles/libft.dir
