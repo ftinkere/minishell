@@ -4,8 +4,10 @@
   <component name="CidrRootsConfiguration">
     <sourceRoots>
       <file path="$PROJECT_DIR$/include" />
-      <file path="$PROJECT_DIR$/libft/srcs" />
       <file path="$PROJECT_DIR$/srcs" />
     </sourceRoots>
+    <libraryRoots>
+      <file path="$PROJECT_DIR$/libft" />
+    </libraryRoots>
   </component>
 </project>

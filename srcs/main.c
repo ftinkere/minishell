@@ -12,7 +12,7 @@ void	print_strs(char *strs[])
 		printf("%s\n", strs[t++]);
 }
 
-void	print_lexes(t_vecl *vec)
+void	print_lexes(t_vec_lex *vec)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ void	print_lexes(t_vecl *vec)
 */
 void	do_line(char *str, char **env)
 {
-	t_vecl	*lexes;
+	t_vec_lex	*lexes;
 
 	lexes = lexer(str);
 	expander(lexes, env);

@@ -2,24 +2,88 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <printf.h>
+#include <stdio.h>
+#include <sys/wait.h>
 
 /*
 ** Выполняет подготовленную команду
 */
 
-void	executor(t_exec *exec, char **env)
+void	exec_one(t_execve *exec, char **env)
+{
+	execve(exec->path, exec->argv, env);
+}
+
+void	executor(t_pipeline *pipeline, char **env)
 {
 	pid_t	pid;
-	int		status;
+	int		i;
+	// to struct:
+	int		tmpin;
+	int		tmpout;
+	int		fdin;
+	int		fdout;
+	int		fdpipe[2];
 
-	pid = fork();
-	if (pid == 0)
+	tmpin = dup(0);
+	tmpout = dup(1);
+
+	// file_in вместо того:
+	fdin = dup(tmpin);
+
+	i = 0;
+	while (i * 2 < pipeline->args->size)
 	{
-		execve(exec->path, exec->argv, exec->env);
-		printf("Error\n");
-		exit(0);
+		dup2(fdin, 0);
+		close(fdin);
+		if (i == pipeline->args->size / 2 - 1)
+		{
+			// Есть ли file_out, иначе
+			fdout = dup(tmpout);
+		}
+		else
+		{
+			pipe(fdpipe); // Посмотреть нет ли утечек дескрипторов
+			fdout = fdpipe[1];
+			fdin = fdpipe[0];
+		}
+		dup2(fdout, 1);
+		close(fdout);
+
+		pid = fork();
+		if (pid == 0)
+		{
+			exec_one(&((t_execve *) pipeline->execves->arr)[i], env);
+			printf("Error, dont execed\n");
+			exit(1);
+		}
+		i++;
 	}
-	if (exec->wait)
-		wait(&status);
+	dup2(tmpin, 0);
+	dup2(tmpout, 1);
+	close(tmpin);
+	close(tmpout);
+	if (pipeline->wait)
+		wait(NULL);
 }
+
+//void	executor(t_pipeline *pipeline, char **env)
+//{
+//	pid_t	pid;
+//	int		status;
+//	int		i;
+//
+//	i = 0;
+//	while (i * 2 < pipeline->args->size)
+//	{
+//		pid = fork();
+//		if (pid == 0) {
+//			exec_one(&((t_execve *) pipeline->execves->arr)[i], env);
+//			printf("Error, pid: %d\n", pid);
+//			exit(0);
+//		}
+//		if (pipeline->wait)
+//			wait(&status);
+//		i++;
+//	}
+//}

@@ -48,15 +48,18 @@ int	get_len(char *str)
 			quote = 0;
 		ret++;
 	}
+	// if (quote != 0): error, expected " or '
+	// or just ignore and process in parser
 	return (ret);
 }
 
-void	get_lex(t_vecl *vec, char *str, int *i)
+void	get_lex(t_vec_lex *vec, char *str, int *i)
 {
 	int		word_len;
 	t_lex	lex;
 
 	word_len = get_len(&str[*i]);
+	// MALLOC!!!!!!!! // вроде фришится в vecl_free()
 	lex.str = ft_substr(str, *i, word_len);
 	lex.token = get_token(lex.str);
 	vecl_add(vec, lex);
@@ -65,9 +68,9 @@ void	get_lex(t_vecl *vec, char *str, int *i)
 		(*i)++;
 }
 
-t_vecl	*lexer(char *str)
+t_vec_lex	*lexer(char *str)
 {
-	t_vecl	*ret;
+	t_vec_lex	*ret;
 	int		i;
 
 	ret = vecl_init();

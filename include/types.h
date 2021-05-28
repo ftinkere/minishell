@@ -33,30 +33,51 @@ typedef struct s_vecl {
 	size_t	capacity;
 	size_t	size;
 	t_lex	*arr;
-}	t_vecl;
+}	t_vec_lex;
+
+
+typedef struct s_vec {
+	size_t	capacity;
+	size_t	size;
+	void	*arr;
+}	t_vec;
+typedef t_vec t_vec_int;
+
+typedef struct s_execve {
+	char	*path;
+	char	**argv;
+}	t_execve;
 
 /*
 **
-** Пара в args_index_pairs говорит начало команды в пайплайне и количество
+** lexes хранит вектор простых лексем, который был считан со входа
+**
+** Пара индексов в args говорит начало команды в пайплайне и количество
 ** лексем которые ей передаются
 ** a b | c d e | f
 ** [0; 2] [3; 3] [7; 1]
 ** С нулевого аргумента два, с третьего три и с седьмого один
 **
+** execves хранит вектор типа t_execve и представляет собой последовательность
+** простых команд в пайплайне которые должны запускаться друг за другом
+**
+** file_in, file_out, file_err хранят пути к файлам для ввода-вывода этих потоков
+**
+** wait показывает нужно ли ждать выполнения процесса с команды или нет
+**
 */
-typedef struct s_exec {
-	t_vecl		*lexes;
-	size_t		size;
-	int			*args_index_pairs;
+typedef struct s_pipeline {
+	t_vec_lex	*lexes;
+	t_vec_int	*args;
 
-	int			stdin;
-	int			stdout;
-	int			stderr;
+	t_vec		*execves;
+
+	char		**envp;
+
+	char		*file_in;
+	char		*file_out;
+	char		*file_err;
 	int			wait;
-
-	char		*path;
-	char		**argv;
-	char		**env;
-}	t_exec;
+}	t_pipeline;
 
 #endif

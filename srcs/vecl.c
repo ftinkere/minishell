@@ -8,18 +8,18 @@
 **
 */
 
-t_vecl	*vecl_init(void)
+t_vec_lex	*vecl_init(void)
 {
-	t_vecl	*vec;
+	t_vec_lex	*vec;
 
-	vec = malloc(sizeof(t_vecl));
+	vec = malloc(sizeof(t_vec_lex));
 	vec->capacity = 8;
 	vec->size = 0;
 	vec->arr = ft_calloc(vec->capacity, sizeof(t_lex));
 	return (vec);
 }
 
-t_vecl	*vecl_grow(t_vecl *vec)
+t_vec_lex	*vecl_grow(t_vec_lex *vec)
 {
 	void	*new_ptr;
 
@@ -31,14 +31,14 @@ t_vecl	*vecl_grow(t_vecl *vec)
 	return (vec);
 }
 
-t_vecl	*vecl_add(t_vecl *vec, t_lex lex)
+t_vec_lex	*vecl_add(t_vec_lex *vec, t_lex lex)
 {
 	if (vec->size == vec->capacity)
 		vecl_grow(vec);
 	vec->arr[vec->size++] = lex;
 }
 
-void	vecl_free(t_vecl *vec)
+void	vecl_free(t_vec_lex *vec)
 {
 	int	i;
 
