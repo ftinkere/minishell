@@ -33,4 +33,6 @@ void		print_lexes(t_vec_lex *vec);
 void		free_split(char **strs);
 void		free_pipeline(t_pipeline *pipeline);
 
+int			is_buildin(char *str);
+
 #endif

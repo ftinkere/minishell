@@ -50,12 +50,19 @@ void	executor(t_pipeline *pipeline, char **env)
 		dup2(fdout, 1);
 		close(fdout);
 
-		pid = fork();
-		if (pid == 0)
+		if (is_buildin(((t_execve *) pipeline->execves->arr)[i].path))
 		{
-			exec_one(&((t_execve *) pipeline->execves->arr)[i], env);
-			printf("Error, dont execed\n");
-			exit(1);
+			free_pipeline(pipeline);
+			exit(0);
+		}
+		else
+		{
+			pid = fork();
+			if (pid == 0) {
+				exec_one(&((t_execve *) pipeline->execves->arr)[i], env);
+				printf("Error, dont execed\n");
+				exit(1);
+			}
 		}
 		i++;
 	}

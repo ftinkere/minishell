@@ -14,24 +14,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2edb8e07-7e34-4b22-9102-c28ed2b959f8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/srcs/path.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/srcs/prints.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/srcs/split_semicolon.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/srcs/tests.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/srcs/utils.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libft/srcs/ft_strfjoin.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/minishell.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/minishell.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/types.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/types.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libft/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/libft/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libft/libft.a" beforeDir="false" afterPath="$PROJECT_DIR$/libft/libft.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libft/libft.h" beforeDir="false" afterPath="$PROJECT_DIR$/libft/libft.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/executor.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/executor.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/expander.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/expander.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/lexer.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/lexer.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/parser.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parser.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/path.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/path.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/t_pipeline.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/t_pipeline.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/vec.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/vec.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/vec_int.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/vec_int.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/vecl.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/vecl.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/utils.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,12 +118,24 @@
       <workItem from="1622722339937" duration="12000" />
       <workItem from="1622722382107" duration="39000" />
       <workItem from="1622722436484" duration="79000" />
-      <workItem from="1622722637082" duration="16348000" />
+      <workItem from="1622722637082" duration="24330000" />
     </task>
+    <task id="LOCAL-00001" summary="Semicolon">
+      <created>1622753406015</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1622753406015</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Semicolon" />
+    <option name="LAST_COMMIT_MESSAGE" value="Semicolon" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -141,7 +148,12 @@
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/srcs/executor.c</url>
           <line>26</line>
-          <option name="timeStamp" value="7" />
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/srcs/parser.c</url>
+          <line>105</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

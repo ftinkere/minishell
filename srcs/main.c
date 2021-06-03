@@ -17,8 +17,6 @@ void	do_line(char *str, char **env)
 	while (i < blocks->size)
 	{
 		lexes = lexer(((char**)blocks->arr)[i]);
-		expand_env(lexes, env);
-		// TODO: freesher for t_pipeline from parser
 		executor(parser(lexes, env), env);
 		vecl_free(lexes);
 		i++;
@@ -38,7 +36,7 @@ int	main(int argc, char *argv[], char *env[])
 {
 	char	*str;
 
-	while (get_next_line(0, &str))
+	while (get_next_line(0, &str)) //freed
 	{
 		do_line(str, env);
 	}

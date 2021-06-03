@@ -83,7 +83,6 @@ t_pipeline	*parser(t_vec_lex *lexes, char **env)
 		return (NULL);
 	pipeline = pipeline_init();
 	pipeline->lexes = lexes;
-	vec_add(pipeline->execves, ft_calloc(1, sizeof(t_execve)));
 
 	// Зацикловать относительно количества команд в пайплайне
 	// И вычислять начала и количества аргументов
@@ -95,6 +94,7 @@ t_pipeline	*parser(t_vec_lex *lexes, char **env)
 	{
 		vec_int_add(pipeline->args, arg);
 		vec_int_add(pipeline->args, count_args(lexes, arg));
+		vec_add(pipeline->execves, ft_calloc(1, sizeof(t_execve)));
 		arg += count_args(lexes, arg) + 1;
 		if (arg - 1 > lexes->size)
 			printf("Error while pipe-parse, arg: %d, tokens: %lu\n", arg, lexes->size);
