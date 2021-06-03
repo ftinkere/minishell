@@ -20,10 +20,17 @@ void		vec_int_free(t_vec *vec);
 t_pipeline	*pipeline_init();
 
 t_vec_lex	*lexer(char *str);
-t_vec_lex	*expander(t_vec_lex *lexes, char **env);
-t_pipeline 	*parser(t_vec_lex *lexes, char **env);
+t_pipeline	*parser(t_vec_lex *lexes, char **env);
 void		executor(t_pipeline *pipeline, char **env);
 
-void	print_strs(char *strs[]);
+t_vec		*split_semicolon(char *str);
+char		*get_path_by_comand(char *cmd);
+char		*expand_path_if_need(char *cmd);
+t_vec_lex	*expand_env(t_vec_lex *lexes, char **env);
+
+void		print_strs(char **strs);
+void		print_lexes(t_vec_lex *vec);
+void		free_split(char **strs);
+void		free_pipeline(t_pipeline *pipeline);
 
 #endif

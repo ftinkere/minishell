@@ -65,6 +65,7 @@ void	executor(t_pipeline *pipeline, char **env)
 	close(tmpout);
 	if (pipeline->wait)
 		wait(NULL);
+	free_pipeline(pipeline);
 }
 
 //void	executor(t_pipeline *pipeline, char **env)

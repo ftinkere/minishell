@@ -7,7 +7,7 @@
 **
 */
 
-enum e_token	get_token(char *str)
+static enum e_token	get_token(char *str)
 {
 	if (!ft_strcmp(str, S_GREATE))
 		return (T_GREATE);
@@ -29,10 +29,10 @@ enum e_token	get_token(char *str)
 		return (T_WORD);
 }
 
-int	get_len(char *str)
+static int	get_len(char *str)
 {
-	int		ret;
-	char	quote;
+	int	ret;
+	int	quote;
 
 	ret = 0;
 	quote = 0;
@@ -53,7 +53,7 @@ int	get_len(char *str)
 	return (ret);
 }
 
-void	get_lex(t_vec_lex *vec, char *str, int *i)
+static void	get_lex(t_vec_lex *vec, char *str, int *i)
 {
 	int		word_len;
 	t_lex	lex;
@@ -71,7 +71,7 @@ void	get_lex(t_vec_lex *vec, char *str, int *i)
 t_vec_lex	*lexer(char *str)
 {
 	t_vec_lex	*ret;
-	int		i;
+	int			i;
 
 	ret = vecl_init();
 	i = 0;

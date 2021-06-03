@@ -33,7 +33,7 @@ t_vec_lex	*vecl_grow(t_vec_lex *vec)
 
 t_vec_lex	*vecl_add(t_vec_lex *vec, t_lex lex)
 {
-	if (vec->size == vec->capacity)
+	if (vec->size == vec->capacity - 1)
 		vecl_grow(vec);
 	vec->arr[vec->size++] = lex;
 }

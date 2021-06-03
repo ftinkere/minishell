@@ -33,7 +33,7 @@ t_vec	*vec_grow(t_vec *vec)
 
 t_vec	*vec_add(t_vec *vec, void *a)
 {
-	if (vec->size == vec->capacity)
+	if (vec->size == vec->capacity - 1)
 		vec_grow(vec);
 	((void **)vec->arr)[vec->size++] = a;
 	return (vec);
@@ -51,6 +51,7 @@ void	vec_free_all(t_vec *vec)
 
 	i = 0;
 	while (i < vec->size)
-		free(&vec->arr[i++]);
-	vec_free(vec);
+		free(((void **)vec->arr)[i++]);
+	free(vec->arr);
+	free(vec);
 }

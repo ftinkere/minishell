@@ -3,6 +3,7 @@
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
       <config projectName="minishell" targetName="libft" />
+      <config projectName="minishell" targetName="minishell_tester" />
       <config projectName="minishell" targetName="minishell" />
     </generated>
   </component>
@@ -13,70 +14,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2edb8e07-7e34-4b22-9102-c28ed2b959f8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/srcs/t_pipeline.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/srcs/vec.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/srcs/vec_int.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/srcs/path.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/srcs/prints.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/srcs/split_semicolon.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/srcs/tests.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/srcs/utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/minishell.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/minishell.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/types.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/types.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/libft.a" beforeDir="false" afterPath="$PROJECT_DIR$/libft/libft.a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_atoi.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_atoi.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_bzero.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_bzero.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_calloc.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_calloc.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_isalnum.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_isalnum.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_isalpha.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_isalpha.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_isascii.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_isascii.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_isdigit.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_isdigit.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_isprint.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_isprint.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_itoa.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_itoa.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_lstadd_back.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_lstadd_back.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_lstadd_front.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_lstadd_front.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_lstclear.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_lstclear.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_lstdelone.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_lstdelone.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_lstiter.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_lstiter.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_lstlast.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_lstlast.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_lstmap.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_lstmap.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_lstnew.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_lstnew.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_lstsize.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_lstsize.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_math_1.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_math_1.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_math_2.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_math_2.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_memccpy.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_memccpy.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_memchr.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_memchr.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_memcmp.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_memcmp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_memcpy.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_memcpy.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_memmove.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_memmove.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_memset.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_memset.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_putchar_fd.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_putchar_fd.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_putendl_fd.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_putendl_fd.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_putnbr_fd.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_putnbr_fd.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_putstr_fd.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_putstr_fd.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_split.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_split.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_split_str.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_split_str.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_strchr.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_strchr.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_strcmp.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_strcmp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_strdup.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_strdup.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_strjoin.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_strjoin.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_strlcat.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_strlcat.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_strlcpy.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_strlcpy.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_strlen.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_strlen.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_strmapi.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_strmapi.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_strncmp.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_strncmp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_strnstr.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_strnstr.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_strrchr.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_strrchr.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_strtrim.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_strtrim.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_substr.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_substr.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_tolower.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_tolower.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/ft_toupper.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/ft_toupper.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/get_next_line.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/get_next_line.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/objs/get_next_line_utils.o" beforeDir="false" afterPath="$PROJECT_DIR$/libft/objs/get_next_line_utils.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/executor.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/executor.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/expander.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/expander.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/lexer.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/lexer.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/parser.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parser.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/t_pipeline.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/t_pipeline.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/vec.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/vec.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/vec_int.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/vec_int.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/vecl.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/vecl.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -107,13 +61,18 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
+    <property name="cidr.known.project.marker" value="true" />
+    <property name="cmake.loaded.for.project" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/srcs" />
+    <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="settings.editor.selected.configurable" value="CPPToolchains" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -121,22 +80,27 @@
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.minishell">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="libft" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="minishell" TARGET_NAME="libft" CONFIG_NAME="Debug">
+    <configuration name="libft" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="minishell" TARGET_NAME="libft" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="minishell" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="minishell" TARGET_NAME="minishell" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="minishell" RUN_TARGET_NAME="minishell">
+    <configuration name="minishell" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="minishell" TARGET_NAME="minishell" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="minishell" RUN_TARGET_NAME="minishell">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="minishell_tester" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="minishell" TARGET_NAME="minishell_tester" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="minishell" RUN_TARGET_NAME="minishell_tester">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -144,6 +108,7 @@
     <list>
       <item itemvalue="CMake Application.libft" />
       <item itemvalue="CMake Application.minishell" />
+      <item itemvalue="CMake Application.minishell_tester" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -155,10 +120,34 @@
       <option name="presentableId" value="Default" />
       <updated>1622137569296</updated>
       <workItem from="1622137570890" duration="9183000" />
+      <workItem from="1622722339937" duration="12000" />
+      <workItem from="1622722382107" duration="39000" />
+      <workItem from="1622722436484" duration="79000" />
+      <workItem from="1622722637082" duration="16348000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/srcs/tests.c</url>
+          <line>46</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/srcs/executor.c</url>
+          <line>26</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

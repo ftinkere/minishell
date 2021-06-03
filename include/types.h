@@ -72,7 +72,7 @@ typedef struct s_pipeline {
 
 	t_vec		*execves;
 
-	char		**envp;
+	t_vec		*envp;
 
 	char		*file_in;
 	char		*file_out;

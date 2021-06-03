@@ -30,6 +30,7 @@ int	get_args(t_pipeline *pipeline, int i)
 	return (((int *)pipeline->args->arr)[i]);
 }
 
+// TODO FREESHER, dont forget for strdups and path
 void	set_execves(t_pipeline *pipeline, t_vec_lex *lexes)
 {
 	int	args_count;
@@ -41,13 +42,13 @@ void	set_execves(t_pipeline *pipeline, t_vec_lex *lexes)
 	{
 		args_count = get_args(pipeline, i * 2 + 1);
 		get_execve(pipeline, i)->path = \
-			lexes->arr[get_args(pipeline, i * 2)].str;
+			expand_path_if_need(lexes->arr[get_args(pipeline, i * 2)].str);
 		get_execve(pipeline, i)->argv = \
 			ft_calloc(args_count + 1, sizeof(char *));
 		j = 0;
 		while (j < args_count) {
 			get_execve(pipeline, i)->argv[j] = \
-				lexes->arr[get_args(pipeline, i * 2) + j].str;
+				ft_strdup(lexes->arr[get_args(pipeline, i * 2) + j].str);
 			j++;
 		}
 		((t_execve *)pipeline->execves->arr)[i].argv[j] = NULL;
@@ -101,7 +102,7 @@ t_pipeline	*parser(t_vec_lex *lexes, char **env)
 	}
 	set_execves(pipeline, lexes);
 
-	pipeline->envp = env;
+//	pipeline->envp = env;
 
 	if (lexes->arr[lexes->size - 1].token == T_AMP)
 		pipeline->wait = 0;
