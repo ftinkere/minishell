@@ -21,7 +21,7 @@ t_pipeline	*pipeline_init();
 
 t_vec_lex	*lexer(char *str);
 t_pipeline	*parser(t_vec_lex *lexes, char **env);
-void		executor(t_pipeline *pipeline, char **env);
+int			executor(t_pipeline *pipeline, char **env);
 
 t_vec		*split_semicolon(char *str);
 char		*get_path_by_comand(char *cmd);

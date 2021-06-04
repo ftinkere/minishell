@@ -25,8 +25,8 @@ SOURCES_RAW		= \
 	ft_strtrim ft_split ft_itoa ft_strmapi ft_putchar_fd ft_putstr_fd \
 	ft_putendl_fd ft_putnbr_fd ft_lstnew ft_lstadd_front ft_lstsize ft_lstlast \
 	ft_lstadd_back ft_lstdelone ft_lstclear ft_lstiter ft_lstmap \
-	get_next_line get_next_line_utils ft_split_str ft_strcmp \
-	ft_math_1 ft_math_2 ft_strfjoin
+	ft_split_str ft_strcmp \
+	ft_math_1 ft_math_2 ft_strfjoin get_next_line get_next_line_utils
 SOURCES_C		=	$(addsuffix .c, $(SOURCE_RAW))
 SOURCES			= $(addprefix $(SRCS_DIR)/, $(SOURCES_C))
 

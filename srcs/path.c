@@ -8,6 +8,7 @@ char	*get_path_by_comand_dir(char *cmd, char *dir_path)
 {
 	DIR				*dir;
 	struct dirent	*ep;
+	char			*name;
 
 	dir = opendir(dir_path);
 	if (dir != NULL)
@@ -17,8 +18,9 @@ char	*get_path_by_comand_dir(char *cmd, char *dir_path)
 		{
 			if (!ft_strcmp(cmd, ep->d_name))
 			{
+				name = ft_strdup(ep->d_name);
 				closedir(dir);
-				return (ft_strf2join(dir_path, ft_strjoin("/", ep->d_name)));
+				return (ft_strf2join(dir_path, ft_strf2join("/", name)));
 			}
 			ep = readdir(dir);
 		}

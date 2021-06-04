@@ -14,10 +14,11 @@ void	exec_one(t_execve *exec, char **env)
 	execve(exec->path, exec->argv, env);
 }
 
-void	executor(t_pipeline *pipeline, char **env)
+int	executor(t_pipeline *pipeline, char **env)
 {
 	pid_t	pid;
 	int		i;
+	int		ret;
 	// to struct:
 	int		tmpin;
 	int		tmpout;
@@ -31,6 +32,7 @@ void	executor(t_pipeline *pipeline, char **env)
 	// file_in вместо того:
 	fdin = dup(tmpin);
 
+	ret = 1;
 	i = 0;
 	while (i * 2 < pipeline->args->size)
 	{
@@ -50,18 +52,20 @@ void	executor(t_pipeline *pipeline, char **env)
 		dup2(fdout, 1);
 		close(fdout);
 
-		if (is_buildin(((t_execve *) pipeline->execves->arr)[i].path))
+		if (is_buildin(((t_execve **)pipeline->execves->arr)[i]->path))
 		{
-			free_pipeline(pipeline);
-			exit(0);
+//			free_pipeline(pipeline);
+			ret = 0;
+			break ;
 		}
 		else
 		{
 			pid = fork();
 			if (pid == 0) {
-				exec_one(&((t_execve *) pipeline->execves->arr)[i], env);
+				exec_one(((t_execve **)pipeline->execves->arr)[i], env);
 				printf("Error, dont execed\n");
-				exit(1);
+				ret = -1;
+				break ;
 			}
 		}
 		i++;
@@ -73,6 +77,7 @@ void	executor(t_pipeline *pipeline, char **env)
 	if (pipeline->wait)
 		wait(NULL);
 	free_pipeline(pipeline);
+	return (ret);
 }
 
 //void	executor(t_pipeline *pipeline, char **env)

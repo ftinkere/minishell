@@ -23,14 +23,14 @@ void	free_execves(t_vec *execves)
 	i = 0;
 	while (i < execves->size)
 	{
-		free(((t_execve *)execves->arr)[i].path);
+		free(((t_execve **)execves->arr)[i]->path);
 		j = 0;
-		while (((t_execve *)execves->arr)[i].argv[j])
+		while (((t_execve **)execves->arr)[i]->argv[j])
 		{
-			free(((t_execve *)execves->arr)[i].argv[j]);
+			free(((t_execve **)execves->arr)[i]->argv[j]);
 			j++;
 		}
-		free(((t_execve *)execves->arr)[i].argv);
+		free(((t_execve **)execves->arr)[i]->argv);
 		i++;
 	}
 	vec_free_all(execves);

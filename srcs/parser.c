@@ -22,7 +22,7 @@ int	count_args(t_vec_lex *lexes, int start)
 
 t_execve	*get_execve(t_pipeline *pipeline, int i)
 {
-	return (&((t_execve *)pipeline->execves->arr)[i]);
+	return (((t_execve **)pipeline->execves->arr)[i]);
 }
 
 int	get_args(t_pipeline *pipeline, int i)
@@ -51,7 +51,7 @@ void	set_execves(t_pipeline *pipeline, t_vec_lex *lexes)
 				ft_strdup(lexes->arr[get_args(pipeline, i * 2) + j].str);
 			j++;
 		}
-		((t_execve *)pipeline->execves->arr)[i].argv[j] = NULL;
+		((t_execve **)pipeline->execves->arr)[i]->argv[j] = NULL;
 		i++;
 	}
 }
