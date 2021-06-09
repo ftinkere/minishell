@@ -15,13 +15,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2edb8e07-7e34-4b22-9102-c28ed2b959f8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/minishell.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/minishell.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/libft/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/executor.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/executor.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/parser.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parser.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/path.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/path.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/utils.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,9 +63,9 @@
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.minishell">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="libft" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="minishell" TARGET_NAME="libft" CONFIG_NAME="Debug">
@@ -113,7 +106,8 @@
       <workItem from="1622722339937" duration="12000" />
       <workItem from="1622722382107" duration="39000" />
       <workItem from="1622722436484" duration="79000" />
-      <workItem from="1622722637082" duration="32980000" />
+      <workItem from="1622722637082" duration="33773000" />
+      <workItem from="1623244560893" duration="875000" />
     </task>
     <task id="LOCAL-00001" summary="Semicolon">
       <created>1622753406015</created>
@@ -129,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622762065634</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Memory leaks fix">
+      <created>1622840828903</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1622840828903</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,7 +139,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Semicolon" />
     <MESSAGE value="More features based" />
-    <option name="LAST_COMMIT_MESSAGE" value="More features based" />
+    <MESSAGE value="Memory leaks fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Memory leaks fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
