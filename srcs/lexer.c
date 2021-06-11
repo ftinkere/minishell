@@ -13,6 +13,8 @@ static enum e_token	get_token(char *str)
 		return (T_GREATE);
 	else if (!ft_strcmp(str, S_LESS))
 		return (T_LESS);
+	else if (!ft_strcmp(str, S_LESSLESS))
+		return (T_LESSLESS);
 	else if (!ft_strcmp(str, S_GREATEGREATE))
 		return (T_GREATGREATE);
 	else if (!ft_strcmp(str, S_GREATEAMP))
@@ -36,20 +38,26 @@ static int	get_len(char *str)
 
 	ret = 0;
 	quote = 0;
-	while (str[ret] && (!ft_strchr(" \t\n", str[ret]) || quote != 0))
+	while (str[ret] && (!ft_strchr(" \t\n><;&|", str[ret]) || quote != 0))
 	{
 		if (str[ret] == '"' && quote == 0)
 			quote = 1;
-		else if (str[ret] == '"' && str[ret - 1] != '\\' && quote == 1)
+		else if (str[ret] == '"' && str[ret - 1] != '\\' && quote == 1 || \
+				(str[ret] == '\'' && quote == -1))
 			quote = 0;
 		else if (str[ret] == '\'' && quote == 0)
 			quote = -1;
-		else if (str[ret] == '\'' && quote == -1)
-			quote = 0;
 		ret++;
 	}
 	// if (quote != 0): error, expected " or '
 	// or just ignore and process in parser
+	if (ret == 0 && !ft_strncmp(str, ">>&", 3))
+		return (3);
+	else if (ret == 0 && (!ft_strncmp(str, ">>", 2) || \
+		!ft_strncmp(str, "<<", 2)) || !ft_strncmp(str, ">&", 2))
+		return (2);
+	else if (ret == 0)
+		return (1);
 	return (ret);
 }
 

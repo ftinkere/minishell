@@ -45,7 +45,5 @@ void	free_pipeline(t_pipeline *pipeline)
 		free(pipeline->file_in);
 	if (pipeline->file_out)
 		free(pipeline->file_out);
-	if (pipeline->file_err)
-		free(pipeline->file_err);
 	free(pipeline);
 }
