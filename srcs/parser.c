@@ -72,6 +72,30 @@ int	count_pipes(t_vec_lex *lexes)
 	return (ret);
 }
 
+void	add_redirects(t_pipeline *pipeline, t_vec_lex *lexes)
+{
+	int	i;
+
+	i = 0;
+	while (i < lexes->size - 1)
+	{
+		if (lexes->arr[i + 1].token != T_WORD)
+		{
+			i++;
+			continue ;
+		}
+		if (lexes->arr[i].token == T_LESS)
+			pipeline->file_in = ft_strdup(lexes->arr[i + 1].str);
+		if (lexes->arr[i].token == T_LESSLESS)
+			pipeline->end_token = ft_strdup(lexes->arr[i + 1].str);
+		if (lexes->arr[i].token == T_GREATE || lexes->arr[i].token == T_GREATGREATE)
+			pipeline->file_out = ft_strdup(lexes->arr[i + 1].str);
+		if (lexes->arr[i].token == T_GREATGREATE)
+			pipeline->append_out = 1;
+		i++;
+	}
+}
+
 t_pipeline	*parser(t_vec_lex *lexes, char **env)
 {
 	t_pipeline	*pipeline;
@@ -101,6 +125,7 @@ t_pipeline	*parser(t_vec_lex *lexes, char **env)
 		i++;
 	}
 	set_execves(pipeline, lexes);
+	add_redirects(pipeline, lexes);
 
 //	pipeline->envp = env;
 
