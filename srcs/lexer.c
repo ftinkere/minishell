@@ -17,10 +17,10 @@ static enum e_token	get_token(char *str)
 		return (T_LESSLESS);
 	else if (!ft_strcmp(str, S_GREATEGREATE))
 		return (T_GREATGREATE);
-	else if (!ft_strcmp(str, S_GREATEAMP))
-		return (T_GREATEAMP);
-	else if (!ft_strcmp(str, S_GREATEGREATEAMP))
-		return (T_GREATGREATEAMP);
+//	else if (!ft_strcmp(str, S_GREATEAMP))
+//		return (T_GREATEAMP);
+//	else if (!ft_strcmp(str, S_GREATEGREATEAMP))
+//		return (T_GREATGREATEAMP);
 	else if (!ft_strcmp(str, S_PIPE))
 		return (T_PIPE);
 	else if (!ft_strcmp(str, S_AMP))
@@ -51,10 +51,7 @@ static int	get_len(char *str)
 	}
 	// if (quote != 0): error, expected " or '
 	// or just ignore and process in parser
-	if (ret == 0 && !ft_strncmp(str, ">>&", 3))
-		return (3);
-	else if (ret == 0 && (!ft_strncmp(str, ">>", 2) || \
-		!ft_strncmp(str, "<<", 2)) || !ft_strncmp(str, ">&", 2))
+	if (ret == 0 && (!ft_strncmp(str, ">>", 2) || !ft_strncmp(str, "<<", 2)))
 		return (2);
 	else if (ret == 0)
 		return (1);

@@ -86,12 +86,12 @@ void	add_redirects(t_pipeline *pipeline, t_vec_lex *lexes)
 		}
 		if (lexes->arr[i].token == T_LESS)
 			pipeline->file_in = ft_strdup(lexes->arr[i + 1].str);
-		if (!ft_strncmp(lexes->arr[i].str, ">", 1))
+		if (lexes->arr[i].token == T_LESSLESS)
+			pipeline->end_token = ft_strdup(lexes->arr[i + 1].str);
+		if (lexes->arr[i].token == T_GREATE || lexes->arr[i].token == T_GREATGREATE)
 			pipeline->file_out = ft_strdup(lexes->arr[i + 1].str);
-		if (!ft_strncmp(lexes->arr[i].str, ">>", 2) && lexes->arr[i + 1].token == T_WORD)
+		if (lexes->arr[i].token == T_GREATGREATE)
 			pipeline->append_out = 1;
-		if ((lexes->arr[i].token == T_GREATEAMP || lexes->arr[i].token == T_GREATGREATEAMP))
-			pipeline->redir_err = 1;
 		i++;
 	}
 }

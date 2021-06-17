@@ -74,12 +74,12 @@ int	executor(t_pipeline *pipeline, char **env)
 		}
 		i++;
 	}
+	if (pipeline->wait)
+		wait(NULL);
 	dup2(tmpin, 0);
 	dup2(tmpout, 1);
 	close(tmpin);
 	close(tmpout);
-	if (pipeline->wait)
-		wait(NULL);
 	free_pipeline(pipeline);
 	return (ret);
 }

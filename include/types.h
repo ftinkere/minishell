@@ -7,8 +7,8 @@
 # define S_LESS "<"
 # define S_GREATEGREATE ">>"
 # define S_LESSLESS "<<"
-# define S_GREATEAMP ">&"
-# define S_GREATEGREATEAMP ">>&"
+//# define S_GREATEAMP ">&"
+//# define S_GREATEGREATEAMP ">>&"
 # define S_PIPE "|"
 # define S_AMP "&"
 # define S_SEMICOLON ";"
@@ -19,8 +19,8 @@ enum e_token {
 	T_LESS,
 	T_LESSLESS,
 	T_GREATGREATE,
-	T_GREATEAMP,
-	T_GREATGREATEAMP,
+//	T_GREATEAMP,
+//	T_GREATGREATEAMP,
 	T_PIPE,
 	T_AMP,
 	T_SEMICOLON
@@ -78,7 +78,7 @@ typedef struct s_pipeline {
 
 	char		*file_in;
 	char		*file_out;
-	int			redir_err;
+	char		*end_token;
 	int			append_out;
 	int			wait;
 }	t_pipeline;

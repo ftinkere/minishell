@@ -59,7 +59,7 @@ int	main(int argc, char *argv[], char *env[])
 
 	res = 0;
 	str = readline("msh: ");
-	while (str)
+	while (str != NULL)
 	{
 		res = do_line(str, env);
 		if (res <= 0)
