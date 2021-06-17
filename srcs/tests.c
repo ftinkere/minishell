@@ -57,6 +57,10 @@
 
 int	main(void)
 {
-	printf("%s\n", get_path_by_comand("ls"));
-	printf("%s\n", get_path_by_comand("grep"));
+	t_vec_lex	*lexes;
+
+	lexes = lexer("echo; mazafaka|pipe&&");
+	for (int i = 0; i < lexes->size; i++) {
+		printf("%s :%d\n", lexes->arr[i].str, lexes->arr[i].token);
+	}
 }

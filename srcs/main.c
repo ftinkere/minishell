@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 #include "minishell.h"
 #include "libft.h"
 
@@ -31,20 +33,42 @@ int	do_line(char *str, char **env)
 // TODO: < > >> &> &>>
 // ;, |, ', " works, PATH +-
 
+//int	main(int argc, char *argv[], char *env[])
+//{
+//	char	*str;
+//	int		res;
+//
+//	res = 0;
+//	while (get_next_line(0, &str))
+//	{
+//		res = do_line(str, env);
+//		if (res <= 0)
+//			break ;
+//		free(str);
+//	}
+//	free(str);
+//	if (res < 0)
+//		return (-res);
+//	return (0);
+//}
+
 int	main(int argc, char *argv[], char *env[])
 {
 	char	*str;
 	int		res;
 
 	res = 0;
-	while (get_next_line(0, &str))
+	str = readline("msh: ");
+	while (str != NULL)
 	{
 		res = do_line(str, env);
 		if (res <= 0)
 			break ;
 		free(str);
+		str = readline("msh: ");
 	}
-	free(str);
+	if (str != NULL)
+		free(str);
 	if (res < 0)
 		return (-res);
 	return (0);
