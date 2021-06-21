@@ -27,11 +27,13 @@ int	do_line(char *str, char **env)
 	return (res);
 }
 
-// TODO: promt (?)
+// TODO: promt (?) +
 // TODO: PATH +-
 // TODO: env
-// TODO: < > >> &> &>>
+// TODO: < > >> <<
 // ;, |, ', " works, PATH +-
+
+// SEGFAULT 2+2
 
 //int	main(int argc, char *argv[], char *env[])
 //{

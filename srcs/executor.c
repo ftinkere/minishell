@@ -71,11 +71,14 @@ int	executor(t_pipeline *pipeline, char **env)
 				ret = -1;
 				break ;
 			}
+			else if (pipeline->wait)
+				waitpid(pid, NULL, 0);
 		}
 		i++;
 	}
 	if (pipeline->wait)
-		wait(NULL);
+		waitpid(pid, NULL, 0);
+//		wait(NULL);
 	dup2(tmpin, 0);
 	dup2(tmpout, 1);
 	close(tmpin);
