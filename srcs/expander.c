@@ -1,5 +1,6 @@
 #include "minishell.h"
 #include "libft.h"
+#include <stddef.h>
 
 /*
 ** Раскрывает необходимые элементы лексем
@@ -13,6 +14,8 @@ t_vec_lex	*expand_env(t_vec_lex *lexes, char **env)
 
 int	is_buildin(char *str)
 {
+	if (str == NULL)
+		return (0);
 	return (!ft_strncmp(str, "../", 3) || !ft_strcmp(str, "exit")
 			|| !ft_strcmp(str, "env") || !ft_strcmp(str, "unset")
 			|| !ft_strcmp(str, "export") || !ft_strcmp(str, "pwd")

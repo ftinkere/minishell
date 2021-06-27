@@ -57,7 +57,11 @@ int	executor(t_pipeline *pipeline, char **env)
 		dup2(fdout, 1);
 		close(fdout);
 
-		if (is_buildin(((t_execve **)pipeline->execves->arr)[i]->path))
+		if (((t_execve **)pipeline->execves->arr)[i]->path == NULL)
+		{
+			write(2, "Comand not found\n", 17);
+		}
+		else if (is_buildin(((t_execve **)pipeline->execves->arr)[i]->path))
 		{
 			ret = 0;
 			break ;
@@ -71,7 +75,7 @@ int	executor(t_pipeline *pipeline, char **env)
 				ret = -1;
 				break ;
 			}
-			else if (pipeline->wait)
+			else
 				waitpid(pid, NULL, 0);
 		}
 		i++;
