@@ -7,11 +7,12 @@
 # define S_LESS "<"
 # define S_GREATEGREATE ">>"
 # define S_LESSLESS "<<"
-//# define S_GREATEAMP ">&"
-//# define S_GREATEGREATEAMP ">>&"
 # define S_PIPE "|"
 # define S_AMP "&"
 # define S_SEMICOLON ";"
+# define MOD_APP (O_CREAT | O_WRONLY | O_APPEND)
+# define MOD (O_CREAT | O_WRONLY | O_TRUNC)
+# define RIGHTS (S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)
 
 enum e_token {
 	T_WORD = 0,
@@ -82,5 +83,13 @@ typedef struct s_pipeline {
 	int			append_out;
 	int			wait;
 }	t_pipeline;
+
+typedef struct s_files {
+	int		tmpin;
+	int		tmpout;
+	int		fdin;
+	int		fdout;
+	int		fdpipe[2];
+} t_files;
 
 #endif

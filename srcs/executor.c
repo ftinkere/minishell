@@ -14,53 +14,66 @@ void	exec_one(t_execve *exec, char **env)
 	execve(exec->path, exec->argv, env);
 }
 
+void	init_executor(t_pipeline *pipeline, t_files *f, int *i, int *ret)
+{
+	f->tmpin = dup(0);
+	f->tmpout = dup(1);
+
+	if (pipeline->file_in)
+		f->fdin = open(pipeline->file_in, O_RDONLY);
+	else
+		f->fdin = dup(f->tmpin);
+	*ret = 1;
+	*i = 0;
+}
+
+void	init_cycle(t_pipeline *pipeline, t_files *f, int i)
+{
+	dup2(f->fdin, 0);
+	close(f->fdin);
+	if (i == pipeline->args->size / 2 - 1)
+	{
+		if (pipeline->file_out && pipeline->append_out)
+			f->fdout = open(pipeline->file_out, MOD_APP, RIGHTS);
+		else if (pipeline->file_out)
+			f->fdout = open(pipeline->file_out, MOD, RIGHTS);
+		else
+			f->fdout = dup(f->tmpout);
+	}
+	else
+	{
+		pipe(f->fdpipe);
+		f->fdout = f->fdpipe[1];
+		f->fdin = f->fdpipe[0];
+	}
+	dup2(f->fdout, 1);
+	close(f->fdout);
+}
+
+void	end_executor(t_pipeline *pipeline, t_files *f, int pid)
+{
+	if (pipeline->wait)
+		waitpid(pid, NULL, 0);
+	dup2(f->tmpin, 0);
+	dup2(f->tmpout, 1);
+	close(f->tmpin);
+	close(f->tmpout);
+	free_pipeline(pipeline);
+}
+
 int	executor(t_pipeline *pipeline, char **env)
 {
 	pid_t	pid;
 	int		i;
 	int		ret;
-	// to struct:
-	int		tmpin;
-	int		tmpout;
-	int		fdin;
-	int		fdout;
-	int		fdpipe[2];
+	t_files	f;
 
-	tmpin = dup(0);
-	tmpout = dup(1);
-
-	if (pipeline->file_in)
-		fdin = open(pipeline->file_in, O_RDONLY);
-	else
-		fdin = dup(tmpin);
-	ret = 1;
-	i = 0;
+	init_executor(pipeline, &f, &i, &ret);
 	while (i * 2 < pipeline->args->size)
 	{
-		dup2(fdin, 0);
-		close(fdin);
-		if (i == pipeline->args->size / 2 - 1)
-		{
-			if (pipeline->file_out && pipeline->append_out)
-				fdout = open(pipeline->file_out, O_CREAT | O_WRONLY | O_APPEND, S_IRWXU);
-			else if (pipeline->file_out)
-				fdout = open(pipeline->file_out, O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
-			else
-				fdout = dup(tmpout);
-		}
-		else
-		{
-			pipe(fdpipe); // Посмотреть нет ли утечек дескрипторов // кажется нет
-			fdout = fdpipe[1];
-			fdin = fdpipe[0];
-		}
-		dup2(fdout, 1);
-		close(fdout);
-
+		init_cycle(pipeline, &f, i);
 		if (((t_execve **)pipeline->execves->arr)[i]->path == NULL)
-		{
 			write(2, "Comand not found\n", 17);
-		}
 		else if (is_buildin(((t_execve **)pipeline->execves->arr)[i]->path))
 		{
 			ret = 0;
@@ -80,34 +93,6 @@ int	executor(t_pipeline *pipeline, char **env)
 		}
 		i++;
 	}
-	if (pipeline->wait)
-		waitpid(pid, NULL, 0);
-//		wait(NULL);
-	dup2(tmpin, 0);
-	dup2(tmpout, 1);
-	close(tmpin);
-	close(tmpout);
-	free_pipeline(pipeline);
+	end_executor(pipeline, &f, pid);
 	return (ret);
 }
-
-//void	executor(t_pipeline *pipeline, char **env)
-//{
-//	pid_t	pid;
-//	int		status;
-//	int		i;
-//
-//	i = 0;
-//	while (i * 2 < pipeline->args->size)
-//	{
-//		pid = fork();
-//		if (pid == 0) {
-//			exec_one(&((t_execve *) pipeline->execves->arr)[i], env);
-//			printf("Error, pid: %d\n", pid);
-//			exit(0);
-//		}
-//		if (pipeline->wait)
-//			wait(&status);
-//		i++;
-//	}
-//}
