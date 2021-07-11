@@ -3,7 +3,7 @@
 #include "minishell.h"
 #include "libft.h"
 
-int	do_line(char *str, char **env)
+int	do_line(char *str, t_vec_env *env)
 {
 	t_vec_lex	*lexes;
 	t_vec		*blocks;
@@ -15,7 +15,7 @@ int	do_line(char *str, char **env)
 	while (i < blocks->size)
 	{
 		lexes = lexer(((char**)blocks->arr)[i]);
-		res = executor(parser(lexes, env), env);
+		res = executor(parser(lexes, vec_env), vec_env);
 		vecl_free(lexes);
 		if (res <= 0)
 			break ;
@@ -33,13 +33,16 @@ int	do_line(char *str, char **env)
 
 int	main(int argc, char *argv[], char *env[])
 {
-	char	*str;
-	int		res;
+	char		*str;
+	int			res;
+	t_vec_env	*vec_env;
 
+	vec_env = (t_vec_env*)vec_init();
+//	env_init(vec_env, env);
 	res = 0;
 	while (get_next_line(0, &str))
 	{
-		res = do_line(str, env);
+		res = do_line(str, vec_env);
 		if (res <= 0)
 			break ;
 		free(str);

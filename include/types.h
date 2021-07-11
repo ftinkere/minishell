@@ -41,7 +41,14 @@ typedef struct s_vec {
 	size_t	size;
 	void	*arr;
 }	t_vec;
+
 typedef t_vec t_vec_int;
+
+typedef struct s_vec_env {
+	size_t	capacity;
+	size_t	size;
+	char	**arr;
+}	t_vec_env;
 
 typedef struct s_execve {
 	char	*path;

@@ -39,6 +39,26 @@ t_vec	*vec_add(t_vec *vec, void *a)
 	return (vec);
 }
 
+t_vec_env *vec_env_add(t_vec_env *vec, char *a)
+{
+	if (vec->size == vec->capacity - 1)
+		vec_grow((t_vec *)vec);
+	((char **)vec->arr)[vec->size++] = a;
+	return (vec);
+}
+
+t_vec_env *vec_env_rem(t_vec_env *vec, char *key)
+{
+	int i;
+
+	i = 0;
+	//
+	free(vec->arr[i]);
+	ft_memmove(&vec->arr[i], &vec->arr[i + 1], vec->size - i - 1);
+	vec->arr[vec->size] = NULL;
+	vec->size--;
+}
+
 void	vec_free(t_vec *vec)
 {
 	free(vec->arr);

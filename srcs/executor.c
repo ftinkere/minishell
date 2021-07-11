@@ -14,7 +14,7 @@ void	exec_one(t_execve *exec, char **env)
 	execve(exec->path, exec->argv, env);
 }
 
-int	executor(t_pipeline *pipeline, char **env)
+int	executor(t_pipeline *pipeline, t_vec_env *env)
 {
 	pid_t	pid;
 	int		i;
@@ -62,7 +62,7 @@ int	executor(t_pipeline *pipeline, char **env)
 		{
 			pid = fork();
 			if (pid == 0) {
-				exec_one(((t_execve **)pipeline->execves->arr)[i], env);
+				exec_one(((t_execve **)pipeline->execves->arr)[i], env->arr);
 				printf("Error, dont execed\n");
 				ret = -1;
 				break ;

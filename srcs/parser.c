@@ -72,7 +72,7 @@ int	count_pipes(t_vec_lex *lexes)
 	return (ret);
 }
 
-t_pipeline	*parser(t_vec_lex *lexes, char **env)
+t_pipeline	*parser(t_vec_lex *lexes, t_vec_env *env)
 {
 	t_pipeline	*pipeline;
 	int			i;

@@ -29,13 +29,14 @@ char	*get_path_by_comand_dir(char *cmd, char *dir_path)
 	return (NULL);
 }
 
-char	*get_path_by_comand(char *cmd)
+char	*get_path_by_comand(char *cmd, t_vec_env *env)
 {
 	char	*path_env;
 	char	**strs;
 	int		i;
 	char	*ret;
 
+	// search_env(env, "PATH");
 	path_env = getenv("PATH");
 	strs = ft_split(path_env, ':');
 	i = 0;
