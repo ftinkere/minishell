@@ -51,12 +51,30 @@ t_vec_env *vec_env_rem(t_vec_env *vec, char *key)
 {
 	int i;
 
+	if (vec->size == 0)
+		return (vec);
 	i = 0;
-	//
+	// найти индекс или указатель
+	// если нет, выйти
 	free(vec->arr[i]);
-	ft_memmove(&vec->arr[i], &vec->arr[i + 1], vec->size - i - 1);
+	ft_memmove(&vec->arr[i], &vec->arr[i + 1], vec->size - i - 1); // при size == 0 ошибка
 	vec->arr[vec->size] = NULL;
 	vec->size--;
+	return (vec);
+}
+
+t_vec_env *vec_env_ch(t_vec_env *env, char *str)
+{
+	int i;
+
+	// если нет ключа
+	// vec_env_add(env, str);
+	// иначе
+
+	i = 0;
+	// найти индекс или указатель
+	free(env->arr[i]);
+	env->arr[i] = str;
 }
 
 void	vec_free(t_vec *vec)
