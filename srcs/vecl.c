@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <libft.h>
+#include <../libft/libft.h>
 #include "minishell.h"
 
 /*
@@ -36,6 +36,7 @@ t_vec_lex	*vecl_add(t_vec_lex *vec, t_lex lex)
 	if (vec->size == vec->capacity - 1)
 		vecl_grow(vec);
 	vec->arr[vec->size++] = lex;
+	return(vec); //
 }
 
 void	vecl_free(t_vec_lex *vec)
@@ -43,7 +44,7 @@ void	vecl_free(t_vec_lex *vec)
 	int	i;
 
 	i = 0;
-	while (i < vec->size)
+	while (i < (int)vec->size)
 	{
 		free(vec->arr[i].str);
 		i++;

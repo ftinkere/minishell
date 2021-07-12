@@ -2,6 +2,16 @@
 # define TYPES_H
 
 # include <stddef.h>
+#include <errno.h>
+#include <string.h>
+#include <stdlib.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <sys/stat.h>
+# include <stdio.h>
+//# include "./libft/libft.h"
 
 # define S_GREATE ">"
 # define S_LESS "<"
@@ -45,10 +55,17 @@ typedef struct s_vec {
 }	t_vec;
 typedef t_vec t_vec_int;
 
+typedef struct s_vec_env {
+	size_t	capacity;
+	size_t	size;
+	char	**arr;
+}	t_vec_env;
+
 typedef struct s_execve {
 	char	*path;
 	char	**argv;
 }	t_execve;
+
 
 /*
 **
@@ -74,7 +91,7 @@ typedef struct s_pipeline {
 
 	t_vec		*execves;
 
-	t_vec		*envp;
+	t_vec_env	*envp;
 
 	char		*file_in;
 	char		*file_out;

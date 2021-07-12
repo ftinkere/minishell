@@ -21,7 +21,7 @@ void	free_execves(t_vec *execves)
 	int	j;
 
 	i = 0;
-	while (i < execves->size)
+	while (i < (int)execves->size)
 	{
 		free(((t_execve **)execves->arr)[i]->path);
 		j = 0;

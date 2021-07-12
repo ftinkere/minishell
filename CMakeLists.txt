@@ -12,9 +12,9 @@ add_custom_target(libft
         )
 
 
-add_executable(minishell srcs/main.c srcs/lexer.c include/types.h srcs/vecl.c include/minishell.h srcs/env.c srcs/parser.c srcs/expander.c srcs/executor.c srcs/t_pipeline.c srcs/vec.c srcs/vec_int.c srcs/prints.c srcs/split_semicolon.c srcs/path.c srcs/utils.c)
-add_executable(minishell_tester srcs/tests.c srcs/lexer.c include/types.h srcs/vecl.c include/minishell.h srcs/env.c srcs/parser.c srcs/expander.c srcs/executor.c srcs/t_pipeline.c srcs/vec.c srcs/vec_int.c srcs/prints.c srcs/split_semicolon.c srcs/path.c srcs/utils.c)
+add_executable(minishell srcs/buildin_fu.c srcs/ft_split.c srcs/utils_tab.c srcs/main.c srcs/lexer.c include/types.h srcs/vecl.c include/minishell.h srcs/env.c srcs/parser.c srcs/expander.c srcs/executor.c srcs/t_pipeline.c srcs/vec.c srcs/vec_int.c srcs/prints.c srcs/split_semicolon.c srcs/path.c srcs/utils.c)
+#add_executable(minishell_tester srcs/buildin_fu.c srcs/ft_split.c srcs/utils_tab.c srcs/tests.c srcs/lexer.c include/types.h srcs/vecl.c include/minishell.h srcs/env.c srcs/parser.c srcs/expander.c srcs/executor.c srcs/t_pipeline.c srcs/vec.c srcs/vec_int.c srcs/prints.c srcs/split_semicolon.c srcs/path.c srcs/utils.c)
 add_dependencies(minishell libft)
-add_dependencies(minishell_tester libft)
+#add_dependencies(minishell_tester libft)
 target_link_libraries(minishell ft readline)
-target_link_libraries(minishell_tester ft readline)
+#target_link_libraries(minishell_tester ft readline)

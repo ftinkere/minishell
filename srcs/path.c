@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../libft/libft.h"
 #include "minishell.h"
 #include <dirent.h>
 #include <stdio.h>

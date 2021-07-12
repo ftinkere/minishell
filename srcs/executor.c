@@ -14,7 +14,7 @@ void	exec_one(t_execve *exec, char **env)
 	execve(exec->path, exec->argv, env);
 }
 
-int	executor(t_pipeline *pipeline, char **env)
+int	executor(t_pipeline *pipeline, t_vec_env *env)
 {
 	pid_t	pid;
 	int		i;
@@ -35,7 +35,7 @@ int	executor(t_pipeline *pipeline, char **env)
 		fdin = dup(tmpin);
 	ret = 1;
 	i = 0;
-	while (i * 2 < pipeline->args->size)
+	while (i * 2 < (int)pipeline->args->size)
 	{
 		dup2(fdin, 0);
 		close(fdin);
@@ -59,8 +59,8 @@ int	executor(t_pipeline *pipeline, char **env)
 
 		if (is_buildin(((t_execve **)pipeline->execves->arr)[i]->path))
 		{
-			ret = 0;
-			break ;
+			ft_buildin(((t_execve **)pipeline->execves->arr)[i], env);
+			//break ;
 		}
 		else
 		{

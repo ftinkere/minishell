@@ -1,5 +1,5 @@
 #include "minishell.h"
-#include "libft.h"
+#include "../libft/libft.h"
 
 static int	get_len_to_semicolon(const char *str)
 {

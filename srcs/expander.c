@@ -1,5 +1,5 @@
 #include "minishell.h"
-#include "libft.h"
+#include "../libft/libft.h"
 
 /*
 ** Раскрывает необходимые элементы лексем
@@ -8,6 +8,7 @@
 // TODO
 t_vec_lex	*expand_env(t_vec_lex *lexes, char **env)
 {
+	(void)env;
 	return (lexes);
 }
 
