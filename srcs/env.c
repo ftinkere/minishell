@@ -1,20 +1,21 @@
 #include "minishell.h"
+#include "libft.h"
 
 t_vec_env *env_buildin(char **envp)
 {
     t_vec_env *ar;
-    int i;
+    //int i;
 
-    i = 0;
+    //i = 0;
     ar = (t_vec_env*)vec_init();
     while(*envp)
     {
-        
-		ar->arr[i] = strdup(*envp);
-        i++;
+		vec_env_add(ar, ft_strdup(*envp));
+		//ar->arr[i] = strdup(*envp);
+        //i++;
         envp++;
     }
-   // return (tabl);
+   return (ar);
 }
 
 char *dollar(char **tabl, char *key)
@@ -38,17 +39,17 @@ char *dollar(char **tabl, char *key)
     return(ret_str);
 }
 
-int ft_buildin(t_execve *ar, char *env[])
+int ft_buildin(t_execve *ar, t_vec_env *env_tab)
 {
-	char **env_tab;
-    if (!(env_tab = env_buildin(env)))  //
-		return (-1);						//
+	//char **env_tab;
+    //if (!(env_tab = env_buildin(env)))  //
+	//	return (-1);						//
     //if (!strcmp(ar->path, "export"))
    //     print_export_env(ar->env_tab);
     if (!strcmp(ar->path, "echo"))
         ft_echo(ar);
     else if (!strcmp(ar->path, "env"))
-		print_env(env_tab);
+		print_env(env_tab->arr);
     else if (!strcmp(ar->path, "export"))
 		ft_export_env(ar, env_tab);
     else if (!strcmp(ar->path, "unset"))

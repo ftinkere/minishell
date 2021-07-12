@@ -57,7 +57,7 @@ t_vec_env *vec_env_rem(t_vec_env *vec, char *key)
 	if (i < 0)
 		return (vec);
 	free(vec->arr[i]);
-	ft_memmove(&vec->arr[i], &vec->arr[i + 1], vec->size - i - 1); // при size == 0 ошибка
+	ft_memmove(&vec->arr[i], &vec->arr[i + 1], vec->size - i); // при size == 0 ошибка
 	vec->arr[vec->size] = NULL;
 	vec->size--;
 	return (vec);
@@ -69,16 +69,17 @@ t_vec_env *vec_env_ch(t_vec_env *env, char *str)
 	char *key;
 
 	key = str_key(str);
-	i = ft_cmp_key(env->arr, key);
+	vec_env_rem(env, key);
+	//i = ft_cmp_key(env->arr, key);
 	free(key);
 
-	if (i < 0)
+	//if (i < 0)
 		vec_env_add(env, str);
-	else
-	{
-		free(env->arr[i]);
-		env->arr[i] = str;
-	}
+//	else
+//	{
+//		free(env->arr[i]);
+//		env->arr[i] = str;
+//	}
 	return (env);
 }
 

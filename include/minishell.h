@@ -37,12 +37,12 @@ void		free_split(char **strs);
 void		free_pipeline(t_pipeline *pipeline);
 
 int			is_buildin(char *str);
-int         ft_buildin(t_execve *ar, char **env);
+int         ft_buildin(t_execve *ar, t_vec_env *env);
 t_vec_env 	*env_buildin(char **envp);
 char        *dollar(char **tabl, char *key);
 int         ft_echo(t_execve *ex);
 int    		ft_export_env(t_execve *ex, t_vec_env *env_tab);
-int         ft_unset_env(t_execve *arg, char **env_tab);
+int         ft_unset_env(t_execve *arg, t_vec_env *env_tab);
 void        ft_cd_buildin(t_execve  *ex);
 void        ft_pwd_buildin(t_execve *ex);
 size_t      ft_tab_size(char **tabl);

@@ -40,7 +40,7 @@ void	free_pipeline(t_pipeline *pipeline)
 {
 	vec_int_free(pipeline->args);
 	free_execves(pipeline->execves);
-	vec_free_all(pipeline->envp);
+	//vec_free_all(pipeline->envp);
 	if (pipeline->file_in)
 		free(pipeline->file_in);
 	if (pipeline->file_out)

@@ -58,18 +58,20 @@ int	main(int argc, char *argv[], char *env[])
 {
 	char	*str;
 	int		res;
-	t_vec_env ar;
+	t_vec_env *ar;
 
 	
 	(void)argc;
 	(void)argv;
-	
+
+	//ar = (t_vec_env *)vec_init();
+	ar = env_buildin(env);
 	res = 0;
 	str = readline("msh: ");
-	env_buildin(env);
+	//env_buildin(env);
 	while (str != NULL)
 	{
-		res = do_line(str, ar.arr);
+		res = do_line(str, ar);
 		if (res <= 0)
 			break ;
 		free(str);
