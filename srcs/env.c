@@ -61,7 +61,10 @@ int ft_buildin(t_execve *ar, t_vec_env *env_tab)
     else if(!strcmp(ar->path, "exit"))
         {
             printf("exit\n");
-            exit(atoi(ar->argv[1]));
+            if(ar->argv[1] == NULL)
+            	exit(0);
+            else
+            	exit(ft_atoi(ar->argv[1]));
         }
     return (1);
 }
