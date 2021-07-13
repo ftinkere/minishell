@@ -46,19 +46,19 @@ int ft_buildin(t_execve *ar, t_vec_env *env_tab)
 	//	return (-1);						//
     //if (!strcmp(ar->path, "export"))
    //     print_export_env(ar->env_tab);
-    if (!strcmp(ar->path, "echo"))
+    if (!ft_strcmp(ar->path, "echo"))
         ft_echo(ar);
-    else if (!strcmp(ar->path, "env"))
+    else if (!ft_strcmp(ar->path, "env"))
 		print_env(env_tab->arr);
-    else if (!strcmp(ar->path, "export"))
+    else if (!ft_strcmp(ar->path, "export"))
 		ft_export_env(ar, env_tab);
-    else if (!strcmp(ar->path, "unset"))
+    else if (!ft_strcmp(ar->path, "unset"))
 		ft_unset_env(ar, env_tab);
-    else if (!strcmp(ar->path, "pwd"))
+    else if (!ft_strcmp(ar->path, "pwd"))
         ft_pwd_buildin(ar);
-    else if (!strcmp(ar->path, "cd"))
+    else if (!ft_strcmp(ar->path, "cd"))
         ft_cd_buildin(ar);
-    else if(!strcmp(ar->path, "exit"))
+    else if(!ft_strcmp(ar->path, "exit"))
         {
             printf("exit\n");
             if(ar->argv[1] == NULL)

@@ -58,7 +58,7 @@ t_vec_env *vec_env_rem(t_vec_env *vec, char *key)
 		return (vec);
 	free(vec->arr[i]);
 	ft_memmove(&vec->arr[i], &vec->arr[i + 1], vec->size - i); // при size == 0 ошибка
-	vec->arr[vec->size] = NULL;
+	vec->arr[vec->size - 1] = NULL;
 	vec->size--;
 	return (vec);
 }
