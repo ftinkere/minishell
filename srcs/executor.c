@@ -52,7 +52,7 @@ void	init_cycle(t_pipeline *pipeline, t_files *f, int i)
 	close(f->fdout);
 }
 
-void	end_executor(t_pipeline *pipeline, t_files *f, int pid)
+void	end_executor(t_pipeline *pipeline, t_files *f)
 {
 	dup2(f->tmpin, 0);
 	dup2(f->tmpout, 1);
@@ -61,28 +61,34 @@ void	end_executor(t_pipeline *pipeline, t_files *f, int pid)
 	free_pipeline(pipeline);
 }
 
-int	executor(t_pipeline *pipeline, t_vec_env *env)
+char	*cmd_ex(t_pipeline *pipeline, int i)
+{
+	return (((t_execve **)pipeline->execves->arr)[i]->argv[0]);
+}
+
+// TODO: Починить `cat`
+int	executor(t_pipeline *pl, t_vec_env *env)
 {
 	pid_t	pid;
 	int		i;
 	int		ret;
 	t_files	f;
 
-	init_executor(pipeline, &f, &i, &ret);
-	while (i * 2 < (int)pipeline->args->size)
+	init_executor(pl, &f, &i, &ret);
+	while (i * 2 < (int)pl->args->size)
 	{
-		init_cycle(pipeline, &f, i);
-		if (((t_execve **)pipeline->execves->arr)[i]->path == NULL)
-			write(2, "Comand not found\n", 17);
-		else if (is_buildin(((t_execve **)pipeline->execves->arr)[i]->path))
-			ft_buildin(((t_execve **)pipeline->execves->arr)[i], env);
+		init_cycle(pl, &f, i);
+		if (get_execve(pl, i)->path == NULL)
+			printf("msh: comand not found: %s\n", cmd_ex(pl, i));
+		else if (is_buildin(get_execve(pl, i)->path))
+			ft_buildin(get_execve(pl, i), env);
 		else
 		{
 			pid = fork();
 			if (pid == 0)
 			{
-				exec_one(((t_execve **)pipeline->execves->arr)[i], env->arr);
-				printf("Error, dont execed\n");
+				exec_one(get_execve(pl, i), env->arr);
+				printf("msh: %s: %s\n", cmd_ex(pl, i), strerror(errno));
 				ret = -1;
 				break ;
 			}
@@ -91,6 +97,6 @@ int	executor(t_pipeline *pipeline, t_vec_env *env)
 		}
 		i++;
 	}
-	end_executor(pipeline, &f, pid);
+	end_executor(pl, &f);
 	return (ret);
 }
