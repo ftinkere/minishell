@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "minishell.h"
 #include "libft.h"
 
@@ -14,9 +13,9 @@ int	count_args(t_vec_lex *lexes, int start)
 	int	ret;
 
 	ret = 0;
-	if (lexes->size <= start || start < 0)
+	if ((int)lexes->size <= start || start < 0)
 		return (0);
-	while (ret + start < lexes->size && lexes->arr[ret + start].token == T_WORD)
+	while (ret + start < (int)lexes->size && lexes->arr[ret + start].token == T_WORD)
 		ret++;
 	return (ret);
 }
@@ -39,7 +38,7 @@ void	set_execves(t_pipeline *pipeline, t_vec_lex *lexes)
 	int	j;
 
 	i = 0;
-	while (i * 2 < pipeline->args->size)
+	while (i * 2 < (int)pipeline->args->size)
 	{
 		args_count = get_args(pipeline, i * 2 + 1);
 		get_execve(pipeline, i)->path = \
@@ -64,7 +63,7 @@ int	count_pipes(t_vec_lex *lexes)
 
 	ret = 1;
 	i = 0;
-	while (i < lexes->size)
+	while (i < (int)lexes->size)
 	{
 		if (lexes->arr[i].token == T_PIPE)
 			ret++;
@@ -78,7 +77,7 @@ void	add_redirects(t_pipeline *pipe, t_vec_lex *lex)
 	int	i;
 
 	i = 0;
-	while (i < lex->size - 1)
+	while (i < (int)lex->size - 1)
 	{
 		if (lex->arr[i + 1].token != T_WORD)
 		{
@@ -103,7 +102,7 @@ void	add_redirects(t_pipeline *pipe, t_vec_lex *lex)
 	}
 }
 
-t_pipeline	*parser(t_vec_lex *lexes, char **env)
+t_pipeline	*parser(t_vec_lex *lexes)
 {
 	t_pipeline	*pipeline;
 	int			i;
@@ -123,7 +122,7 @@ t_pipeline	*parser(t_vec_lex *lexes, char **env)
 		vec_int_add(pipeline->args, count_args(lexes, arg));
 		vec_add(pipeline->execves, ft_calloc(1, sizeof(t_execve)));
 		arg += count_args(lexes, arg) + 1;
-		if (arg - 1 > lexes->size)
+		if (arg - 1 > (int)lexes->size)
 			printf("Error while pipe-parse, arg: %d, tokens: %lu\n",
 				arg, lexes->size);
 		i++;

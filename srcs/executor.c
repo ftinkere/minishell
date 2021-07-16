@@ -17,7 +17,6 @@ void	exec_one(t_execve *exec, char **env)
 void	init_executor(t_pipeline *pipeline, t_files *f, int *i, int *ret)
 {
 	lessless(pipeline->end_token, pipeline->readed_ll);
-//	strs_to_in(pipeline->readed_ll->arr);
 
 	f->tmpin = dup(0);
 	f->tmpout = dup(1);
@@ -55,8 +54,6 @@ void	init_cycle(t_pipeline *pipeline, t_files *f, int i)
 
 void	end_executor(t_pipeline *pipeline, t_files *f, int pid)
 {
-	if (pipeline->wait)
-		waitpid(pid, NULL, 0);
 	dup2(f->tmpin, 0);
 	dup2(f->tmpout, 1);
 	close(f->tmpin);
@@ -64,9 +61,7 @@ void	end_executor(t_pipeline *pipeline, t_files *f, int pid)
 	free_pipeline(pipeline);
 }
 
-
-
-int	executor(t_pipeline *pipeline, char **env)
+int	executor(t_pipeline *pipeline, t_vec_env *env)
 {
 	pid_t	pid;
 	int		i;
@@ -74,27 +69,24 @@ int	executor(t_pipeline *pipeline, char **env)
 	t_files	f;
 
 	init_executor(pipeline, &f, &i, &ret);
-	while (i * 2 < pipeline->args->size)
+	while (i * 2 < (int)pipeline->args->size)
 	{
 		init_cycle(pipeline, &f, i);
 		if (((t_execve **)pipeline->execves->arr)[i]->path == NULL)
 			write(2, "Comand not found\n", 17);
 		else if (is_buildin(((t_execve **)pipeline->execves->arr)[i]->path))
-		{
-			ret = 0;
-			break ;
-		}
+			ft_buildin(((t_execve **)pipeline->execves->arr)[i], env);
 		else
 		{
 			pid = fork();
 			if (pid == 0)
 			{
-				exec_one(((t_execve **)pipeline->execves->arr)[i], env);
+				exec_one(((t_execve **)pipeline->execves->arr)[i], env->arr);
 				printf("Error, dont execed\n");
 				ret = -1;
 				break ;
 			}
-			else if (i != pipeline->args->size / 2 - 1)
+			else
 				waitpid(pid, NULL, 0);
 		}
 		i++;

@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <libft.h>
+#include <../libft/libft.h>
 #include "minishell.h"
 
 t_vec	*vec_int_init(void)

@@ -4,7 +4,7 @@ project(minishell C)
 set(CMAKE_C_STANDARD 99)
 
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/libft)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libft ${CMAKE_CURRENT_SOURCE_DIR}/include /usr/lib)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libft ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_custom_target(libft
         COMMAND make all

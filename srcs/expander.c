@@ -9,6 +9,7 @@
 // TODO
 t_vec_lex	*expand_env(t_vec_lex *lexes, char **env)
 {
+	(void)env;
 	return (lexes);
 }
 
@@ -19,7 +20,8 @@ int	is_buildin(char *str)
 	return (!ft_strncmp(str, "../", 3) || !ft_strcmp(str, "exit")
 			|| !ft_strcmp(str, "env") || !ft_strcmp(str, "unset")
 			|| !ft_strcmp(str, "export") || !ft_strcmp(str, "pwd")
-			|| !ft_strcmp(str, "cd") || !ft_strcmp(str, "echo"));
+			|| !ft_strcmp(str, "cd") || !ft_strcmp(str, "echo")
+			|| !ft_strcmp(str, "^D"));
 }
 
 int	is_comand(char *str)

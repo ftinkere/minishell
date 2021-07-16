@@ -1,5 +1,5 @@
 #include <minishell.h>
-#include <libft.h>
+#include <../libft/libft.h>
 
 t_pipeline	*pipeline_init()
 {
