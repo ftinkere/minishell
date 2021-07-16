@@ -77,6 +77,8 @@ typedef struct s_pipeline {
 
 	t_vec		*envp;
 
+	t_vec		*readed_ll;
+
 	char		*file_in;
 	char		*file_out;
 	char		*end_token;

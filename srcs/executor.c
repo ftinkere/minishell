@@ -16,13 +16,16 @@ void	exec_one(t_execve *exec, char **env)
 
 void	init_executor(t_pipeline *pipeline, t_files *f, int *i, int *ret)
 {
+	lessless(pipeline->end_token, pipeline->readed_ll);
+//	strs_to_in(pipeline->readed_ll->arr);
+
 	f->tmpin = dup(0);
 	f->tmpout = dup(1);
-
 	if (pipeline->file_in)
 		f->fdin = open(pipeline->file_in, O_RDONLY);
 	else
-		f->fdin = dup(f->tmpin);
+		f->fdin = strs_to_in(pipeline->readed_ll->arr);
+	vec_free_all(pipeline->readed_ll);
 	*ret = 1;
 	*i = 0;
 }
@@ -61,6 +64,8 @@ void	end_executor(t_pipeline *pipeline, t_files *f, int pid)
 	free_pipeline(pipeline);
 }
 
+
+
 int	executor(t_pipeline *pipeline, char **env)
 {
 	pid_t	pid;
@@ -82,13 +87,14 @@ int	executor(t_pipeline *pipeline, char **env)
 		else
 		{
 			pid = fork();
-			if (pid == 0) {
+			if (pid == 0)
+			{
 				exec_one(((t_execve **)pipeline->execves->arr)[i], env);
 				printf("Error, dont execed\n");
 				ret = -1;
 				break ;
 			}
-			else
+			else if (i != pipeline->args->size / 2 - 1)
 				waitpid(pid, NULL, 0);
 		}
 		i++;

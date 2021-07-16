@@ -12,5 +12,6 @@ t_pipeline	*pipeline_init()
 	pipeline->wait = 1;
 	pipeline->append_out = 0;
 	pipeline->envp = vec_init();
+	pipeline->readed_ll = vec_init();
 	return (pipeline);
 }

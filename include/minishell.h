@@ -32,6 +32,10 @@ void		print_strs(char **strs);
 void		print_lexes(t_vec_lex *vec);
 void		free_split(char **strs);
 void		free_pipeline(t_pipeline *pipeline);
+int			free_ret(void *fred, int ret);
+t_vec		*lessless(char *end_str, t_vec *ret);
+int			strs_to_in(char **strs);
+
 
 int			is_buildin(char *str);
 

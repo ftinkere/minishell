@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "minishell.h"
 #include "libft.h"
 
@@ -72,26 +73,32 @@ int	count_pipes(t_vec_lex *lexes)
 	return (ret);
 }
 
-void	add_redirects(t_pipeline *pipeline, t_vec_lex *lexes)
+void	add_redirects(t_pipeline *pipe, t_vec_lex *lex)
 {
 	int	i;
 
 	i = 0;
-	while (i < lexes->size - 1)
+	while (i < lex->size - 1)
 	{
-		if (lexes->arr[i + 1].token != T_WORD)
+		if (lex->arr[i + 1].token != T_WORD)
 		{
 			i++;
 			continue ;
 		}
-		if (lexes->arr[i].token == T_LESS)
-			pipeline->file_in = ft_strdup(lexes->arr[i + 1].str);
-		if (lexes->arr[i].token == T_LESSLESS)
-			pipeline->end_token = ft_strdup(lexes->arr[i + 1].str);
-		if (lexes->arr[i].token == T_GREATE || lexes->arr[i].token == T_GREATGREATE)
-			pipeline->file_out = ft_strdup(lexes->arr[i + 1].str);
-		if (lexes->arr[i].token == T_GREATGREATE)
-			pipeline->append_out = 1;
+		if (lex->arr[i].token == T_LESS)
+			pipe->file_in = ft_strdup(lex->arr[i + 1].str);
+		if (lex->arr[i].token == T_LESSLESS && pipe->end_token != NULL && \
+			pipe->end_token != (void *)1)
+			free(pipe->end_token);
+		if (lex->arr[i].token == T_LESSLESS)
+			pipe->end_token = ft_strdup(lex->arr[i + 1].str);
+		if (lex->arr[i].token == T_GREATE || lex->arr[i].token == T_GREATGREATE)
+			pipe->file_out = ft_strdup(lex->arr[i + 1].str);
+		if (lex->arr[i].token == T_GREATGREATE)
+			pipe->append_out = 1;
+		if (lex->arr[i].token == T_LESS && pipe->end_token != NULL && \
+			pipe->end_token != (void *)1 && free_ret(pipe->end_token, 1))
+			pipe->end_token = (void *)1;
 		i++;
 	}
 }
@@ -107,10 +114,6 @@ t_pipeline	*parser(t_vec_lex *lexes, char **env)
 		return (NULL);
 	pipeline = pipeline_init();
 	pipeline->lexes = lexes;
-
-	// Зацикловать относительно количества команд в пайплайне
-	// И вычислять начала и количества аргументов
-	// Учесть начальные переменные среды в команде
 	pipe_count = count_pipes(lexes);
 	i = 0;
 	arg = 0;
@@ -121,14 +124,12 @@ t_pipeline	*parser(t_vec_lex *lexes, char **env)
 		vec_add(pipeline->execves, ft_calloc(1, sizeof(t_execve)));
 		arg += count_args(lexes, arg) + 1;
 		if (arg - 1 > lexes->size)
-			printf("Error while pipe-parse, arg: %d, tokens: %lu\n", arg, lexes->size);
+			printf("Error while pipe-parse, arg: %d, tokens: %lu\n",
+				arg, lexes->size);
 		i++;
 	}
 	set_execves(pipeline, lexes);
 	add_redirects(pipeline, lexes);
-
-//	pipeline->envp = env;
-
 	if (lexes->arr[lexes->size - 1].token == T_AMP)
 		pipeline->wait = 0;
 	return (pipeline);

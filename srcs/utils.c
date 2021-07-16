@@ -2,6 +2,12 @@
 #include <unistd.h>
 #include "minishell.h"
 
+int	free_ret(void *fred, int ret)
+{
+	free(fred);
+	return (ret);
+}
+
 void	free_split(char **strs)
 {
 	int	i;
