@@ -20,13 +20,13 @@ void		vec_int_free(t_vec *vec);
 t_pipeline	*pipeline_init();
 
 t_vec_lex	*lexer(char *str);
-t_pipeline	*parser(t_vec_lex *lexes, char **env);
+t_pipeline	*parser(t_vec_lex *lexes);
 int			executor(t_pipeline *pipeline, t_vec_env *env);
 
 t_vec		*split_semicolon(char *str);
 char		*get_path_by_comand(char *cmd);
 char		*expand_path_if_need(char *cmd);
-t_vec_lex	*expand_env(t_vec_lex *lexes, char **env);
+t_vec_lex	*expand_env(t_vec_lex *lexes, t_vec_env *env);
 t_vec_env 	*vec_env_ch(t_vec_env *env, char *str);
 t_vec_env 	*vec_env_rem(t_vec_env *vec, char *key);
 t_vec_env 	*vec_env_add(t_vec_env *vec, char *a);
@@ -58,8 +58,6 @@ void        print_export_env(char **tabl);
 char        *str_key(char *str);
 int         ft_cmp_key(char **tabl, char *key);
 char        **ft_cpy_val(char **tabl, char *key);
-//char        **ft_split(char const *s, char c);
-//char        *ft_substr(char const *s, unsigned int start, size_t len);
 char        *ft_strdup_prob(char *src);
 
 #endif

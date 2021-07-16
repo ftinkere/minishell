@@ -23,10 +23,6 @@ static enum e_token	get_token(char *str)
 //		return (T_GREATGREATEAMP);
 	else if (!ft_strcmp(str, S_PIPE))
 		return (T_PIPE);
-	else if (!ft_strcmp(str, S_AMP))
-		return (T_AMP);
-	else if (!ft_strcmp(str, S_SEMICOLON))
-		return (T_SEMICOLON);
 	else
 		return (T_WORD);
 }

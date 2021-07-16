@@ -129,7 +129,5 @@ t_pipeline	*parser(t_vec_lex *lexes)
 	}
 	set_execves(pipeline, lexes);
 	add_redirects(pipeline, lexes);
-	if (lexes->arr[lexes->size - 1].token == T_AMP)
-		pipeline->wait = 0;
 	return (pipeline);
 }

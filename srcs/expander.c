@@ -7,7 +7,7 @@
 */
 
 // TODO
-t_vec_lex	*expand_env(t_vec_lex *lexes, char **env)
+t_vec_lex	*expand_env(t_vec_lex *lexes, t_vec_env *env)
 {
 	(void)env;
 	return (lexes);

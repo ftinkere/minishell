@@ -18,8 +18,6 @@
 # define S_GREATEGREATE ">>"
 # define S_LESSLESS "<<"
 # define S_PIPE "|"
-# define S_AMP "&"
-# define S_SEMICOLON ";"
 # define MOD_APP (O_CREAT | O_WRONLY | O_APPEND)
 # define MOD (O_CREAT | O_WRONLY | O_TRUNC)
 # define RIGHTS (S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)
@@ -30,11 +28,7 @@ enum e_token {
 	T_LESS,
 	T_LESSLESS,
 	T_GREATGREATE,
-//	T_GREATEAMP,
-//	T_GREATGREATEAMP,
 	T_PIPE,
-	T_AMP,
-	T_SEMICOLON
 };
 
 typedef struct s_lex {
@@ -92,15 +86,12 @@ typedef struct s_pipeline {
 
 	t_vec		*execves;
 
-	t_vec_env	*envp;
-
 	t_vec		*readed_ll;
 
 	char		*file_in;
 	char		*file_out;
 	char		*end_token;
 	int			append_out;
-	int			wait;
 }	t_pipeline;
 
 typedef struct s_files {
