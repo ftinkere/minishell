@@ -8,14 +8,14 @@
 **
 */
 
-int	count_args(t_vec_lex *lexes, int start)
+int	count_args(t_vec_lex *lex, int strt)
 {
 	int	ret;
 
 	ret = 0;
-	if ((int)lexes->size <= start || start < 0)
+	if ((int)lex->size <= strt || strt < 0)
 		return (0);
-	while (ret + start < (int)lexes->size && lexes->arr[ret + start].token == T_WORD)
+	while (ret + strt < (int)lex->size && lex->arr[ret + strt].token == T_WORD)
 		ret++;
 	return (ret);
 }
@@ -46,7 +46,8 @@ void	set_execves(t_pipeline *pipeline, t_vec_lex *lexes)
 		get_execve(pipeline, i)->argv = \
 			ft_calloc(args_count + 1, sizeof(char *));
 		j = 0;
-		while (j < args_count) {
+		while (j < args_count)
+		{
 			get_execve(pipeline, i)->argv[j] = \
 				ft_strdup(lexes->arr[get_args(pipeline, i * 2) + j].str);
 			j++;
@@ -58,7 +59,7 @@ void	set_execves(t_pipeline *pipeline, t_vec_lex *lexes)
 
 int	count_pipes(t_vec_lex *lexes)
 {
-	int ret;
+	int	ret;
 	int	i;
 
 	ret = 1;

@@ -17,7 +17,6 @@ void	exec_one(t_execve *exec, char **env)
 void	init_executor(t_pipeline *pipeline, t_files *f, int *i, int *ret)
 {
 	lessless(pipeline->end_token, pipeline->readed_ll);
-
 	f->tmpin = dup(0);
 	f->tmpout = dup(1);
 	if (pipeline->file_in)

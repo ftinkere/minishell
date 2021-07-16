@@ -16,7 +16,7 @@ int	do_line(char *str, t_vec_env *env)
 	i = 0;
 	while (i < (int)blocks->size)
 	{
-		lexes = lexer(((char**)blocks->arr)[i]);
+		lexes = lexer(((char **)blocks->arr)[i]);
 		res = executor(parser(expand_env(lexes, env)), env);
 		vecl_free(lexes);
 		if (res <= 0)
@@ -56,10 +56,9 @@ int	do_line(char *str, t_vec_env *env)
 
 int	main(int argc, char *argv[], char *env[])
 {
-	char	*str;
-	int		res;
-	t_vec_env *ar;
-
+	char		*str;
+	int			res;
+	t_vec_env	*ar;
 
 	(void)argc;
 	(void)argv;

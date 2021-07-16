@@ -1,7 +1,7 @@
 #include <minishell.h>
 #include <../libft/libft.h>
 
-t_pipeline	*pipeline_init()
+t_pipeline	*pipeline_init(void)
 {
 	t_pipeline	*pipeline;
 

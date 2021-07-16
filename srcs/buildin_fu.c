@@ -3,7 +3,7 @@
 
 int	ft_echo(t_execve *ex)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (ex->argv[i])
@@ -18,7 +18,7 @@ int	ft_echo(t_execve *ex)
 
 int	ft_export_env(t_execve *ex, t_vec_env *env)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (ex->argv[1] == NULL)
@@ -36,7 +36,7 @@ int	ft_export_env(t_execve *ex, t_vec_env *env)
 
 int	ft_unset_env(t_execve *ex, t_vec_env *env)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (ex->argv[i])
@@ -49,7 +49,7 @@ int	ft_unset_env(t_execve *ex, t_vec_env *env)
 
 void	ft_cd_buildin(t_execve *ex)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (ex->argv[i])
@@ -62,26 +62,27 @@ void	ft_cd_buildin(t_execve *ex)
 
 void	ft_pwd_buildin(t_execve *ex)
 {
-	char dir[100] = {0};
+	char	*dir;
 
 	if (!strcmp(ex->path, "pwd"))
 	{
-		getcwd(dir, 100);
+		dir = getcwd(NULL, 0);
 		printf("%s\n", dir);
+		free(dir);
 	}
-
 }
 
 char	*ft_strdup_prob(char *src)
 {
-	size_t i;
-	size_t len;
-	char *str;
+	size_t	i;
+	size_t	len;
+	char	*str;
 
 	len = 0;
 	while (src[len] != ' ' && src[len])
 		len++;
-	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
 		return (NULL);
 	i = 0;
 	while (i < len)
