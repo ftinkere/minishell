@@ -1,6 +1,7 @@
 #include "minishell.h"
 #include <stdio.h>
 #include <dirent.h>
+#include <readline/readline.h>
 
 //int	get_semicolon(char *str, int start);
 //
@@ -57,10 +58,8 @@
 
 int	main(void)
 {
-	t_vec_lex	*lexes;
+	t_vec *ret;
 
-	lexes = lexer("echo; mazafaka|pipe&&");
-	for (int i = 0; i < lexes->size; i++) {
-		printf("%s :%d\n", lexes->arr[i].str, lexes->arr[i].token);
-	}
+	ret = lessless("EOF");
+	print_strs(ret->arr);
 }

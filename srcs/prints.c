@@ -15,7 +15,7 @@ void	print_lexes(t_vec_lex *vec)
 	int	i;
 
 	i = 0;
-	while (i < vec->size)
+	while (i < (int)vec->size)
 	{
 		printf("%s:%i ", vec->arr[i].str, vec->arr[i].token);
 		i++;

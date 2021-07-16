@@ -2,3 +2,6 @@ cmake-build-debug
 *.a
 *.o
 *.a
+/.idea/
+/libft/.idea/
+.idea/*

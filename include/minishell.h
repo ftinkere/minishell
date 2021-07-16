@@ -20,19 +20,45 @@ void		vec_int_free(t_vec *vec);
 t_pipeline	*pipeline_init();
 
 t_vec_lex	*lexer(char *str);
-t_pipeline	*parser(t_vec_lex *lexes, char **env);
-int			executor(t_pipeline *pipeline, char **env);
+t_pipeline	*parser(t_vec_lex *lexes);
+int			executor(t_pipeline *pl, t_vec_env *env);
 
 t_vec		*split_semicolon(char *str);
 char		*get_path_by_comand(char *cmd);
 char		*expand_path_if_need(char *cmd);
-t_vec_lex	*expand_env(t_vec_lex *lexes, char **env);
+t_vec_lex	*expand_env(t_vec_lex *lexes, t_vec_env *env);
+t_vec_env 	*vec_env_ch(t_vec_env *env, char *str);
+t_vec_env 	*vec_env_rem(t_vec_env *vec, char *key);
+t_vec_env 	*vec_env_add(t_vec_env *vec, char *a);
 
 void		print_strs(char **strs);
 void		print_lexes(t_vec_lex *vec);
 void		free_split(char **strs);
 void		free_pipeline(t_pipeline *pipeline);
+int			free_ret(void *fred, int ret);
+t_vec		*lessless(char *end_str, t_vec *ret);
+int			strs_to_in(char **strs);
+
 
 int			is_buildin(char *str);
+int         ft_buildin(t_execve *ar, t_vec_env *env);
+t_vec_env 	*env_buildin(char **envp);
+char        *dollar(char **tabl, char *key);
+int         ft_echo(t_execve *ex);
+int    		ft_export_env(t_execve *ex, t_vec_env *env);
+int         ft_unset_env(t_execve *ex, t_vec_env *env);
+void        ft_cd_buildin(t_execve  *ex);
+void        ft_pwd_buildin(t_execve *ex);
+size_t      ft_tab_size(char **tabl);
+void        print_env(char **tabl);
+char        **ins_row(char **tabl, char *str);
+char        **del_row(char **tabl, char *str);
+int         ft_count_rows_tab(char **tabl);
+void        print_export_env(char **tabl);
+char        *str_key(char *str);
+int         ft_cmp_key(char **tabl, char *key);
+char        **ft_cpy_val(char **tabl, char *key);
+char        *ft_strdup_prob(char *src);
+t_execve	*get_execve(t_pipeline *pipeline, int i);
 
 #endif

@@ -2,6 +2,12 @@
 #include <unistd.h>
 #include "minishell.h"
 
+int	free_ret(void *fred, int ret)
+{
+	free(fred);
+	return (ret);
+}
+
 void	free_split(char **strs)
 {
 	int	i;
@@ -21,7 +27,7 @@ void	free_execves(t_vec *execves)
 	int	j;
 
 	i = 0;
-	while (i < execves->size)
+	while (i < (int)execves->size)
 	{
 		free(((t_execve **)execves->arr)[i]->path);
 		j = 0;
@@ -40,7 +46,7 @@ void	free_pipeline(t_pipeline *pipeline)
 {
 	vec_int_free(pipeline->args);
 	free_execves(pipeline->execves);
-	vec_free_all(pipeline->envp);
+	//vec_free_all(pipeline->envp);
 	if (pipeline->file_in)
 		free(pipeline->file_in);
 	if (pipeline->file_out)

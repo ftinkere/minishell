@@ -2,16 +2,25 @@
 # define TYPES_H
 
 # include <stddef.h>
+#include <errno.h>
+#include <string.h>
+#include <stdlib.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <sys/stat.h>
+# include <stdio.h>
+//# include "./libft/libft.h"
 
 # define S_GREATE ">"
 # define S_LESS "<"
 # define S_GREATEGREATE ">>"
 # define S_LESSLESS "<<"
-//# define S_GREATEAMP ">&"
-//# define S_GREATEGREATEAMP ">>&"
 # define S_PIPE "|"
-# define S_AMP "&"
-# define S_SEMICOLON ";"
+# define MOD_APP (O_CREAT | O_WRONLY | O_APPEND)
+# define MOD (O_CREAT | O_WRONLY | O_TRUNC)
+# define RIGHTS (S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)
 
 enum e_token {
 	T_WORD = 0,
@@ -19,11 +28,7 @@ enum e_token {
 	T_LESS,
 	T_LESSLESS,
 	T_GREATGREATE,
-//	T_GREATEAMP,
-//	T_GREATGREATEAMP,
 	T_PIPE,
-	T_AMP,
-	T_SEMICOLON
 };
 
 typedef struct s_lex {
@@ -45,10 +50,17 @@ typedef struct s_vec {
 }	t_vec;
 typedef t_vec t_vec_int;
 
+typedef struct s_vec_env {
+	size_t	capacity;
+	size_t	size;
+	char	**arr;
+}	t_vec_env;
+
 typedef struct s_execve {
 	char	*path;
 	char	**argv;
 }	t_execve;
+
 
 /*
 **
@@ -74,13 +86,20 @@ typedef struct s_pipeline {
 
 	t_vec		*execves;
 
-	t_vec		*envp;
+	t_vec		*readed_ll;
 
 	char		*file_in;
 	char		*file_out;
 	char		*end_token;
 	int			append_out;
-	int			wait;
 }	t_pipeline;
+
+typedef struct s_files {
+	int		tmpin;
+	int		tmpout;
+	int		fdin;
+	int		fdout;
+	int		fdpipe[2];
+} t_files;
 
 #endif
