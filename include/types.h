@@ -59,6 +59,8 @@ typedef struct s_vec_env {
 typedef struct s_execve {
 	char	*path;
 	char	**argv;
+	int		fin;
+	int		fout;
 }	t_execve;
 
 
@@ -85,21 +87,12 @@ typedef struct s_pipeline {
 	t_vec_int	*args;
 
 	t_vec		*execves;
-
-	t_vec		*readed_ll;
-
-	char		*file_in;
-	char		*file_out;
-	char		*end_token;
-	int			append_out;
+	int			cmd_count;
 }	t_pipeline;
 
 typedef struct s_files {
 	int		tmpin;
 	int		tmpout;
-	int		fdin;
-	int		fdout;
-	int		fdpipe[2];
 } t_files;
 
 #endif
