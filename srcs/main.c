@@ -5,66 +5,61 @@
 #include "minishell.h"
 #include "libft.h"
 
-int	do_line(char *str, t_vec_env *env)
+int	do_line(char *str, t_vec_env *env, int *last_code)
 {
 	t_vec_lex	*lexes;
-	t_pipeline	*pipe;
+	t_vec		*blocks;
+	t_pipeline	*pipel;
+	int			i;
 	int			ret_redirect;
 	int			ret;
 
 	if (*str == '\0')
 		return (0);
-	lexes = lexer(str);
-	pipe = parser(expand_env(lexes, env), &ret_redirect, &ret);
-	if (ret_redirect)
-		return (ret_redirect);
-	if (ret)
-		return (ret);
-	ret = executor(pipe, env);
-	vecl_free(lexes);
+	blocks = split_semicolon(str);
+	print_strs(blocks->arr);
+	i = 0;
+	while (i < blocks->size)
+	{
+		lexes = lexer(((char **)blocks->arr)[i]);
+		pipel = parser(expand_env(lexes, env, *last_code),
+				&ret_redirect, &ret, env);
+		if (ret_redirect)
+			return (ret_redirect);
+		if (ret)
+			return (ret);
+		ret = executor(pipel, env, last_code);
+		vecl_free(lexes);
+		i++;
+	}
+	vec_free_all(blocks);
 	return (ret);
 }
 
-// TODO: promt (?) +
-// TODO: PATH +-
-// TODO: env +-
-// TODO: rewrite < > >> <<
-// ;, |, ', " works, PATH +-
-
-//int	main(int argc, char *argv[], char *env[])
-//{
-//	char	*str;
-//	int		res;
-//
-//	res = 0;
-//	while (get_next_line(0, &str))
-//	{
-//		res = do_line(str, env);
-//		if (res <= 0)
-//			break ;
-//		free(str);
-//	}
-//	free(str);
-//	if (res < 0)
-//		return (-res);
-//	return (0);
-//}
+// TODO: signals
+// TODO: -nnn -n -n в echo
+// TODO: export +=
+// TODO: $?
+// TODO: fix `export`
+// TODO: fix cat: -: Неправильный дескриптор файла
 
 int	main(int argc, char *argv[], char *env[])
 {
 	char		*str;
 	int			res;
 	t_vec_env	*ar;
+	int			last_code;
 
 	(void)argc;
 	(void)argv;
+	last_code = 0;
 	ar = env_buildin(env);
 	res = 0;
 	str = readline("msh: ");
 	add_history(str);
-	while (res == 0)
+	while (res >= 0)
 	{
-		res = do_line(str, ar);
+		res = do_line(str, ar, &last_code);
 		if (res < 0)
 			break ;
 		free(str);

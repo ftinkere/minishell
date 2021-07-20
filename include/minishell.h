@@ -20,13 +20,14 @@ void		vec_int_free(t_vec *vec);
 t_pipeline	*pipeline_init();
 
 t_vec_lex	*lexer(char *str);
-t_pipeline	*parser(t_vec_lex *lexes, int *ret_redirect, int *ret_parse);
-int			executor(t_pipeline *pipel, t_vec_env *env);
+t_pipeline	*parser(t_vec_lex *lexes, int *ret_redirect, int *ret_parse,
+		t_vec_env *env);
+int			executor(t_pipeline *pipel, t_vec_env *env, int *last_code);
 
 t_vec		*split_semicolon(char *str);
-char		*get_path_by_comand(char *cmd);
-char		*expand_path_if_need(char *cmd);
-t_vec_lex	*expand_env(t_vec_lex *lexes, t_vec_env *env);
+char		*get_path_by_comand(char *cmd, t_vec_env *env);
+char		*expand_path_if_need(char *cmd, t_vec_env *env);
+t_vec_lex	*expand_env(t_vec_lex *lexes, t_vec_env *env, int last_code);
 t_vec_env 	*vec_env_ch(t_vec_env *env, char *str);
 t_vec_env 	*vec_env_rem(t_vec_env *vec, char *key);
 t_vec_env 	*vec_env_add(t_vec_env *vec, char *a);
@@ -42,13 +43,13 @@ int			ret_lessless_fd(char *end_str);
 
 
 int			is_buildin(char *str);
-int         ft_buildin(t_execve *ar, t_vec_env *env);
+int         ft_buildin(t_execve *ar, t_vec_env *env, int *last_code);
 t_vec_env 	*env_buildin(char **envp);
-char        *dollar(char **tabl, char *key);
+char        *dollar(char **tabl, char *key, int last_code);
 int         ft_echo(t_execve *ex);
 int    		ft_export_env(t_execve *ex, t_vec_env *env);
 int         ft_unset_env(t_execve *ex, t_vec_env *env);
-void        ft_cd_buildin(t_execve  *ex);
+void        ft_cd_buildin(t_execve  *ex, int *last_code);
 void        ft_pwd_buildin(t_execve *ex);
 size_t      ft_tab_size(char **tabl);
 void        print_env(char **tabl);

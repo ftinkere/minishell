@@ -29,14 +29,15 @@ char	*get_path_by_comand_dir(char *cmd, char *dir_path)
 	return (NULL);
 }
 
-char	*get_path_by_comand(char *cmd)
+char	*get_path_by_comand(char *cmd, t_vec_env *env)
 {
 	char	*path_env;
 	char	**strs;
 	int		i;
 	char	*ret;
 
-	path_env = getenv("PATH");
+//	path_env = getenv("PATH");
+	path_env = dollar(env->arr, "PATH", 0);
 	strs = ft_split(path_env, ':');
 	i = 0;
 	ret = NULL;
@@ -47,6 +48,7 @@ char	*get_path_by_comand(char *cmd)
 			break ;
 		i++;
 	}
+	free(path_env);
 	free_split(strs);
 	return (ret);
 }

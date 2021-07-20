@@ -45,7 +45,7 @@ char	*cmd_ex(t_pipeline *pipeline, int i)
 	return (((t_execve **)pipeline->execves->arr)[i]->argv[0]);
 }
 
-int	executor(t_pipeline *pipel, t_vec_env *env)
+int	executor(t_pipeline *pipel, t_vec_env *env, int *last_code)
 {
 	pid_t	pid;
 	int		i;
@@ -57,9 +57,12 @@ int	executor(t_pipeline *pipel, t_vec_env *env)
 	{
 		init_cycle(pipel, i);
 		if (get_execve(pipel, i)->path == NULL)
+		{
+			*last_code = 127;
 			printf("msh: comand not found: %s\n", cmd_ex(pipel, i));
+		}
 		else if (is_buildin(get_execve(pipel, i)->path))
-			ft_buildin(get_execve(pipel, i), env);
+			ft_buildin(get_execve(pipel, i), env, last_code);
 		else
 		{
 			pid = fork();
@@ -73,7 +76,7 @@ int	executor(t_pipeline *pipel, t_vec_env *env)
 		}
 		i++;
 	}
-	waitpid(pid, NULL, 0);
+	waitpid(pid, last_code, 0);
 	end_executor(pipel, &f);
 	return (ret);
 }
