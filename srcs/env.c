@@ -14,31 +14,10 @@ t_vec_env	*env_buildin(char **envp)
 	return (ar);
 }
 
-//char	*dollar(char **tabl, char *key)
-//{
-//	char	*ret_str;
-//	int		flag;
-//
-//	flag = 0;
-//	while (*tabl)
-//	{
-//		if (!ft_strncmp(*tabl, key, ft_strlen(key))
-//			&& *tabl[ft_strlen(key)] == '=')
-//		{
-//			ret_str = ft_substr(*tabl, ft_strlen(key) + 1,
-//					ft_strlen(*tabl) - ft_strlen(key));
-//			flag = 1;
-//		}
-//		tabl++;
-//	}
-//	if (flag == 0)
-//		return (NULL);
-//	else
-//		return (ret_str);
-//}
-
 char	*dollar(char **tabl, char *key)
 {
+	if (key == NULL || *key == '\0')
+		return (ft_strdup(""));
 	while (*tabl)
 	{
 		if (!ft_strncmp(*tabl, key, ft_strlen(key))
@@ -47,7 +26,7 @@ char	*dollar(char **tabl, char *key)
 							ft_strlen(*tabl) - ft_strlen(key)));
 		tabl++;
 	}
-	return (NULL);
+	return (ft_strdup(""));
 }
 
 int	ft_buildin(t_execve *ar, t_vec_env *env_tab)
