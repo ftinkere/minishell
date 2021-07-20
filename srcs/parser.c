@@ -59,7 +59,7 @@ int	set_execves(t_pipeline *pipel, t_vec_lex *lex)
 	while (i * 2 < (int)pipel->args->size)
 	{
 		args_count = get_args(pipel, i * 2 + 1);
-		if (check_err_redirect(lex, get_args(pipel, i * 2)))
+		if (args_count == 0)
 			return (1);
 		get_execve(pipel, i)->path = \
 			expand_path_if_need(lex->arr[get_args(pipel, i * 2)].str);
@@ -162,7 +162,7 @@ int	add_redirects(t_pipeline *pipel, t_vec_lex *lex)
 	ret = 0;
 	pipe_n = 0;
 	i = 0;
-	while (i < (int)lex->size)
+	while (i < (int)lex->size && ret == 0)
 	{
 		if (lex->arr[i].token == T_WORD)
 			;
