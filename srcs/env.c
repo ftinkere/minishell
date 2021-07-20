@@ -21,22 +21,20 @@ t_vec_env *env_buildin(char **envp)
 char *dollar(char **tabl, char *key)
 {
     char *ret_str;
-    int flag = 0;
 
+    if (!key || !*key)
+    	return (ft_strdup(""));
     while(*tabl)
     {
-        if(!strncmp(*tabl, key, strlen(key)))
+        if(!ft_strncmp(*tabl, key, ft_strlen(key)) && (*tabl)[ft_strlen(key)] == '=')
         {
-            ret_str = ft_substr(*tabl, strlen(key) + 1, strlen(*tabl) - strlen(key));
-            flag = 1;
+            ret_str = ft_substr(*tabl, ft_strlen(key) + 1,
+								ft_strlen(*tabl) - ft_strlen(key));
+			return(ret_str);
         }
         tabl++;
     }
-    if (flag == 0)
-        return (NULL);
-    else
-        //printf("%s", ret_str);
-    return(ret_str);
+    return (ft_strdup(""));
 }
 
 int ft_buildin(t_execve *ar, t_vec_env *env_tab)

@@ -3,63 +3,45 @@
 #include <dirent.h>
 #include <readline/readline.h>
 
-//int	get_semicolon(char *str, int start);
-//
-//void	tes(char *str, int start, int needed)
-//{
-//	static int	num = 0;
-//	int			t;
-//
-//	t = get_semicolon(str, start);
-//	if (t != needed)
-//		printf("%d: Need %d, get: %d\n", num, needed, t);
-//	else
-//		printf("%d: ok\n", num);
-//	num++;
-//}
-//
-//int	main(void)
-//{
-//	printf("SEMICOLON INDEX\n");
-//	tes("", 0, -1);
-//	tes(";", 0, 0);
-//	tes(" ;", 0, 1);
-//	tes(";;", 1, 1);
-//	tes("str;str;", 1, 3);
-//	tes("str;str;", 4, 7);
-//	tes("str;str", 4, -1);
-//}
-//
-//void	tes(char *str)
-//{
-//	static int	num = 0;
-//	t_vec		*blocks;
-//
-//	blocks = split_semicolon(str);
-//	printf("%d:\n", num);
-//	print_strs(((char **)blocks->arr));
-//	num++;
-//}
-//
-//int	main(void)
-//{
-//	printf("SEMICOLON SPLIT\n");
-//	tes("");
-//	tes("abcdef");
-//	tes(";");
-//	tes("a;b");
-//	tes("a;b;");
-//	tes("a;b;cd;");
-//	tes("a;b;cd; asfd a;");
-//	tes("a;b;cd; asfd a");
-//	tes("a;b;cd; asfd\"';'\"a");
-//	tes("export abc abc; env; ls | grep -r \\etc");
-//}
+
+int	do_line(char *str, t_vec_env *env)
+{
+	t_vec_lex	*lexes;
+	t_vec		*blocks;
+	int			i;
+	int			res;
+
+	blocks = split_semicolon(str);
+	i = 0;
+	while (i < (int)blocks->size)
+	{
+		lexes = lexer(((char**)blocks->arr)[i]);
+		res = executor(parser(expand_env(lexes, env)), env);
+		vecl_free(lexes);
+		if (res <= 0)
+			break ;
+		i++;
+	}
+	vec_free_all(blocks);
+	return (res);
+}
+
 
 int	main(void)
 {
-	t_vec *ret;
+	t_vec_env *env;
+	t_vec_lex *lex;
 
-	ret = lessless("EOF");
-	print_strs(ret->arr);
+	env = (t_vec_env *)vec_init();
+	do_line("export AAA=123", env);
+	lex = expand_env(lexer("echo $AAA"), env);
+	print_lexes(lex);
+	printf("%s\n", dollar(env->arr, "AAA"));
+	do_line("export BBB=$AAA", env);
+	printf("%s\n", dollar(env->arr, "BBB"));
+//	do_line("env", env);
+//	do_line("echo $AAA", env);
+
+
+
 }

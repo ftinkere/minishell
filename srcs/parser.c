@@ -46,6 +46,7 @@ void	set_execves(t_pipeline *pipeline, t_vec_lex *lexes)
 		get_execve(pipeline, i)->argv = \
 			ft_calloc(args_count + 1, sizeof(char *));
 		j = 0;
+		print_lexes(lexes);
 		while (j < args_count) {
 			get_execve(pipeline, i)->argv[j] = \
 				ft_strdup(lexes->arr[get_args(pipeline, i * 2) + j].str);
