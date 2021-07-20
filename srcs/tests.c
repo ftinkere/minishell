@@ -32,7 +32,7 @@ int	main(void)
 	last_code = 0;
 	env = (t_vec_env *)vec_init();
 	do_line("echo $?", env, &last_code);
-	do_line("cd sad a", env, &last_code);
+	do_line("/bin/cat", env, &last_code);
 	do_line("echo $?", env, &last_code);
 //	printf("%s\n", dollar(env->arr, "?", 10));
 //	printf("%s\n", dollar(env->arr, "?", 0));

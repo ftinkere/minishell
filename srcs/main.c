@@ -17,7 +17,6 @@ int	do_line(char *str, t_vec_env *env, int *last_code)
 	if (*str == '\0')
 		return (0);
 	blocks = split_semicolon(str);
-	print_strs(blocks->arr);
 	i = 0;
 	while (i < blocks->size)
 	{
@@ -41,7 +40,6 @@ int	do_line(char *str, t_vec_env *env, int *last_code)
 // TODO: export +=
 // TODO: $?
 // TODO: fix `export`
-// TODO: fix cat: -: Неправильный дескриптор файла
 
 int	main(int argc, char *argv[], char *env[])
 {

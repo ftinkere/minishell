@@ -178,6 +178,8 @@ int	add_redirects(t_pipeline *pipel, t_vec_lex *lex)
 			ret = add_greategreate(get_execve(pipel, pipe_n), lex, i);
 		i++;
 	}
+	if (get_execve(pipel, 0)->fin == 0)
+		get_execve(pipel, 0)->fin = dup(0);
 	if (get_execve(pipel, pipe_n)->fout == 1)
 		get_execve(pipel, pipe_n)->fout = dup(1);
 	return (ret);
@@ -190,6 +192,7 @@ t_execve	*new_t_execve(void)
 	ret = ft_calloc(1, sizeof(t_execve));
 //	ret->fin = dup(0);
 //	ret->fout = dup(1);
+	ret->fin = 0;
 	ret->fout = 1;
 	return (ret);
 }
