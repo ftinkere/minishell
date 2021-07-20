@@ -58,7 +58,12 @@ void	ft_cd_buildin(t_execve *ex,  int *last_code, t_vec_env *env)
 
 	i = 1;
 	if (!ex->argv[1])
-		chdir(env->arr[ft_cmp_key(env->arr, "HOME")] + 5);
+	{
+		if (ft_cmp_key(env->arr, "HOME") == -1)
+			chdir(getenv("HOME"));
+		else
+			chdir(env->arr[ft_cmp_key(env->arr, "HOME")] + 5);
+	}
 	else
 	{
 		while (ex->argv[i])
@@ -87,24 +92,24 @@ void	ft_pwd_buildin(t_execve *ex)
 	}
 }
 
-char	*ft_strdup_prob(char *src)
-{
-	size_t	i;
-	size_t	len;
-	char	*str;
-
-	len = 0;
-	while (src[len] != ' ' && src[len])
-		len++;
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		str[i] = src[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
+//char	*ft_strdup_prob(char *src)
+//{
+//	size_t	i;
+//	size_t	len;
+//	char	*str;
+//
+//	len = 0;
+//	while (src[len] != ' ' && src[len])
+//		len++;
+//	str = (char *)malloc(sizeof(char) * (len + 1));
+//	if (!str)
+//		return (NULL);
+//	i = 0;
+//	while (i < len)
+//	{
+//		str[i] = src[i];
+//		i++;
+//	}
+//	str[i] = '\0';
+//	return (str);
+//}
