@@ -6,9 +6,13 @@ int	ft_echo(t_execve *ex)
 	int	i;
 
 	i = 1;
+
 	while (ex->argv[i])
 	{
-		printf("%s ", ex->argv[i]);
+		if (!ft_strcmp(ex->argv[i], "-n"))
+			i++;
+		else
+			printf("%s", ex->argv[i]);
 		i++;
 	}
 	if (ft_strcmp(ex->argv[1], "-n"))
