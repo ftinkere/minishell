@@ -140,12 +140,12 @@ void	ft_exp_str(char *str)
 void	print_export_env(char **tabl)
 {
 	int	i;
-	int	mass[50];
+	int	mass[256];
 	//int j = 1;
 //	int	tmp;
 
 	i = -1;
-	while (++i < 50)
+	while (++i < 256)
 		mass[i] = i;
 	i = 0;
 	while (tabl[i])

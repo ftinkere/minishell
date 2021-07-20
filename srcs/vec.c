@@ -70,16 +70,22 @@ t_vec_env *vec_env_ch(t_vec_env *env, char *str)
 
 	key = str_key(str);
 	vec_env_rem(env, key);
-	//i = ft_cmp_key(env->arr, key);
 	free(key);
 
 	//if (i < 0)
 		vec_env_add(env, str);
-//	else
-//	{
-//		free(env->arr[i]);
-//		env->arr[i] = str;
-//	}
+	return (env);
+}
+
+t_vec_env *vec_env_plus(t_vec_env *env, char *str)
+{
+	char *key;
+	int i;
+
+	key = ft_substr(str_key(str), 0, ft_strlen(str_key(str)) - 1);
+	i = ft_cmp_key(env->arr, key);
+	env->arr[i] = ft_strf1join(env->arr[i], str + ft_strlen(key) + 2);
+	free(key);
 	return (env);
 }
 

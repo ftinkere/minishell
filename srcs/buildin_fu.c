@@ -23,13 +23,16 @@ int	ft_export_env(t_execve *ex, t_vec_env *env)
 	int	i;
 
 	i = 1;
-	if (ex->argv[1] == NULL)
+	if (!ex->argv[1])
 		print_export_env(env->arr);
 	else
 	{
 		while (ex->argv[i])
 		{
-			vec_env_ch(env, ft_strdup(ex->argv[i]));
+			if (ft_strchr(ex->argv[i], '+') && ft_strchr(ex->argv[i], '='))
+				vec_env_plus(env, ft_strdup(ex->argv[i]));
+			else
+				vec_env_ch(env, ft_strdup(ex->argv[i]));
 			i++;
 		}
 	}
@@ -49,21 +52,26 @@ int	ft_unset_env(t_execve *ex, t_vec_env *env)
 	return (1);
 }
 
-void	ft_cd_buildin(t_execve *ex,  int *last_code)
+void	ft_cd_buildin(t_execve *ex,  int *last_code, t_vec_env *env)
 {
 	int	i;
 
 	i = 1;
-	while (ex->argv[i])
-	{
-		i++;
-	}
-	if (i > 2)
-		printf("msh: cd: too many arguments\n");
-	else if ((chdir(ex->argv[1])) == -1)
-		printf("msh: cd: %s\n", strerror(errno));
+	if (!ex->argv[1])
+		chdir(env->arr[ft_cmp_key(env->arr, "HOME")] + 5);
 	else
-		return ;
+	{
+		while (ex->argv[i])
+		{
+			i++;
+		}
+		if (i > 2)
+			printf("msh: cd: too many arguments\n");
+		else if ((chdir(ex->argv[1])) == -1)
+			printf("msh: cd: %s\n", strerror(errno));
+		else
+			return;
+	}
 	*last_code = 1;
 }
 
