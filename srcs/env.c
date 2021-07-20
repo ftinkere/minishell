@@ -14,10 +14,12 @@ t_vec_env	*env_buildin(char **envp)
 	return (ar);
 }
 
-char	*dollar(char **tabl, char *key)
+char	*dollar(char **tabl, char *key, int	last_code)
 {
 	if (key == NULL || *key == '\0')
 		return (ft_strdup(""));
+	if (!ft_strcmp(key, "?"))
+		return (ft_itoa(last_code));
 	while (*tabl)
 	{
 		if (!ft_strncmp(*tabl, key, ft_strlen(key))
@@ -29,7 +31,7 @@ char	*dollar(char **tabl, char *key)
 	return (ft_strdup(""));
 }
 
-int	ft_buildin(t_execve *ar, t_vec_env *env_tab)
+int	ft_buildin(t_execve *ar, t_vec_env *env_tab, int *last_code)
 {
 	if (!ft_strcmp(ar->path, "echo"))
 		ft_echo(ar);
@@ -42,7 +44,7 @@ int	ft_buildin(t_execve *ar, t_vec_env *env_tab)
 	else if (!ft_strcmp(ar->path, "pwd"))
 		ft_pwd_buildin(ar);
 	else if (!ft_strcmp(ar->path, "cd"))
-		ft_cd_buildin(ar);
+		ft_cd_buildin(ar, last_code);
 	else if (!ft_strcmp(ar->path, "exit"))
 	{
 		printf("exit\n");

@@ -49,7 +49,7 @@ int	check_err_redirect(t_vec_lex *lex, int i)
 	return (0);
 }
 
-int	set_execves(t_pipeline *pipel, t_vec_lex *lex)
+int	set_execves(t_pipeline *pipel, t_vec_lex *lex, t_vec_env *env)
 {
 	int	args_count;
 	int	i;
@@ -62,7 +62,7 @@ int	set_execves(t_pipeline *pipel, t_vec_lex *lex)
 		if (args_count == 0)
 			return (1);
 		get_execve(pipel, i)->path = \
-			expand_path_if_need(lex->arr[get_args(pipel, i * 2)].str);
+			expand_path_if_need(lex->arr[get_args(pipel, i * 2)].str, env);
 		get_execve(pipel, i)->argv = \
 			ft_calloc(args_count + 1, sizeof(char *));
 		j = 0;
@@ -194,7 +194,8 @@ t_execve	*new_t_execve(void)
 	return (ret);
 }
 
-t_pipeline	*parser(t_vec_lex *lexes, int *ret_redirect, int *ret_parse)
+t_pipeline	*parser(t_vec_lex *lexes, int *ret_redirect, int *ret_parse,
+		t_vec_env *env)
 {
 	t_pipeline	*pipeline;
 	int			i;
@@ -217,6 +218,6 @@ t_pipeline	*parser(t_vec_lex *lexes, int *ret_redirect, int *ret_parse)
 		i++;
 	}
 	*ret_redirect = add_redirects(pipeline, lexes);
-	*ret_parse = set_execves(pipeline, lexes);
+	*ret_parse = set_execves(pipeline, lexes, env);
 	return (pipeline);
 }

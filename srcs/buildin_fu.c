@@ -6,6 +6,8 @@ int	ft_echo(t_execve *ex)
 	int	i;
 
 	i = 1;
+	if (!ft_strcmp(ex->argv[1], "-n"))
+		i++;
 	while (ex->argv[i])
 	{
 		printf("%s ", ex->argv[i]);
@@ -47,17 +49,22 @@ int	ft_unset_env(t_execve *ex, t_vec_env *env)
 	return (1);
 }
 
-void	ft_cd_buildin(t_execve *ex)
+void	ft_cd_buildin(t_execve *ex,  int *last_code)
 {
 	int	i;
 
 	i = 1;
 	while (ex->argv[i])
 	{
-		if ((chdir(ex->argv[i])) == -1)
-			printf("msh: cd: %s\n", strerror(errno));
 		i++;
 	}
+	if (i > 2)
+		printf("msh: cd: too many arguments\n");
+	else if ((chdir(ex->argv[1])) == -1)
+		printf("msh: cd: %s\n", strerror(errno));
+	else
+		return ;
+	*last_code = 1;
 }
 
 void	ft_pwd_buildin(t_execve *ex)

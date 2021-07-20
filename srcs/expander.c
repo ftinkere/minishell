@@ -30,6 +30,8 @@ char *find_key(char *str)
 	char 	*key;
 
 	i = 1;
+	if (str[1] == '?')
+		return (ft_strdup("?"));
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
 	key = ft_substr(str, 1, (i - 1));
@@ -73,7 +75,7 @@ int move_count(char *str)
 	return (0);
 }
 
-char	*ret_str(char *str, t_vec_env *env)
+char	*ret_str(char *str, t_vec_env *env, int last_code)
 {
 	char *ret_str;
 	int i;
@@ -96,7 +98,8 @@ char	*ret_str(char *str, t_vec_env *env)
 		else if (str[i] == '"' && fl_quotes == 0)
 			fl_quotes = 1;
 		else if (str[i] == '$')
-			ret_str = ft_strfjoin(ret_str, dollar(env->arr, find_key(str + i)));
+			ret_str = ft_strfjoin(ret_str,
+					dollar(env->arr, find_key(str + i), last_code));
 		//i += ft_strlen(find_key(str + i));
 		else if (str[i] == '\\' && fl_quotes != -1 && str[i + 1])
 			ret_str = ft_strfjoin(ret_str, ft_substr(str, i + 1, 1));
@@ -108,7 +111,7 @@ char	*ret_str(char *str, t_vec_env *env)
 }
 
 
-t_vec_lex	*expand_env(t_vec_lex *lexes, t_vec_env *env)
+t_vec_lex	*expand_env(t_vec_lex *lexes, t_vec_env *env, int last_code)
 {
 	int		i;
 	char	*tmp;
@@ -119,7 +122,7 @@ t_vec_lex	*expand_env(t_vec_lex *lexes, t_vec_env *env)
 		if	(lexes->arr[i].token == T_WORD)
 		{
 			tmp = lexes->arr[i].str;
-			lexes->arr[i].str = ret_str(tmp, env);
+			lexes->arr[i].str = ret_str(tmp, env, last_code);
 			free(tmp);
 		}
 		i++;
@@ -145,9 +148,9 @@ int	is_comand(char *str)
 	return (1);
 }
 
-char	*expand_path_if_need(char *cmd)
+char	*expand_path_if_need(char *cmd, t_vec_env *env)
 {
 	if (is_comand(cmd))
-		return (get_path_by_comand(cmd));
+		return (get_path_by_comand(cmd, env));
 	return (ft_strdup(cmd));
 }
