@@ -44,7 +44,7 @@ int	ft_buildin(t_execve *ar, t_vec_env *env_tab, int *last_code)
 	else if (!ft_strcmp(ar->path, "pwd"))
 		ft_pwd_buildin(ar);
 	else if (!ft_strcmp(ar->path, "cd"))
-		ft_cd_buildin(ar, last_code);
+		ft_cd_buildin(ar, last_code, env_tab);
 	else if (!ft_strcmp(ar->path, "exit"))
 	{
 		printf("exit\n");

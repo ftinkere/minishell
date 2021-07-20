@@ -50,7 +50,7 @@ char        *dollar(char **tabl, char *key, int last_code);
 int         ft_echo(t_execve *ex);
 int    		ft_export_env(t_execve *ex, t_vec_env *env);
 int         ft_unset_env(t_execve *ex, t_vec_env *env);
-void        ft_cd_buildin(t_execve  *ex, int *last_code);
+void		ft_cd_buildin(t_execve *ex,  int *last_code, t_vec_env *env);
 void        ft_pwd_buildin(t_execve *ex);
 size_t      ft_tab_size(char **tabl);
 void        print_env(char **tabl);
