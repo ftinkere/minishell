@@ -20,8 +20,8 @@ void		vec_int_free(t_vec *vec);
 t_pipeline	*pipeline_init();
 
 t_vec_lex	*lexer(char *str);
-t_pipeline	*parser(t_vec_lex *lexes);
-int			executor(t_pipeline *pl, t_vec_env *env);
+t_pipeline	*parser(t_vec_lex *lexes, int *ret_redirect, int *ret_parse);
+int			executor(t_pipeline *pipel, t_vec_env *env);
 
 t_vec		*split_semicolon(char *str);
 char		*get_path_by_comand(char *cmd);
@@ -37,7 +37,8 @@ void		free_split(char **strs);
 void		free_pipeline(t_pipeline *pipeline);
 int			free_ret(void *fred, int ret);
 t_vec		*lessless(char *end_str, t_vec *ret);
-int			strs_to_in(char **strs);
+int			strs_to_in(t_vec *strs);
+int			ret_lessless_fd(char *end_str);
 
 
 int			is_buildin(char *str);

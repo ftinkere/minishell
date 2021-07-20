@@ -140,7 +140,7 @@ int	is_buildin(char *str)
 int	is_comand(char *str)
 {
 	if (!ft_strncmp(str, "/", 1) || !ft_strncmp(str, "./", 2)
-		|| is_buildin(str))
+		|| !ft_strncmp(str, "../", 3) || is_buildin(str))
 		return (0);
 	return (1);
 }

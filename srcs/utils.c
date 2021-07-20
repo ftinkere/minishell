@@ -44,12 +44,22 @@ void	free_execves(t_vec *execves)
 
 void	free_pipeline(t_pipeline *pipeline)
 {
+	int	i;
+
 	vec_int_free(pipeline->args);
+	i = 0;
+	while (i < pipeline->execves->size)
+	{
+//		if (get_execve(pipeline, i)->fin > 2)
+//			close(get_execve(pipeline, i)->fin);
+//		if (get_execve(pipeline, i)->fout > 2)
+//			close(get_execve(pipeline, i)->fout);
+		i++;
+	}
 	free_execves(pipeline->execves);
-	//vec_free_all(pipeline->envp);
-	if (pipeline->file_in)
-		free(pipeline->file_in);
-	if (pipeline->file_out)
-		free(pipeline->file_out);
+//	if (pipeline->file_in)
+//		free(pipeline->file_in);
+//	if (pipeline->file_out)
+//		free(pipeline->file_out);
 	free(pipeline);
 }

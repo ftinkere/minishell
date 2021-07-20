@@ -8,32 +8,28 @@
 int	do_line(char *str, t_vec_env *env)
 {
 	t_vec_lex	*lexes;
-	t_vec		*blocks;
-	int			i;
-	int			res;
+	t_pipeline	*pipe;
+	int			ret_redirect;
+	int			ret;
 
-	blocks = split_semicolon(str);
-	i = 0;
-	while (i < (int)blocks->size)
-	{
-		lexes = lexer(((char**)blocks->arr)[i]);
-		res = executor(parser(expand_env(lexes, env)), env);
-		vecl_free(lexes);
-		if (res <= 0)
-			break ;
-		i++;
-	}
-	vec_free_all(blocks);
-	return (res);
+	if (*str == '\0')
+		return (0);
+	lexes = lexer(str);
+	pipe = parser(expand_env(lexes, env), &ret_redirect, &ret);
+	if (ret_redirect)
+		return (ret_redirect);
+	if (ret)
+		return (ret);
+	ret = executor(pipe, env);
+	vecl_free(lexes);
+	return (ret);
 }
 
 // TODO: promt (?) +
 // TODO: PATH +-
-// TODO: env
-// TODO: < > >> <<
+// TODO: env +-
+// TODO: rewrite < > >> <<
 // ;, |, ', " works, PATH +-
-
-// SEGFAULT 2+2
 
 //int	main(int argc, char *argv[], char *env[])
 //{
@@ -56,10 +52,9 @@ int	do_line(char *str, t_vec_env *env)
 
 int	main(int argc, char *argv[], char *env[])
 {
-	char	*str;
-	int		res;
-	t_vec_env *ar;
-
+	char		*str;
+	int			res;
+	t_vec_env	*ar;
 
 	(void)argc;
 	(void)argv;
@@ -67,10 +62,10 @@ int	main(int argc, char *argv[], char *env[])
 	res = 0;
 	str = readline("msh: ");
 	add_history(str);
-	while (str != NULL)
+	while (res == 0)
 	{
 		res = do_line(str, ar);
-		if (res <= 0)
+		if (res < 0)
 			break ;
 		free(str);
 		str = readline("msh: ");
