@@ -62,10 +62,10 @@ int	main(int argc, char *argv[], char *env[])
 	res = 0;
 	str = readline("msh: ");
 	add_history(str);
-	while (str != NULL)
+	while (res == 0)
 	{
 		res = do_line(str, ar);
-		if (res <= 0)
+		if (res < 0)
 			break ;
 		free(str);
 		str = readline("msh: ");
