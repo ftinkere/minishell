@@ -31,6 +31,7 @@ t_vec_lex	*expand_env(t_vec_lex *lexes, t_vec_env *env, int last_code);
 t_vec_env 	*vec_env_ch(t_vec_env *env, char *str);
 t_vec_env 	*vec_env_rem(t_vec_env *vec, char *key);
 t_vec_env 	*vec_env_add(t_vec_env *vec, char *a);
+t_vec_env 	*vec_env_plus(t_vec_env *env, char *str);
 
 void		print_strs(char **strs);
 void		print_lexes(t_vec_lex *vec);

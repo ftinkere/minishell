@@ -23,13 +23,16 @@ int	ft_export_env(t_execve *ex, t_vec_env *env)
 	int	i;
 
 	i = 1;
-	if (ex->argv[1] == NULL)
+	if (!ex->argv[1])
 		print_export_env(env->arr);
 	else
 	{
 		while (ex->argv[i])
 		{
-			vec_env_ch(env, ft_strdup(ex->argv[i]));
+			if (ft_strchr(ex->argv[i], '+') && ft_strchr(ex->argv[i], '='))
+				vec_env_plus(env, ft_strdup(ex->argv[i]));
+			else
+				vec_env_ch(env, ft_strdup(ex->argv[i]));
 			i++;
 		}
 	}
