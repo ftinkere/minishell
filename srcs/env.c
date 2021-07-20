@@ -21,7 +21,7 @@ char	*dollar(char **tabl, char *key)
 	while (*tabl)
 	{
 		if (!ft_strncmp(*tabl, key, ft_strlen(key))
-				&& *tabl[ft_strlen(key)] == '=')
+				&& (*tabl)[ft_strlen(key)] == '=')
 			return (ft_substr(*tabl, ft_strlen(key) + 1,
 							ft_strlen(*tabl) - ft_strlen(key)));
 		tabl++;
