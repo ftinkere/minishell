@@ -51,7 +51,7 @@ int	ft_buildin(t_execve *ar, t_vec_env *env_tab, int *last_code)
 		if (ar->argv[1] == NULL)
 			exit(0);
 		else
-			exit(ft_atoi(ar->argv[1]));
+			exit(ft_atoi(ar->argv[1]) % 256);
 	}
 	return (1);
 }

@@ -54,27 +54,29 @@ int	ft_unset_env(t_execve *ex, t_vec_env *env)
 
 void	ft_cd_buildin(t_execve *ex,  int *last_code, t_vec_env *env)
 {
-	int	i;
+	int	len_args;
 	int	ret;
 
 	ret = 0;
-	i = 1;
-	while (ex->argv[i])
-		i++;
-	if (i == 1)
-		ret = chdir(env->arr[ft_cmp_key(env->arr, "HOME")] + 5);
-	else if (i == 2)
+	len_args = 1;
+	while (ex->argv[len_args])
+		len_args++;
+	if (len_args == 1)
+	{
+		if (ft_cmp_key(env->arr, "HOME") == -1)
+			ret = chdir(getenv("HOME"));
+		else
+			ret = chdir(env->arr[ft_cmp_key(env->arr, "HOME")] + 5);
+	}
+	else if (len_args == 2)
 		ret = chdir(ex->argv[1]);
-	else if (i > 2)
+	else if (len_args > 2)
 	{
 		printf("msh: cd: too many arguments\n");
 		*last_code = 1;
 	}
-	if (ret == -1)
-	{
+	if (ret < 0)
 		printf("msh: cd: %s\n", strerror(errno));
-		*last_code = 1;
-	}
 }
 
 void	ft_pwd_buildin(t_execve *ex)
@@ -89,24 +91,24 @@ void	ft_pwd_buildin(t_execve *ex)
 	}
 }
 
-char	*ft_strdup_prob(char *src)
-{
-	size_t	i;
-	size_t	len;
-	char	*str;
-
-	len = 0;
-	while (src[len] != ' ' && src[len])
-		len++;
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		str[i] = src[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
+//char	*ft_strdup_prob(char *src)
+//{
+//	size_t	i;
+//	size_t	len;
+//	char	*str;
+//
+//	len = 0;
+//	while (src[len] != ' ' && src[len])
+//		len++;
+//	str = (char *)malloc(sizeof(char) * (len + 1));
+//	if (!str)
+//		return (NULL);
+//	i = 0;
+//	while (i < len)
+//	{
+//		str[i] = src[i];
+//		i++;
+//	}
+//	str[i] = '\0';
+//	return (str);
+//}
