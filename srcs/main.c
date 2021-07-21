@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <sys/signal.h>
 #include "minishell.h"
 #include "libft.h"
 
@@ -37,10 +38,13 @@ int	do_line(char *str, t_vec_env *env, int *last_code)
 
 // TODO: signals
 // TODO: -nnn -n -n в echo
-// TODO: export +=
-// TODO: $?
+// TODO: export += (done?)
+// TODO: $? (done?)
 // TODO: fix `export`
+// TODO: exit codes of buildins
+// TODO: fork buildins in pipeline
 
+//TODO: change promt to msh after test
 int	main(int argc, char *argv[], char *env[])
 {
 	char		*str;
@@ -53,20 +57,21 @@ int	main(int argc, char *argv[], char *env[])
 	last_code = 0;
 	ar = env_buildin(env);
 	res = 0;
-	str = readline("msh: ");
-	add_history(str);
-	while (res >= 0)
+	str = readline("bash-5.1$ ");
+//	add_history(str);
+	while (str != NULL && res >= 0)
 	{
+		add_history(str);
 		res = do_line(str, ar, &last_code);
 		if (res < 0)
 			break ;
 		free(str);
-		str = readline("msh: ");
-		add_history(str);
+		str = readline("bash-5.1$ ");
 	}
 	if (str != NULL)
 		free(str);
+	printf("exit\n");
 	if (res < 0)
 		return (-res);
-	return (0);
+	return (last_code);
 }

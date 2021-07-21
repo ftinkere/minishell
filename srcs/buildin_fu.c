@@ -4,16 +4,29 @@
 int	ft_echo(t_execve *ex)
 {
 	int	i;
+	int	j;
+	int	n_flag;
 
+	n_flag = 0;
 	i = 1;
-	if (!ft_strcmp(ex->argv[1], "-n"))
-		i++;
-	while (ex->argv[i])
+	while (ex->argv[i] != NULL && !ft_strncmp("-", ex->argv[i], 1))
 	{
-		printf("%s ", ex->argv[i]);
+		j = 1;
+		while (ex->argv[i][j] != '\0' && ex->argv[i][j] == 'n')
+			j++;
+		if (ex->argv[i][j] != '\0' || ex->argv[i][1] == '\0')
+			break ;
+		n_flag = 1;
 		i++;
 	}
-	if (ft_strcmp(ex->argv[1], "-n"))
+	while (ex->argv[i])
+	{
+		printf("%s", ex->argv[i]);
+		if (ex->argv[i + 1] != NULL)
+			printf(" ");
+		i++;
+	}
+	if (n_flag == 0 || ex->argv[1] == NULL)
 		printf("\n");
 	return (1);
 }
@@ -77,6 +90,7 @@ void	ft_cd_buildin(t_execve *ex,  int *last_code, t_vec_env *env)
 	}
 	if (ret < 0)
 		printf("msh: cd: %s\n", strerror(errno));
+	*last_code = 0;
 }
 
 void	ft_pwd_buildin(t_execve *ex)

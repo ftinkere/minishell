@@ -69,7 +69,8 @@ int	executor(t_pipeline *pipel, t_vec_env *env, int *last_code)
 			if (pid == 0)
 			{
 				exec_one(get_execve(pipel, i), env->arr);
-				printf("msh: %s: %s\n", cmd_ex(pipel, i), strerror(errno));
+				perror(cmd_ex(pipel, i));
+//				printf("msh: %s: %s\n", cmd_ex(pipel, i), strerror(errno));
 				ret = -1;
 				break ;
 			}
@@ -77,6 +78,7 @@ int	executor(t_pipeline *pipel, t_vec_env *env, int *last_code)
 		i++;
 	}
 	waitpid(pid, last_code, 0);
+	*last_code = WEXITSTATUS(*last_code);
 	end_executor(pipel, &f);
 	return (ret);
 }

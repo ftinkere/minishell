@@ -125,7 +125,15 @@ t_vec_lex	*expand_env(t_vec_lex *lexes, t_vec_env *env, int last_code)
 			lexes->arr[i].str = ret_str(tmp, env, last_code);
 			free(tmp);
 		}
-		i++;
+		if (lexes->arr[i].str[0] == '\0')
+		{
+			free(lexes->arr[i].str);
+			ft_memmove(&lexes->arr[i], &lexes->arr[i + 1],
+					(lexes->size - i) * sizeof (t_lex));
+			lexes->size--;
+		}
+		else
+			i++;
 	}
 	return (lexes);
 }
