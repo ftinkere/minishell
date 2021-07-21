@@ -31,6 +31,22 @@ int	ft_echo(t_execve *ex)
 	return (1);
 }
 
+int	check_arg_export(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] && str[i] != '=' && str[i + 1])
+	{
+		if (str[i] == '+' && str[i + 1] == '=')
+			i++;
+		else if ((!ft_isalnum(str[i]) && str[i] != '_'))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	ft_export_env(t_execve *ex, t_vec_env *env)
 {
 	int	i;
@@ -41,13 +57,23 @@ int	ft_export_env(t_execve *ex, t_vec_env *env)
 	else
 	{
 		while (ex->argv[i])
-		{
-			if (ft_strchr(ex->argv[i], '+') && ft_strchr(ex->argv[i], '='))
-				vec_env_plus(env, ft_strdup(ex->argv[i]));
-			else
-				vec_env_ch(env, ft_strdup(ex->argv[i]));
-			i++;
-		}
+			{
+				if (!check_arg_export(ex->argv[i]))
+				{
+					if (ft_strchr(ex->argv[i], '+')
+							&& ft_strchr(ex->argv[i], '='))
+						vec_env_plus(env, ft_strdup(ex->argv[i]));
+					else
+						vec_env_ch(env, ft_strdup(ex->argv[i]));
+				}
+				else
+				{
+					printf("msh: export: '%s': not a valid identifier\n",
+						   ex->argv[i]);
+					return (1);
+				}
+				i++;
+			}
 	}
 	return (1);
 }

@@ -31,6 +31,20 @@ char	*dollar(char **tabl, char *key, int	last_code)
 	return (ft_strdup(""));
 }
 
+void ft_exit_builin(t_execve *ex)
+{
+	printf("exit\n");
+	if (ex->argv[1] == NULL)
+		exit(0);
+	else if (!ft_isdigit(*ex->argv[1]))
+	{
+		printf("msh: exit: %s: numeric argument required\n", ex->argv[1]);
+		exit(255);
+	}
+	else
+		exit(ft_atoi(ex->argv[1]) % 256);
+}
+
 int	ft_buildin(t_execve *ar, t_vec_env *env_tab, int *last_code)
 {
 	if (!ft_strcmp(ar->path, "echo"))
@@ -46,12 +60,6 @@ int	ft_buildin(t_execve *ar, t_vec_env *env_tab, int *last_code)
 	else if (!ft_strcmp(ar->path, "cd"))
 		ft_cd_buildin(ar, last_code, env_tab);
 	else if (!ft_strcmp(ar->path, "exit"))
-	{
-		printf("exit\n");
-		if (ar->argv[1] == NULL)
-			exit(0);
-		else
-			exit(ft_atoi(ar->argv[1]) % 256);
-	}
+		ft_exit_builin(ar);
 	return (1);
 }
