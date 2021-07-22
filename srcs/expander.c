@@ -72,6 +72,7 @@ int move_count(char *str)
 		return (2);
 	else if (str[0] == '$')
 		return (ft_strlen(find_key(str)) + 1);
+	free(str);
 	return (0);
 }
 
@@ -99,8 +100,9 @@ char	*ret_str(char *str, t_vec_env *env, int last_code)
 			fl_quotes = 1;
 		else if (str[i] == '$')
 			ret_str = ft_strfjoin(ret_str,
-					dollar(env->arr, find_key(str + i), last_code));
-		//i += ft_strlen(find_key(str + i));
+								  dollar(env->arr, find_key(str + i),
+										 last_code));
+			//i += ft_strlen(find_key(str + i));
 		else if (str[i] == '\\' && fl_quotes != -1 && str[i + 1])
 			ret_str = ft_strfjoin(ret_str, ft_substr(str, i + 1, 1));
 		i += move_count(str + i);

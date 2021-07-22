@@ -120,41 +120,41 @@ void	ft_exp_str(char *str)
 	int	i;
 
 	i = 0;
-	write(1, "declare -x ", 11);
+	printf("%s", "declare -x ");
 	while (i < ft_strlen(str_key(str)) + 1)
 	{
-		ft_putchar_fd(str[i], 1);
+		printf("%c", str[i]);
 		i++;
 	}
-	ft_putchar_fd('"', 1);
+	printf("%c", '"');
 	while (str[i])
 	{
-		ft_putchar_fd(str[i], 1);
+		printf("%c", str[i]);
 		i++;
 	}
-	ft_putchar_fd(34, 1);
-	ft_putchar_fd('\n', 1);
+	printf("%c\n", '"');
 }
 
-// TODO: Сделать и для больше 50
 void	print_export_env(char **tabl)
 {
 	int	i;
-	int	mass[256];
-	//int j = 1;
-//	int	tmp;
+	int	*mass;
 
-	i = -1;
-	while (++i < 256)
+	i = 0;
+	mass = (int*)malloc(sizeof(int) * ft_count_rows_tab(tabl));
+	while (i < ft_count_rows_tab(tabl))
+	{
 		mass[i] = i;
+		i++;
+	}
 	i = 0;
 	while (tabl[i])
 	{
 		if (tabl[i] != NULL)
-			//printf("declare -x %s\n", tabl[(mass_env(tabl, mass, 0, 1))[i]]);
 			ft_exp_str(tabl[(mass_env(tabl, mass, 0, 1))[i]]);
 		i++;
 	}
+	free(mass);
 }
 
 char	*str_key(char *str)
