@@ -21,6 +21,7 @@ int	do_line(char *str, t_vec_env *env, int *last_code)
 		return (0);
 	blocks = split_semicolon(str);
 	i = 0;
+	ret = 0;
 	while (i < blocks->size)
 	{
 		lexes = lexer(((char **)blocks->arr)[i]);

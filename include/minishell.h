@@ -2,7 +2,6 @@
 # define MINISHELL_H
 # include "types.h"
 
-
 t_vec_lex	*vecl_init(void);
 t_vec_lex	*vecl_add(t_vec_lex *vec, t_lex lex);
 void		vecl_free(t_vec_lex *vec);
@@ -17,21 +16,21 @@ t_vec		*vec_int_grow(t_vec *vec);
 t_vec		*vec_int_add(t_vec *vec, int a);
 void		vec_int_free(t_vec *vec);
 
-t_pipeline	*pipeline_init();
+t_pipeline	*pipeline_init(void);
 
 t_vec_lex	*lexer(char *str);
 t_pipeline	*parser(t_vec_lex *lexes, int *ret_redirect, int *ret_parse,
-		t_vec_env *env);
+				t_vec_env *env);
 int			executor(t_pipeline *pipel, t_vec_env *env, int *last_code);
 
 t_vec		*split_semicolon(char *str);
 char		*get_path_by_comand(char *cmd, t_vec_env *env);
 char		*expand_path_if_need(char *cmd, t_vec_env *env);
 t_vec_lex	*expand_env(t_vec_lex *lexes, t_vec_env *env, int last_code);
-t_vec_env 	*vec_env_ch(t_vec_env *env, char *str);
-t_vec_env 	*vec_env_rem(t_vec_env *vec, char *key);
-t_vec_env 	*vec_env_add(t_vec_env *vec, char *a);
-t_vec_env 	*vec_env_plus(t_vec_env *env, char *str);
+t_vec_env	*vec_env_ch(t_vec_env *env, char *str);
+t_vec_env	*vec_env_rem(t_vec_env *vec, char *key);
+t_vec_env	*vec_env_add(t_vec_env *vec, char *a);
+t_vec_env	*vec_env_plus(t_vec_env *env, char *str);
 
 void		print_strs(char **strs);
 void		print_lexes(t_vec_lex *vec);
@@ -42,30 +41,31 @@ t_vec		*lessless(char *end_str, t_vec *ret);
 int			strs_to_in(t_vec *strs);
 int			ret_lessless_fd(char *end_str);
 
-
 int			is_buildin(char *str);
-int			ft_buildin(t_execve *ar, t_vec_env *env, int *last_code, int is_pipe);
-t_vec_env 	*env_buildin(char **envp);
-char        *dollar(char **tabl, char *key, int last_code);
-int         ft_echo(t_execve *ex);
-int    		ft_export_env(t_execve *ex, t_vec_env *env, int num_cmds);
-int         ft_unset_env(t_execve *ex, t_vec_env *env);
-int		ft_cd_buildin(t_execve *ex, t_vec_env *env);
-int	        ft_pwd_buildin(t_execve *ex);
-size_t      ft_tab_size(char **tabl);
-int	        print_env(char **tabl);
-char        **ins_row(char **tabl, char *str);
-char        **del_row(char **tabl, char *str);
-int         ft_count_rows_tab(char **tabl);
-void        print_export_env(char **tabl);
-char        *str_key(char *str);
-int         ft_cmp_key(char **tabl, char *key);
-char        **ft_cpy_val(char **tabl, char *key);
-char        *ft_strdup_prob(char *src);
+int			ft_buildin(t_execve *ar, t_vec_env *env, int *last_code,
+				int is_pipe);
+t_vec_env	*env_buildin(char **envp);
+char		*dollar(char **tabl, char *key, int last_code);
+int			buildin_echo(t_execve *ex);
+int			buildin_export(t_execve *ex, t_vec_env *env, int num_cmds);
+int			buildin_unset(t_execve *ex, t_vec_env *env);
+int			ft_cd_buildin(t_execve *ex, t_vec_env *env);
+int			ft_pwd_buildin(t_execve *ex);
+size_t		ft_tab_size(char **tabl);
+int			print_env(char **tabl);
+char		**ins_row(char **tabl, char *str);
+char		**del_row(char **tabl, char *str);
+int			ft_count_rows_tab(char **tabl);
+void		print_export_env(char **tabl);
+char		*str_key(const char *str);
+int			ft_cmp_key(char **tabl, char *key);
+char		**ft_cpy_val(char **tabl, char *key);
+char		*ft_strdup_prob(char *src);
 t_execve	*get_execve(t_pipeline *pipeline, int i);
 
 void		sigint_handler(__attribute__((unused)) int status);
-void		sigint_proc_hadndler(__attribute__((unused)) int status);
+void		sigint_proc_handler(__attribute__((unused)) int status);
 void		sigquit_proc_handler(__attribute__((unused)) int status);
+void		exit_err(enum e_err_type err);
 
 #endif

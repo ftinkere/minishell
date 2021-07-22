@@ -2,25 +2,24 @@
 # define TYPES_H
 
 # include <stddef.h>
-#include <errno.h>
-#include <string.h>
-#include <stdlib.h>
+# include <errno.h>
+# include <string.h>
+# include <stdlib.h>
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <sys/stat.h>
 # include <stdio.h>
-//# include "./libft/libft.h"
 
 # define S_GREATE ">"
 # define S_LESS "<"
 # define S_GREATEGREATE ">>"
 # define S_LESSLESS "<<"
 # define S_PIPE "|"
-# define MOD_APP (O_CREAT | O_WRONLY | O_APPEND)
-# define MOD (O_CREAT | O_WRONLY | O_TRUNC)
-# define RIGHTS (S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)
+# define MOD_APP (O_CREAT|O_WRONLY|O_APPEND)
+# define MOD (O_CREAT|O_WRONLY|O_TRUNC)
+# define RIGHTS (S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)
 
 enum e_token {
 	T_WORD = 0,
@@ -46,13 +45,12 @@ typedef struct s_vecl {
 	t_lex	*arr;
 }	t_vec_lex;
 
-
 typedef struct s_vec {
 	size_t	capacity;
 	size_t	size;
 	void	*arr;
 }	t_vec;
-typedef t_vec t_vec_int;
+typedef t_vec	t_vec_int;
 
 typedef struct s_vec_env {
 	size_t	capacity;
@@ -67,7 +65,6 @@ typedef struct s_execve {
 	int		fout;
 }	t_execve;
 
-
 /*
 **
 ** lexes хранит вектор простых лексем, который был считан со входа
@@ -81,10 +78,6 @@ typedef struct s_execve {
 ** execves хранит вектор типа t_execve и представляет собой последовательность
 ** простых команд в пайплайне которые должны запускаться друг за другом
 **
-** file_in, file_out, file_err хранят пути к файлам для ввода-вывода этих потоков
-**
-** wait показывает нужно ли ждать выполнения процесса с команды или нет
-**
 */
 typedef struct s_pipeline {
 	t_vec_lex	*lexes;
@@ -96,6 +89,6 @@ typedef struct s_pipeline {
 typedef struct s_files {
 	int		tmpin;
 	int		tmpout;
-} t_files;
+}	t_files;
 
 #endif

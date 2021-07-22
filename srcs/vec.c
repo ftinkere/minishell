@@ -43,7 +43,7 @@ t_vec_env *vec_env_add(t_vec_env *vec, char *a)
 {
 	if (vec->size == vec->capacity - 1)
 		vec_grow((t_vec *)vec);
-	((char **)vec->arr)[vec->size++] = a;
+	vec->arr[vec->size++] = a;
 	return (vec);
 }
 

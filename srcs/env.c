@@ -57,13 +57,13 @@ void ft_exit_builin(t_execve *ex)
 int	ft_buildin(t_execve *ar, t_vec_env *env_tab, int *last_code, int num_cmds)
 {
 	if (!ft_strcmp(ar->path, "echo"))
-		*last_code = ft_echo(ar);
+		*last_code = buildin_echo(ar);
 	else if (!ft_strcmp(ar->path, "env"))
 		*last_code = print_env(env_tab->arr);
 	else if (!ft_strcmp(ar->path, "export"))
-		*last_code = ft_export_env(ar, env_tab, num_cmds);
+		*last_code = buildin_export(ar, env_tab, num_cmds);
 	else if (!ft_strcmp(ar->path, "unset") && num_cmds == 1)
-		*last_code = ft_unset_env(ar, env_tab);
+		*last_code = buildin_unset(ar, env_tab);
 	else if (!ft_strcmp(ar->path, "pwd"))
 		*last_code = ft_pwd_buildin(ar);
 	else if (!ft_strcmp(ar->path, "cd") && num_cmds == 1)

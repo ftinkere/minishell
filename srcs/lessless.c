@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <readline/readline.h>
-#include <stdlib.h>
 #include <unistd.h>
-#include <sys/signal.h>
 #include "minishell.h"
 
 t_vec	*lessless(char *end_str, t_vec *ret)

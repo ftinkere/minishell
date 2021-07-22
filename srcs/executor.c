@@ -1,7 +1,6 @@
 #include "minishell.h"
 #include <sys/types.h>
 #include <unistd.h>
-#include <fcntl.h>
 #include <stdio.h>
 #include <sys/wait.h>
 
@@ -44,9 +43,8 @@ void	end_executor(t_pipeline *pipeline, t_files *f, int *last_code, t_vec_int *p
 		i++;
 		if (WCOREDUMP(*last_code))
 			*last_code = 131;
-		else if (WIFSIGNALED(*last_code)
-				&& WTERMSIG(*last_code) == SIGINT)
-			*last_code = 130;
+		else if (WIFSIGNALED(*last_code))
+			*last_code = 128 + WTERMSIG(*last_code);
 		else
 			*last_code = WEXITSTATUS(*last_code);
 	}
@@ -87,7 +85,7 @@ int	executor(t_pipeline *pipel, t_vec_env *env, int *last_code)
 				(int)pipel->args->size / 2);
 		else
 		{
-			signal(SIGINT, sigint_proc_hadndler);
+			signal(SIGINT, sigint_proc_handler);
 			signal(SIGQUIT, sigquit_proc_handler);
 			pid = fork();
 			if (pid == 0)

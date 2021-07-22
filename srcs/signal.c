@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <readline/readline.h>
-#include <unistd.h>
 
 extern int g_last_code;
 
@@ -13,7 +12,7 @@ void	sigint_handler(__attribute__((unused)) int status)
 	rl_redisplay();
 }
 
-void	sigint_proc_hadndler(__attribute__((unused)) int status)
+void	sigint_proc_handler(__attribute__((unused)) int status)
 {
 	printf("\n");
 }

@@ -94,60 +94,7 @@ int	ft_count_rows_tab(char **tabl)
 	return (count);
 }
 
-int	*mass_env(char **tabl, int *mass, int i, int j)
-{
-	int	tmp;
-
-	while (tabl[i])
-	{
-		j = 1;
-		while (tabl[j])
-		{
-			if (tabl[mass[j]][0] < tabl[mass[j - 1]][0])
-			{
-				tmp = mass[j];
-				mass[j] = mass[j - 1];
-				mass[j - 1] = tmp;
-			}
-			j++;
-		}
-		i++;
-	}
-	return (mass);
-}
-
-void	ft_exp_str(char *str)
-{
-	char	*key;
-
-	key = str_key(str);
-	printf("declare -x %s=\"%s\"\n", key, &str[ft_strlen(key) + 1]);
-	free(key);
-}
-
-void	print_export_env(char **tabl)
-{
-	int	i;
-	int	*mass;
-
-	i = 0;
-	mass = (int*)malloc(sizeof(int) * ft_count_rows_tab(tabl));
-	while (i < ft_count_rows_tab(tabl))
-	{
-		mass[i] = i;
-		i++;
-	}
-	i = 0;
-	while (tabl[i])
-	{
-		if (tabl[i] != NULL)
-			ft_exp_str(tabl[(mass_env(tabl, mass, 0, 1))[i]]);
-		i++;
-	}
-	free(mass);
-}
-
-char	*str_key(char *str)
+char	*str_key(const char *str)
 {
 	int		key_len;
 	char	*ret;
@@ -174,7 +121,8 @@ int	ft_cmp_key(char **tabl, char *key)
 	i = 0;
 	while (tabl[i])
 	{
-		if (!strncmp(tabl[i], key, strlen(key)) && tabl[i][strlen(key)] == '=')
+		if (!ft_strncmp(tabl[i], key, ft_strlen(key))
+			&& tabl[i][ft_strlen(key)] == '=')
 			return (i);
 		i++;
 	}

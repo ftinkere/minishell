@@ -1,7 +1,6 @@
-#include "../libft/libft.h"
+#include "libft.h"
 #include "minishell.h"
 #include <dirent.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 char	*get_path_by_comand_dir(char *cmd, char *dir_path)

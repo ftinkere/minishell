@@ -6,28 +6,28 @@
 ** Раскрывает необходимые элементы лексем
 */
 
-int 	len_btwn_char(char *str, char c)
-{
-	int	i;
-	int	len;
+//int 	len_btwn_char(char *str, char c)
+//{
+//	int	i;
+//	int	len;
+//
+//	i = 0;
+//	len = 0;
+//	while (str[i])
+//	{
+//		if (str[i] == c && i <= len)
+//			len = i;
+//		else if (str[i] == c && i > len)
+//			return (i - len - 1);
+//		i++;
+//	}
+//	return (0);
+//}
 
-	i = 0;
-	len = 0;
-	while (str[i])
-	{
-		if (str[i] == c && i <= len)
-			len = i;
-		else if (str[i] == c && i > len)
-			return (i - len - 1);
-		i++;
-	}
-	return (0);
-}
-
-char *find_key(char *str)
+char	*find_key(char *str)
 {
-	int 	i;
-	char 	*key;
+	int		i;
+	char	*key;
 
 	i = 1;
 	if (*str == '\0')
@@ -37,27 +37,29 @@ char *find_key(char *str)
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
 	if (i == 1)
-		return(ft_strdup(""));
+		return (ft_strdup(""));
 	key = ft_substr(str, 1, (i - 1));
 	return (key);
 }
 
 int 	count_char_quotes(char *str, int flag_quotes)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (flag_quotes == 1)
 	{
 		while (str[i] && !(str[i] == '\\' && (str[i + 1] == '\\'
-				|| str[i + 1] == '"' || str[i + 1] == '$')) && str[i] != '"'
-			&& (str[i] != '$' || !ft_isalnum(str[i + 1]) && str[i + 1] != '_'))
+					|| str[i + 1] == '"' || str[i + 1] == '$')) && str[i] != '"'
+			&& (str[i] != '$' || !ft_isalnum(str[i + 1]) && str[i + 1] != '_'
+				&& str[i + 1] != '?'))
 			i++;
 	}
 	else if (flag_quotes == 0)
 	{
 		while (str[i] && str[i] != '\'' && str[i] != '\\' && str[i] != '"'
-			&& (str[i] != '$' || !ft_isalnum(str[i + 1]) && str[i + 1] != '_'))
+			&& (str[i] != '$' || !ft_isalnum(str[i + 1]) && str[i + 1] != '_')
+			&& str[i + 1] != '?')
 			i++;
 	}
 	else
@@ -68,20 +70,21 @@ int 	count_char_quotes(char *str, int flag_quotes)
 	return (i);
 }
 
-int move_count(char *str)
+int	move_count(char *str)
 {
 	char	*key;
 
 	key = find_key(str);
 	if (str[0] == '\0')
 		return (free_ret(key, 0));
-	else if (str[0] == '"' || str[0] == '\'' || (str[0] == '\\' && str[1] == '\0'))
+	else if (str[0] == '"' || str[0] == '\'' || (str[0] == '\\'
+			&& str[1] == '\0'))
 		return (free_ret(key, 1));
 	else if (str[0] == '\\')
 		return (free_ret(key, 2));
-	else if (str[0] == '$' && (ft_isalnum(str[1]) || str[1] == '_'))
+	else if (str[0] == '$' && (ft_isalnum(str[1]) || str[1] == '_'
+			|| str[1] == '?'))
 		return (free_ret(key, (int)ft_strlen(key) + 1));
-//	free(str);
 	free(key);
 	return (0);
 }
@@ -105,7 +108,7 @@ char	*ret_str(char *str, t_vec_env *env, int last_code)
 		if (str[i] == '\'' && fl_quotes == 0)
 			fl_quotes = -1;
 		else if ((str[i] == '\'' && fl_quotes == -1)
-				|| (str[i] == '"' && fl_quotes == 1))
+			|| (str[i] == '"' && fl_quotes == 1))
 			fl_quotes = 0;
 		else if (str[i] == '"' && fl_quotes == 0)
 			fl_quotes = 1;
@@ -115,7 +118,6 @@ char	*ret_str(char *str, t_vec_env *env, int last_code)
 			ret_str = ft_strfjoin(ret_str, dollar(env->arr, key, last_code));
 			free(key);
 		}
-			//i += ft_strlen(find_key(str + i));
 		else if (str[i] == '\\' && fl_quotes != -1 && str[i + 1])
 			ret_str = ft_strfjoin(ret_str, ft_substr(str, i + 1, 1));
 		i += move_count(str + i);
