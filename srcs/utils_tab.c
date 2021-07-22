@@ -14,7 +14,7 @@ size_t	ft_tab_size(char **tabl)
 	return (siz);
 }
 
-void	print_env(char **tabl)
+int	print_env(char **tabl)
 {
 	while (*tabl)
 	{
@@ -22,6 +22,7 @@ void	print_env(char **tabl)
 			printf("%s\n", *tabl);
 		tabl++;
 	}
+	return (0);
 }
 
 //char **ins_row(char **tabl, char *str)

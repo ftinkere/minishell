@@ -150,6 +150,7 @@ int	piper(t_pipeline *pipel, int *pipe_n, t_vec_lex *lex, int i)
 	else
 		close(pipe_fd[1]);
 	get_execve(pipel, *pipe_n + 1)->fin = pipe_fd[0];
+//	printf("pipe %d: in: %d out: %d\n", *pipe_n, get_execve(pipel, *pipe_n)->fin, get_execve(pipel, *pipe_n)->fout);
 	(*pipe_n)++;
 	return (0);
 }
@@ -177,12 +178,14 @@ int	add_redirects(t_pipeline *pipel, t_vec_lex *lex)
 			ret = add_greate(get_execve(pipel, pipe_n), lex, i);
 		else if (lex->arr[i].token == T_GREATGREATE)
 			ret = add_greategreate(get_execve(pipel, pipe_n), lex, i);
+//		printf("pipe %d: in: %d out: %d\n", pipe_n, get_execve(pipel, pipe_n)->fin, get_execve(pipel, pipe_n)->fout);
 		i++;
 	}
 	if (get_execve(pipel, 0)->fin == 0)
 		get_execve(pipel, 0)->fin = dup(0);
 	if (get_execve(pipel, pipe_n)->fout == 1)
 		get_execve(pipel, pipe_n)->fout = dup(1);
+//	printf("pipe %d: in: %d out: %d\n", pipe_n, get_execve(pipel, pipe_n)->fin, get_execve(pipel, pipe_n)->fout);
 	return (ret);
 }
 

@@ -60,7 +60,6 @@ static void	get_lex(t_vec_lex *vec, char *str, int *i)
 	t_lex	lex;
 
 	word_len = get_len(&str[*i]);
-	// MALLOC!!!!!!!! // вроде фришится в vecl_free()
 	lex.str = ft_substr(str, *i, word_len);
 	lex.token = get_token(lex.str);
 	vecl_add(vec, lex);

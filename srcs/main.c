@@ -6,6 +6,8 @@
 #include "minishell.h"
 #include "libft.h"
 
+int	g_last_code;
+
 int	do_line(char *str, t_vec_env *env, int *last_code)
 {
 	t_vec_lex	*lexes;
@@ -36,38 +38,37 @@ int	do_line(char *str, t_vec_env *env, int *last_code)
 	return (ret);
 }
 
-// TODO: signals, ctrl D done
-// TODO: exit codes of buildins
-// TODO: fork buildins in pipeline
-
-//TODO: change promt to msh after test
 int	main(int argc, char *argv[], char *env[])
 {
 	char		*str;
 	int			res;
 	t_vec_env	*ar;
-	int			last_code;
+//	int			last_code;
 
 	(void)argc;
 	(void)argv;
-	last_code = 0;
+	g_last_code = 0;
 	ar = env_buildin(env);
 	res = 0;
-	str = readline("bash-5.1$ ");
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
+	str = readline("msh$ ");
 //	add_history(str);
 	while (str != NULL && res >= 0)
 	{
 		add_history(str);
-		res = do_line(str, ar, &last_code);
+		res = do_line(str, ar, &g_last_code);
 		if (res < 0)
 			break ;
 		free(str);
-		str = readline("bash-5.1$ ");
+		str = readline("msh$ ");
 	}
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	if (str != NULL)
 		free(str);
 	printf("exit\n");
 	if (res < 0)
 		return (-res);
-	return (last_code);
+	return (g_last_code);
 }

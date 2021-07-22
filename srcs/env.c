@@ -1,6 +1,7 @@
 #include "minishell.h"
 #include "libft.h"
 #include <stddef.h>
+#include <sys/signal.h>
 
 t_vec_env	*env_buildin(char **envp)
 {
@@ -34,32 +35,39 @@ char	*dollar(char **tabl, char *key, int	last_code)
 
 void ft_exit_builin(t_execve *ex)
 {
+	int	i;
+
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	printf("exit\n");
 	if (ex->argv[1] == NULL)
 		exit(0);
-	else if (!ft_isdigit(*ex->argv[1]))
+	i = 0;
+	while ((*ex->argv)[i] && ft_isdigit((*ex->argv)[i]))
+		i++;
+	if ((*ex->argv)[i] != '\0')
 	{
 		printf("msh: exit: %s: numeric argument required\n", ex->argv[1]);
-		exit(255);
+		exit(2);
 	}
 	else
 		exit(ft_atoi(ex->argv[1]) % 256);
 }
 
-int	ft_buildin(t_execve *ar, t_vec_env *env_tab, int *last_code, int is_pipe)
+int	ft_buildin(t_execve *ar, t_vec_env *env_tab, int *last_code, int num_cmds)
 {
 	if (!ft_strcmp(ar->path, "echo"))
-		ft_echo(ar);
+		*last_code = ft_echo(ar);
 	else if (!ft_strcmp(ar->path, "env"))
-		print_env(env_tab->arr);
+		*last_code = print_env(env_tab->arr);
 	else if (!ft_strcmp(ar->path, "export"))
-		ft_export_env(ar, env_tab);
-	else if (!ft_strcmp(ar->path, "unset"))
-		ft_unset_env(ar, env_tab);
+		*last_code = ft_export_env(ar, env_tab, num_cmds);
+	else if (!ft_strcmp(ar->path, "unset") && num_cmds == 1)
+		*last_code = ft_unset_env(ar, env_tab);
 	else if (!ft_strcmp(ar->path, "pwd"))
-		ft_pwd_buildin(ar);
-	else if (!ft_strcmp(ar->path, "cd"))
-		ft_cd_buildin(ar, last_code, env_tab);
+		*last_code = ft_pwd_buildin(ar);
+	else if (!ft_strcmp(ar->path, "cd") && num_cmds == 1)
+		*last_code = ft_cd_buildin(ar, env_tab);
 	else if (!ft_strcmp(ar->path, "exit"))
 		ft_exit_builin(ar);
 	return (1);

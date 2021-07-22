@@ -48,12 +48,12 @@ int			ft_buildin(t_execve *ar, t_vec_env *env, int *last_code, int is_pipe);
 t_vec_env 	*env_buildin(char **envp);
 char        *dollar(char **tabl, char *key, int last_code);
 int         ft_echo(t_execve *ex);
-int    		ft_export_env(t_execve *ex, t_vec_env *env);
+int    		ft_export_env(t_execve *ex, t_vec_env *env, int num_cmds);
 int         ft_unset_env(t_execve *ex, t_vec_env *env);
-void		ft_cd_buildin(t_execve *ex,  int *last_code, t_vec_env *env);
-void        ft_pwd_buildin(t_execve *ex);
+int		ft_cd_buildin(t_execve *ex, t_vec_env *env);
+int	        ft_pwd_buildin(t_execve *ex);
 size_t      ft_tab_size(char **tabl);
-void        print_env(char **tabl);
+int	        print_env(char **tabl);
 char        **ins_row(char **tabl, char *str);
 char        **del_row(char **tabl, char *str);
 int         ft_count_rows_tab(char **tabl);
@@ -63,5 +63,9 @@ int         ft_cmp_key(char **tabl, char *key);
 char        **ft_cpy_val(char **tabl, char *key);
 char        *ft_strdup_prob(char *src);
 t_execve	*get_execve(t_pipeline *pipeline, int i);
+
+void		sigint_handler(__attribute__((unused)) int status);
+void		sigint_proc_hadndler(__attribute__((unused)) int status);
+void		sigquit_proc_handler(__attribute__((unused)) int status);
 
 #endif

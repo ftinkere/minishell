@@ -21,6 +21,7 @@ void	init_executor(t_files *f, int *i, int *ret, t_vec_int **pids)
 	*ret = 1;
 	*i = 0;
 	*pids = vec_int_init();
+	signal(SIGINT, SIG_IGN);
 }
 
 void	init_cycle(t_pipeline *pipel, int i)
@@ -41,8 +42,16 @@ void	end_executor(t_pipeline *pipeline, t_files *f, int *last_code, t_vec_int *p
 	{
 		waitpid(((pid_t *)pids->arr)[i], last_code, 0);
 		i++;
-		*last_code = WEXITSTATUS(*last_code);
+		if (WCOREDUMP(*last_code))
+			*last_code = 131;
+		else if (WIFSIGNALED(*last_code)
+				&& WTERMSIG(*last_code) == SIGINT)
+			*last_code = 130;
+		else
+			*last_code = WEXITSTATUS(*last_code);
 	}
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
 	vec_int_free(pids);
 	dup2(f->tmpin, 0);
 	dup2(f->tmpout, 1);
@@ -78,11 +87,13 @@ int	executor(t_pipeline *pipel, t_vec_env *env, int *last_code)
 				(int)pipel->args->size / 2);
 		else
 		{
+			signal(SIGINT, sigint_proc_hadndler);
+			signal(SIGQUIT, sigquit_proc_handler);
 			pid = fork();
 			if (pid == 0)
 			{
 				exec_one(get_execve(pipel, i), env->arr);
-				*last_code = errno;
+				*last_code = 126;
 				perror(cmd_ex(pipel, i));
 //				printf("msh: %s: %s\n", cmd_ex(pipel, i), strerror(errno));
 				ret = -1;

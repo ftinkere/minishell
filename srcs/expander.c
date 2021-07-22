@@ -30,10 +30,14 @@ char *find_key(char *str)
 	char 	*key;
 
 	i = 1;
+	if (*str == '\0')
+		return (ft_strdup(""));
 	if (str[1] == '?')
 		return (ft_strdup("?"));
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
+	if (i == 1)
+		return(ft_strdup(""));
 	key = ft_substr(str, 1, (i - 1));
 	return (key);
 }
@@ -45,13 +49,15 @@ int 	count_char_quotes(char *str, int flag_quotes)
 	i = 0;
 	if (flag_quotes == 1)
 	{
-		while (str[i] && str[i] != '$' && str[i] != '\\' && str[i] != '"')
+		while (str[i] && !(str[i] == '\\' && (str[i + 1] == '\\'
+				|| str[i + 1] == '"' || str[i + 1] == '$')) && str[i] != '"'
+			&& (str[i] != '$' || !ft_isalnum(str[i + 1]) && str[i + 1] != '_'))
 			i++;
 	}
 	else if (flag_quotes == 0)
 	{
-		while (str[i] && str[i] != '\'' && str[i] != '$' && str[i] != '\\'
-				&& str[i] != '"')
+		while (str[i] && str[i] != '\'' && str[i] != '\\' && str[i] != '"'
+			&& (str[i] != '$' || !ft_isalnum(str[i + 1]) && str[i + 1] != '_'))
 			i++;
 	}
 	else
@@ -64,24 +70,29 @@ int 	count_char_quotes(char *str, int flag_quotes)
 
 int move_count(char *str)
 {
+	char	*key;
+
+	key = find_key(str);
 	if (str[0] == '\0')
-		return (0);
+		return (free_ret(key, 0));
 	else if (str[0] == '"' || str[0] == '\'' || (str[0] == '\\' && str[1] == '\0'))
-		return (1);
+		return (free_ret(key, 1));
 	else if (str[0] == '\\')
-		return (2);
-	else if (str[0] == '$')
-		return (ft_strlen(find_key(str)) + 1);
-	free(str);
+		return (free_ret(key, 2));
+	else if (str[0] == '$' && (ft_isalnum(str[1]) || str[1] == '_'))
+		return (free_ret(key, (int)ft_strlen(key) + 1));
+//	free(str);
+	free(key);
 	return (0);
 }
 
 char	*ret_str(char *str, t_vec_env *env, int last_code)
 {
-	char *ret_str;
-	int i;
-	int fl_quotes;
-	int len;
+	char	*key;
+	char	*ret_str;
+	int		i;
+	int		fl_quotes;
+	int		len;
 
 	i = 0;
 	fl_quotes = 0;
@@ -99,16 +110,16 @@ char	*ret_str(char *str, t_vec_env *env, int last_code)
 		else if (str[i] == '"' && fl_quotes == 0)
 			fl_quotes = 1;
 		else if (str[i] == '$')
-			ret_str = ft_strfjoin(ret_str,
-								  dollar(env->arr, find_key(str + i),
-										 last_code));
+		{
+			key = find_key(&str[i]);
+			ret_str = ft_strfjoin(ret_str, dollar(env->arr, key, last_code));
+			free(key);
+		}
 			//i += ft_strlen(find_key(str + i));
 		else if (str[i] == '\\' && fl_quotes != -1 && str[i + 1])
 			ret_str = ft_strfjoin(ret_str, ft_substr(str, i + 1, 1));
 		i += move_count(str + i);
 	}
-		//обрабатываем одну строку "text $USER" => text user
-		// вернуть новую замаллоченную строку
 	return(ret_str);
 }
 
