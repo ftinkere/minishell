@@ -28,7 +28,11 @@ enum e_token {
 	T_LESS,
 	T_LESSLESS,
 	T_GREATGREATE,
-	T_PIPE,
+	T_PIPE
+};
+
+enum e_err_type {
+	ERR_MALLOC
 };
 
 typedef struct s_lex {
@@ -87,7 +91,6 @@ typedef struct s_pipeline {
 	t_vec_int	*args;
 
 	t_vec		*execves;
-	int			cmd_count;
 }	t_pipeline;
 
 typedef struct s_files {

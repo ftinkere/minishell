@@ -36,8 +36,8 @@ int	do_line(char *str, t_vec_env *env, int *last_code)
 	return (ret);
 }
 
-// TODO: signals
-// TODO: -nnn -n -n в echo
+// TODO: signals, ctrl D done
+// TODO: -nnn -n -n в echo done
 // TODO: export += (done?)
 // TODO: $? (done?)
 // TODO: fix `export`

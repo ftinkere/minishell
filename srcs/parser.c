@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "minishell.h"
 #include "libft.h"
+#include <stddef.h>
 
 /*
 **

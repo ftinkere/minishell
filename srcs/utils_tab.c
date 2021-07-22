@@ -117,22 +117,11 @@ int	*mass_env(char **tabl, int *mass, int i, int j)
 
 void	ft_exp_str(char *str)
 {
-	int	i;
+	char	*key;
 
-	i = 0;
-	printf("%s", "declare -x ");
-	while (i < ft_strlen(str_key(str)) + 1)
-	{
-		printf("%c", str[i]);
-		i++;
-	}
-	printf("%c", '"');
-	while (str[i])
-	{
-		printf("%c", str[i]);
-		i++;
-	}
-	printf("%c\n", '"');
+	key = str_key(str);
+	printf("declare -x %s=\"%s\"\n", key, &str[ft_strlen(key) + 1]);
+	free(key);
 }
 
 void	print_export_env(char **tabl)
@@ -159,21 +148,21 @@ void	print_export_env(char **tabl)
 
 char	*str_key(char *str)
 {
-	int		i;
+	int		key_len;
 	char	*ret;
-	int		j;
+	int		i;
 
+	key_len = 0;
+	while (str[key_len] != '\0' && str[key_len] != '=')
+		key_len++;
+	ret = (char *)malloc(sizeof(char) * (key_len + 1));
 	i = 0;
-	while (str[i] != '=' && str[i])
-		i++;
-	ret = (char *) malloc(sizeof(char) * (i + 1));
-	j = 0;
-	while (j < i)
+	while (i < key_len)
 	{
-		ret[j] = str[j];
-		j++;
+		ret[i] = str[i];
+		i++;
 	}
-	ret[j] = '\0';
+	ret[i] = '\0';
 	return (ret);
 }
 

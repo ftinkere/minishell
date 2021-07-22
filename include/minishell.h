@@ -44,7 +44,7 @@ int			ret_lessless_fd(char *end_str);
 
 
 int			is_buildin(char *str);
-int         ft_buildin(t_execve *ar, t_vec_env *env, int *last_code);
+int			ft_buildin(t_execve *ar, t_vec_env *env, int *last_code, int is_pipe);
 t_vec_env 	*env_buildin(char **envp);
 char        *dollar(char **tabl, char *key, int last_code);
 int         ft_echo(t_execve *ex);

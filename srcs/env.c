@@ -1,5 +1,6 @@
 #include "minishell.h"
 #include "libft.h"
+#include <stddef.h>
 
 t_vec_env	*env_buildin(char **envp)
 {
@@ -45,7 +46,7 @@ void ft_exit_builin(t_execve *ex)
 		exit(ft_atoi(ex->argv[1]) % 256);
 }
 
-int	ft_buildin(t_execve *ar, t_vec_env *env_tab, int *last_code)
+int	ft_buildin(t_execve *ar, t_vec_env *env_tab, int *last_code, int is_pipe)
 {
 	if (!ft_strcmp(ar->path, "echo"))
 		ft_echo(ar);

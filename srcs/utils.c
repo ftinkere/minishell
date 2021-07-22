@@ -63,3 +63,16 @@ void	free_pipeline(t_pipeline *pipeline)
 //		free(pipeline->file_out);
 	free(pipeline);
 }
+
+void	exit_err(enum e_err_type err, t_pipeline *pipel)
+{
+	static const char *str_err[] = {
+		"Malloc could not allocate memory"
+	};
+
+	if (err == ERR_MALLOC)
+	{
+		printf("msh: %s\n", str_err[ERR_MALLOC]);
+
+	}
+}
