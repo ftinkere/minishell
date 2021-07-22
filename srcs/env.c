@@ -33,16 +33,31 @@ char	*dollar(char **tabl, char *key, int	last_code)
 
 void ft_exit_builin(t_execve *ex)
 {
+	int i;
+
+	i = 0;
 	printf("exit\n");
 	if (ex->argv[1] == NULL)
 		exit(0);
-	else if (!ft_isdigit(*ex->argv[1]))
+	else if(ex->argv[2])
 	{
-		printf("msh: exit: %s: numeric argument required\n", ex->argv[1]);
-		exit(255);
+		printf("msh: exit: too many arguments");
+		exit(1);
 	}
 	else
+	{
+		while (ex->argv[1][i])
+		{
+			if (!ft_isdigit(ex->argv[1][i]))
+			{
+				printf("msh: exit: %s: numeric argument required\n",
+					   ex->argv[1]);
+				exit(255);
+			}
+			i++;
+		}
 		exit(ft_atoi(ex->argv[1]) % 256);
+	}
 }
 
 int	ft_buildin(t_execve *ar, t_vec_env *env_tab, int *last_code)

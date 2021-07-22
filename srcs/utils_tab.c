@@ -117,22 +117,25 @@ int	*mass_env(char **tabl, int *mass, int i, int j)
 
 void	ft_exp_str(char *str)
 {
-	int	i;
+	char *key;
 
-	i = 0;
-	printf("%s", "declare -x ");
-	while (i < ft_strlen(str_key(str)) + 1)
-	{
-		printf("%c", str[i]);
-		i++;
-	}
-	printf("%c", '"');
-	while (str[i])
-	{
-		printf("%c", str[i]);
-		i++;
-	}
-	printf("%c\n", '"');
+	key = str_key(str);
+	printf("declare -x %s= \"%s\"\n", key, &str[ft_strlen(key) + 1]);
+	free(key);
+//	len = ft_strlen(str_key(str)) + 1;
+//	printf("%s", "declare -x ");
+//	while (i < len)
+//	{
+//		printf("%c", str[i]);
+//		i++;
+//	}
+//	printf("%c", '"');
+//	while (str[i])
+//	{
+//		printf("%c", str[i]);
+//		i++;
+//	}
+//	printf("%c\n", '"');
 }
 
 void	print_export_env(char **tabl)

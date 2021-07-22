@@ -82,12 +82,12 @@ t_vec_env *vec_env_plus(t_vec_env *env, char *str)
 	char *key;
 	int i;
 
-	key = ft_substr(str_key(str), 0, ft_strlen(str_key(str)) - 1);
-	free(str);
+	key = str_key(str);
+	key[ft_strlen(key) - 1] = '\0';
 	i = ft_cmp_key(env->arr, key);
 	env->arr[i] = ft_strf1join(env->arr[i], str + ft_strlen(key) + 2);
+	free(str);
 	free(key);
-	free(str_key(str));
 	return (env);
 }
 
