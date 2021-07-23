@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <readline/readline.h>
 
-extern int g_last_code;
+extern int	g_last_code;
 
 void	sigint_handler(__attribute__((unused)) int status)
 {

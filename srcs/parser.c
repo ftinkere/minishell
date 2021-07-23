@@ -63,7 +63,7 @@ int	set_execves(t_pipeline *pipel, t_vec_lex *lex, t_vec_env *env)
 		if (args_count == 0)
 			return (1);
 		get_execve(pipel, i)->path = \
-			expand_path_if_need(lex->arr[get_args(pipel, i * 2)].str, env);
+            expand_path(lex->arr[get_args(pipel, i * 2)].str, env);
 		get_execve(pipel, i)->argv = \
 			ft_calloc(args_count + 1, sizeof(char *));
 		j = 0;

@@ -31,7 +31,7 @@ int	strs_to_in(t_vec *strs)
 	tmpout = dup(1);
 //	dup2(1, pipe_fd[1]);
 	dup2(pipe_fd[1], 1);
-	print_strs(strs->arr);
+	print_strs((char **)strs->arr);
 	dup2(tmpout, 1);
 	close(tmpout);
 	close(pipe_fd[1]);
@@ -41,11 +41,11 @@ int	strs_to_in(t_vec *strs)
 int	ret_lessless_fd(char *end_str)
 {
 	t_vec	*readed;
-	int ret;
+	int		ret;
 
 	readed = vec_init();
 	lessless(end_str, readed);
 	ret = strs_to_in(readed);
-	vec_free_all(readed);
+	vec_deep_free(readed);
 	return (ret);
 }

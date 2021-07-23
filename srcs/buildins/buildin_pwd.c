@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	ft_pwd_buildin(t_execve *ex)
+int	buildin_pwd(t_execve *ex)
 {
 	char	*dir;
 

@@ -19,7 +19,7 @@ int	do_line(char *str, t_vec_env *env, int *last_code)
 	if (ret)
 		return (ret);
 	ret = executor(pipe, env, last_code);
-	vecl_free(lexes);
+	vec_lex_free(lexes);
 	return (ret);
 }
 
@@ -34,14 +34,14 @@ int	do_line(char *str, t_vec_env *env, int *last_code)
 //	do_line("echo $?", env, &last_code);
 //	do_line("/bin/cat", env, &last_code);
 //	do_line("echo $?", env, &last_code);
-////	printf("%s\n", dollar(env->arr, "?", 10));
-////	printf("%s\n", dollar(env->arr, "?", 0));
+////	printf("%s\n", env_get_value(env->arr, "?", 10));
+////	printf("%s\n", env_get_value(env->arr, "?", 0));
 //	//	do_line("export END_TOKEN=EOF", env);
 ////	lex = expand_env(lexer("echo $AAA"), env);
 ////	print_lexes(lex);
-////	printf("%s\n", dollar(env->arr, "AAA"));
+////	printf("%s\n", env_get_value(env->arr, "AAA"));
 ////	do_line("cat << $END_TOKEN", env);
-////	printf("%s\n", dollar(env->arr, "BBB"));
+////	printf("%s\n", env_get_value(env->arr, "BBB"));
 ////	do_line("env", env);
 ////	do_line("echo $AAA", env);
 //}

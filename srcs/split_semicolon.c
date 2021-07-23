@@ -10,7 +10,7 @@ static int	get_len_to_semicolon(const char *str)
 	quote = 0;
 	if (*str == '\0')
 		return (-1);
-	while(str[ret] && (str[ret] != ';' || quote != 0))
+	while (str[ret] && (str[ret] != ';' || quote != 0))
 	{
 		if (str[ret] == '"' && quote == 0)
 			quote = 1;
@@ -21,9 +21,6 @@ static int	get_len_to_semicolon(const char *str)
 			quote = -1;
 		ret++;
 	}
-//	if (str[ret] == '\0')
-//		return (ret);
-//	return (ret + 1);
 	return (ret);
 }
 
@@ -35,7 +32,6 @@ static int	get_block(t_vec *vec, char *str, int *i)
 	len_to_semicolon = get_len_to_semicolon(&str[*i]);
 	if (len_to_semicolon == -1)
 		return (-1);
-	// MALLOC!
 	block = ft_substr(str, *i, len_to_semicolon);
 	vec_add(vec, block);
 	*i += len_to_semicolon;

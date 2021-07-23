@@ -25,7 +25,7 @@ static int	export_arg(t_execve *ex, t_vec_env *env, int i)
 	{
 		plus = ft_strchr(ex->argv[i], '+');
 		if (plus != NULL && plus[1] == '=')
-			vec_env_plus(env, ft_strdup(ex->argv[i]));
+			vec_env_join(env, ft_strdup(ex->argv[i]));
 		else
 			vec_env_ch(env, ft_strdup(ex->argv[i]));
 	}

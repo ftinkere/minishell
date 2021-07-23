@@ -4,14 +4,14 @@ static int	buildin_cd_home(t_vec_env *env)
 {
 	int	ret;
 
-	if (ft_cmp_key(env->arr, "HOME") == -1)
+	if (env_keychr(env->arr, "HOME") == -1)
 		ret = chdir(getenv("HOME"));
 	else
-		ret = chdir(env->arr[ft_cmp_key(env->arr, "HOME")] + 5);
+		ret = chdir(env->arr[env_keychr(env->arr, "HOME")] + 5);
 	return (ret);
 }
 
-int	ft_cd_buildin(t_execve *ex, t_vec_env *env)
+int	buildin_cd(t_execve *ex, t_vec_env *env)
 {
 	int	len_args;
 	int	ret;

@@ -1,9 +1,8 @@
 #include "libft.h"
 #include "minishell.h"
 #include <dirent.h>
-#include <stdlib.h>
 
-char	*get_path_by_comand_dir(char *cmd, char *dir_path)
+static char	*get_path_by_comand_dir(char *cmd, char *dir_path)
 {
 	DIR				*dir;
 	struct dirent	*ep;
@@ -28,15 +27,14 @@ char	*get_path_by_comand_dir(char *cmd, char *dir_path)
 	return (NULL);
 }
 
-char	*get_path_by_comand(char *cmd, t_vec_env *env)
+static char	*get_path_by_comand(char *cmd, t_vec_env *env)
 {
 	char	*path_env;
 	char	**strs;
 	int		i;
 	char	*ret;
 
-//	path_env = getenv("PATH");
-	path_env = dollar(env->arr, "PATH", 0);
+	path_env = env_get_value(env->arr, "PATH", 0);
 	strs = ft_split(path_env, ':');
 	i = 0;
 	ret = NULL;
@@ -50,4 +48,11 @@ char	*get_path_by_comand(char *cmd, t_vec_env *env)
 	free(path_env);
 	free_split(strs);
 	return (ret);
+}
+
+char	*expand_path(char *cmd, t_vec_env *env)
+{
+	if (is_comand(cmd))
+		return (get_path_by_comand(cmd, env));
+	return (ft_strdup(cmd));
 }

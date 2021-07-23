@@ -48,7 +48,7 @@ typedef struct s_vecl {
 typedef struct s_vec {
 	size_t	capacity;
 	size_t	size;
-	void	*arr;
+	void	**arr;
 }	t_vec;
 typedef t_vec	t_vec_int;
 

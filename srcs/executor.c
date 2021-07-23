@@ -81,8 +81,8 @@ int	executor(t_pipeline *pipel, t_vec_env *env, int *last_code)
 			printf("msh: comand not found: %s\n", cmd_ex(pipel, i));
 		}
 		else if (is_buildin(get_execve(pipel, i)->path))
-			ft_buildin(get_execve(pipel, i), env, last_code,
-				(int)pipel->args->size / 2);
+			buildin_dispath(get_execve(pipel, i), env, last_code,
+							(int) pipel->args->size / 2);
 		else
 		{
 			signal(SIGINT, sigint_proc_handler);

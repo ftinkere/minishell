@@ -30,7 +30,7 @@ static void	ft_exp_str(char *str)
 {
 	char	*key;
 
-	key = str_key(str);
+	key = str_get_key(str);
 	printf("declare -x %s=\"%s\"\n", key, &str[ft_strlen(key) + 1]);
 	free(key);
 }

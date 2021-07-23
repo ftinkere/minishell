@@ -32,10 +32,10 @@ int	do_line(char *str, t_vec_env *env, int *last_code)
 		if (ret)
 			return (ret);
 		ret = executor(pipel, env, last_code);
-		vecl_free(lexes);
+		vec_lex_free(lexes);
 		i++;
 	}
-	vec_free_all(blocks);
+	vec_deep_free(blocks);
 	return (ret);
 }
 
@@ -44,17 +44,15 @@ int	main(int argc, char *argv[], char *env[])
 	char		*str;
 	int			res;
 	t_vec_env	*ar;
-//	int			last_code;
 
 	(void)argc;
 	(void)argv;
 	g_last_code = 0;
-	ar = env_buildin(env);
+	ar = vec_env_init(env);
 	res = 0;
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	str = readline("msh$ ");
-//	add_history(str);
 	while (str != NULL && res >= 0)
 	{
 		add_history(str);

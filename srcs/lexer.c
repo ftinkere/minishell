@@ -1,11 +1,5 @@
 #include "minishell.h"
-#include "../libft/libft.h"
-
-/*
-**
-** Обработка строки в набор лексем
-**
-*/
+#include "libft.h"
 
 static enum e_token	get_token(char *str)
 {
@@ -17,10 +11,6 @@ static enum e_token	get_token(char *str)
 		return (T_LESSLESS);
 	else if (!ft_strcmp(str, S_GREATEGREATE))
 		return (T_GREATGREATE);
-//	else if (!ft_strcmp(str, S_GREATEAMP))
-//		return (T_GREATEAMP);
-//	else if (!ft_strcmp(str, S_GREATEGREATEAMP))
-//		return (T_GREATGREATEAMP);
 	else if (!ft_strcmp(str, S_PIPE))
 		return (T_PIPE);
 	else
@@ -45,8 +35,6 @@ static int	get_len(char *str)
 			quote = -1;
 		ret++;
 	}
-	// if (quote != 0): error, expected " or '
-	// or just ignore and process in parser
 	if (ret == 0 && (!ft_strncmp(str, ">>", 2) || !ft_strncmp(str, "<<", 2)))
 		return (2);
 	else if (ret == 0)
@@ -62,7 +50,7 @@ static void	get_lex(t_vec_lex *vec, char *str, int *i)
 	word_len = get_len(&str[*i]);
 	lex.str = ft_substr(str, *i, word_len);
 	lex.token = get_token(lex.str);
-	vecl_add(vec, lex);
+	vec_lex_add(vec, lex);
 	*i += word_len;
 	while (str[*i] && ft_strchr(" \t", str[*i]))
 		(*i)++;
@@ -73,7 +61,7 @@ t_vec_lex	*lexer(char *str)
 	t_vec_lex	*ret;
 	int			i;
 
-	ret = vecl_init();
+	ret = vec_lex_init();
 	i = 0;
 	while (ft_strchr(" \n\t", str[i]))
 		i++;
