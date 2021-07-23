@@ -1,7 +1,7 @@
 #include "minishell.h"
 #include "libft.h"
 
-int	ft_count_rows_tab(char **tabl)
+int	count_tab_rows(char **tabl)
 {
 	int	count;
 
@@ -13,4 +13,3 @@ int	ft_count_rows_tab(char **tabl)
 	}
 	return (count);
 }
-

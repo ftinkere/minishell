@@ -1,7 +1,7 @@
 #include "minishell.h"
 #include "libft.h"
 
-static int 	count_char_quotes(char *str, int flag_quotes)
+static int	count_char_quotes(char *str, int flag_quotes)
 {
 	int	i;
 

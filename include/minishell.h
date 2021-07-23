@@ -27,28 +27,46 @@ t_vec		*vec_int_grow(t_vec *vec);
 t_vec		*vec_int_add(t_vec *vec, int a);
 void		vec_int_free(t_vec *vec);
 
+/*
+** Init of structures
+*/
 t_pipeline	*pipeline_init(void);
+t_execve	*t_execve_init(void);
 
+/*
+** Lexer
+*/
 t_vec_lex	*lexer(char *str);
+t_vec		*split_semicolon(char *str);
+
+/*
+** Parser
+*/
 t_pipeline	*parser(t_vec_lex *lexes, int *ret_redirect, int *ret_parse,
 				t_vec_env *env);
-int			executor(t_pipeline *pipel, t_vec_env *env, int *last_code);
+int			read_lessless__ret_fd(char *end_str);
+int			piper(t_pipeline *pipel, int *pipe_n, t_vec_lex *lex, int i);
+int			add_greategreate(t_execve *ex, t_vec_lex *lex, int i);
+int			add_greate(t_execve *ex, t_vec_lex *lex, int i);
+int			add_lessless(t_execve *ex, t_vec_lex *lex, int i);
+int			add_less(t_execve *ex, t_vec_lex *lex, int i);
+int			check_err_redirect(t_vec_lex *lex, int i);
+int			count_args(t_vec_lex *lex, int start);
+int			count_pipes(t_vec_lex *lexes);
 
-t_vec		*split_semicolon(char *str);
-//char		*get_path_by_comand(char *cmd, t_vec_env *env);
+/*
+** Expander
+*/
 char		*expand_path(char *cmd, t_vec_env *env);
 t_vec_lex	*expand_env(t_vec_lex *lexes, t_vec_env *env, int last_code);
-int			is_comand(char *str);
 
-void		print_strs(char **strs);
-void		print_lexes(t_vec_lex *vec);
-t_vec		*lessless(char *end_str, t_vec *ret);
-int			strs_to_in(t_vec *strs);
-int			ret_lessless_fd(char *end_str);
-int			ft_count_rows_tab(char **tabl);
-void		print_export_env(char **tabl);
-t_execve	*get_execve(t_pipeline *pipeline, int i);
-void		exit_err(enum e_err_type err);
+/*
+** Executor
+*/
+void		exec_one(t_execve *exec, char **env);
+char		*cmd_ex(t_pipeline *pipeline, int i);
+pid_t		fork_and_signal_set(void);
+int			executor(t_pipeline *pipel, t_vec_env *env, int *last_code);
 
 /*
 ** Signal handlers
@@ -73,7 +91,6 @@ char		*env_get_value(char **tabl, char *key, int last_code);
 int			env_keychr(char **tabl, char *key);
 char		*str_get_key(const char *str);
 
-
 /*
 ** Buildins
 */
@@ -87,6 +104,17 @@ int			buildin_cd(t_execve *ex, t_vec_env *env);
 int			buildin_pwd(t_execve *ex);
 int			buildin_env(char **tabl);
 void		buildin_exit(t_execve *ex);
+void		buildin_export_print(char **tabl);
+
+/*
+** Utils
+*/
+int			is_comand(char *str);
+int			count_tab_rows(char **tabl);
+t_execve	*get_execve(t_pipeline *pipeline, int i);
+int			get_args(t_pipeline *pipeline, int i);
+void		exit_err(enum e_err_type err);
+char		*str_key(const char *str);
 
 /*
 ** Free
@@ -95,5 +123,11 @@ void		free_execves(t_vec *execves);
 void		free_split(char **strs);
 void		free_pipeline(t_pipeline *pipeline);
 int			free_ret(void *fred, int ret);
+
+/*
+** Print or debug
+*/
+void		print_strs(char **strs);
+void		print_lexes(t_vec_lex *vec);
 
 #endif

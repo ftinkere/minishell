@@ -7,7 +7,7 @@ t_vec_env	*vec_env_join(t_vec_env *env, char *str)
 	char	*key;
 	int		i;
 
-	key = str_get_key(str);
+	key = str_key(str);
 	if (*key == '\0')
 		return (env);
 	key[ft_strlen(key) - 1] = '\0';

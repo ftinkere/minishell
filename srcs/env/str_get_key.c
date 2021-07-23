@@ -17,9 +17,11 @@ char	*str_get_key(const char *str)
 	int		i;
 	char	*key;
 
-	i = 1;
+	i = 0;
 	if (*str == '\0')
 		return (ft_strdup(""));
+	if (*str == '$')
+		i++;
 	if (str[1] == '?')
 		return (ft_strdup("?"));
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))

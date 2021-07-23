@@ -35,16 +35,16 @@ static void	ft_exp_str(char *str)
 	free(key);
 }
 
-void	print_export_env(char **tabl)
+void	buildin_export_print(char **tabl)
 {
 	int	i;
 	int	*mass;
 
 	i = 0;
-	mass = (int *)malloc(sizeof(int) * ft_count_rows_tab(tabl));
+	mass = (int *)malloc(sizeof(int) * count_tab_rows(tabl));
 	if (mass == NULL)
 		exit_err(ERR_MALLOC);
-	while (i < ft_count_rows_tab(tabl))
+	while (i < count_tab_rows(tabl))
 	{
 		mass[i] = i;
 		i++;

@@ -17,9 +17,6 @@
 # define S_GREATEGREATE ">>"
 # define S_LESSLESS "<<"
 # define S_PIPE "|"
-# define MOD_APP (O_CREAT|O_WRONLY|O_APPEND)
-# define MOD (O_CREAT|O_WRONLY|O_TRUNC)
-# define RIGHTS (S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)
 
 enum e_token {
 	T_WORD = 0,

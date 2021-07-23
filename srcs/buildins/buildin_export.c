@@ -45,7 +45,7 @@ int	buildin_export(t_execve *ex, t_vec_env *env, int num_cmds)
 	i = 1;
 	ret = 0;
 	if (ex->argv[1] == NULL)
-		print_export_env(env->arr);
+		buildin_export_print(env->arr);
 	else if (num_cmds == 1)
 	{
 		while (ex->argv[i])

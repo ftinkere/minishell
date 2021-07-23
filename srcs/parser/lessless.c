@@ -3,7 +3,8 @@
 #include <unistd.h>
 #include "minishell.h"
 
-t_vec	*lessless(char *end_str, t_vec *ret)
+static t_vec
+	*lessless(char *end_str, t_vec *ret)
 {
 	char	*tmp;
 	int		cont;
@@ -22,14 +23,14 @@ t_vec	*lessless(char *end_str, t_vec *ret)
 	return (ret);
 }
 
-int	strs_to_in(t_vec *strs)
+static int
+	strs_to_in(t_vec *strs)
 {
 	int	tmpout;
 	int	pipe_fd[2];
 
 	pipe(pipe_fd);
 	tmpout = dup(1);
-//	dup2(1, pipe_fd[1]);
 	dup2(pipe_fd[1], 1);
 	print_strs((char **)strs->arr);
 	dup2(tmpout, 1);
@@ -38,7 +39,7 @@ int	strs_to_in(t_vec *strs)
 	return (pipe_fd[0]);
 }
 
-int	ret_lessless_fd(char *end_str)
+int	read_lessless__ret_fd(char *end_str)
 {
 	t_vec	*readed;
 	int		ret;
