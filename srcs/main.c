@@ -21,7 +21,7 @@ static int	do_line(char *str, t_vec_env *env, int *last_code, int ret)
 	blocks = split_semicolon(str);
 	i = 0;
 	ret = 0;
-	while (i < blocks->size)
+	while (i < (int)blocks->size)
 	{
 		lexes = lexer(((char **)blocks->arr)[i++]);
 		pipel = parser(expand_env(lexes, env, *last_code),

@@ -10,15 +10,15 @@ static int	count_char_quotes(char *str, int flag_quotes)
 	{
 		while (str[i] && !(str[i] == '\\' && (str[i + 1] == '\\'
 					|| str[i + 1] == '"' || str[i + 1] == '$')) && str[i] != '"'
-			&& (str[i] != '$' || !ft_isalnum(str[i + 1]) && str[i + 1] != '_'
-				&& str[i + 1] != '?'))
+			&& (str[i] != '$' || (!ft_isalnum(str[i + 1]) && str[i + 1] != '_'
+					&& str[i + 1] != '?')))
 			i++;
 	}
 	else if (flag_quotes == 0)
 	{
 		while (str[i] && str[i] != '\'' && str[i] != '\\' && str[i] != '"'
-			&& (str[i] != '$' || !ft_isalnum(str[i + 1]) && str[i + 1] != '_')
-			&& str[i + 1] != '?')
+			&& (str[i] != '$' || (!ft_isalnum(str[i + 1])
+					&& str[i + 1] != '_')) && str[i + 1] != '?')
 			i++;
 	}
 	else
@@ -97,7 +97,7 @@ t_vec_lex	*expand_env(t_vec_lex *lexes, t_vec_env *env, int last_code)
 	char	*tmp;
 
 	i = 0;
-	while (i < lexes->size)
+	while (i < (int)lexes->size)
 	{
 		if (lexes->arr[i].token == T_WORD)
 		{

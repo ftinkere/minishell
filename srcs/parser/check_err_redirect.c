@@ -4,7 +4,7 @@ int	check_err_redirect(t_vec_lex *lex, int i)
 {
 	if (lex->arr[i].token == T_WORD)
 		return (0);
-	if (i == lex->size - 1)
+	if (i == (int)lex->size - 1)
 	{
 		printf("msh: syntax error: unexpected EOF\n");
 		return (1);

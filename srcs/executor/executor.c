@@ -32,7 +32,7 @@ static void
 	int	i;
 
 	i = 0;
-	while (i < pids->size)
+	while (i < (int)pids->size)
 	{
 		if (((pid_t *)pids->arr)[i] < 0)
 			printf("Error while fork\n");

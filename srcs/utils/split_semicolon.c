@@ -14,8 +14,8 @@ static int	get_len_to_semicolon(const char *str)
 	{
 		if (str[ret] == '"' && quote == 0)
 			quote = 1;
-		else if (str[ret] == '"' && str[ret - 1] != '\\' && quote == 1
-			|| str[ret] == '\'' && quote == -1)
+		else if ((str[ret] == '"' && str[ret - 1] != '\\' && quote == 1)
+			|| (str[ret] == '\'' && quote == -1))
 			quote = 0;
 		else if (str[ret] == '\'' && quote == 0)
 			quote = -1;
