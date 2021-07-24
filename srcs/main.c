@@ -20,13 +20,13 @@ static int	do_line(char *str, t_vec_env *env, int *code, int ret)
 	blocks = split_semicolon(str);
 	i = 0;
 	ret = 0;
-	while (i < (int)blocks->size && ret != 0)
+	while (i < (int)blocks->size && ret == 0)
 	{
 		if (((char **)blocks->arr)[i++][0] != '\0')
 		{
 			lex = lexer(((char **) blocks->arr)[i - 1]);
 			pipel = parser(expand_env(lex, env, *code), &ret, env);
-			if (ret != 0)
+			if (ret == 0)
 				ret = executor(pipel, env, code);
 			vec_lex_free(lex);
 		}
