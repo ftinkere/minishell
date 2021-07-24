@@ -14,9 +14,9 @@ void	buildin_exit(t_execve *ex)
 	if (ex->argv[1] == NULL)
 		exit(0);
 	i = 0;
-	while ((*ex->argv)[i] && ft_isdigit((*ex->argv)[i]))
+	while (ex->argv[1][i] && ft_isdigit(ex->argv[1][i]))
 		i++;
-	if ((*ex->argv)[i] != '\0')
+	if (ex->argv[1][i] != '\0')
 	{
 		printf("msh: exit: %s: numeric argument required\n", ex->argv[1]);
 		exit(2);
