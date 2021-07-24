@@ -1,4 +1,4 @@
-#include <malloc.h>
+#include <stdlib.h>
 
 char	*str_key(const char *str)
 {
