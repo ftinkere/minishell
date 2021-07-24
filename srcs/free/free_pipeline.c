@@ -10,4 +10,5 @@ int	free_pipeline(t_pipeline *pipeline)
 		i++;
 	free_execves(pipeline->execves);
 	free(pipeline);
+	return (1);
 }
