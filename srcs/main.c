@@ -8,13 +8,13 @@
 
 int	g_last_code;
 
-static int	do_line(char *str, t_vec_env *env, int *last_code, int ret)
+static int	do_line(char *str, t_vec_env *env, int *code, int ret)
 {
-	t_vec_lex	*lexes;
+	t_vec_lex	*lex;
 	t_vec		*blocks;
 	t_pipeline	*pipel;
 	int			i;
-	int			ret_redirect;
+	int			ret_re;
 
 	if (*str == '\0')
 		return (0);
@@ -23,15 +23,15 @@ static int	do_line(char *str, t_vec_env *env, int *last_code, int ret)
 	ret = 0;
 	while (i < (int)blocks->size)
 	{
-		lexes = lexer(((char **)blocks->arr)[i++]);
-		pipel = parser(expand_env(lexes, env, *last_code),
-				&ret_redirect, &ret, env);
-		if (ret_redirect)
-			return (ret_redirect);
-		if (ret)
-			return (ret);
-		ret = executor(pipel, env, last_code);
-		vec_lex_free(lexes);
+		if (((char **)blocks->arr)[i++][0] != '\0')
+		{
+			lex = lexer(((char **) blocks->arr)[i - 1]);
+			pipel = parser(expand_env(lex, env, *code), &ret_re, &ret, env);
+			if (ret_re || ret)
+				return (ret_re | ret);
+			ret = executor(pipel, env, code);
+			vec_lex_free(lex);
+		}
 	}
 	vec_deep_free(blocks);
 	return (ret);
