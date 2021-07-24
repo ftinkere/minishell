@@ -63,7 +63,7 @@ t_vec_lex	*lexer(char *str)
 
 	ret = vec_lex_init();
 	i = 0;
-	while (ft_strchr(" \n\t", str[i]))
+	while (str[i] && ft_strchr(" \n\t", str[i]))
 		i++;
 	while (str[i] != '\0')
 		get_lex(ret, str, &i);

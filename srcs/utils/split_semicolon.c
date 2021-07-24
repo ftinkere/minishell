@@ -28,11 +28,14 @@ static int	get_block(t_vec *vec, char *str, int *i)
 {
 	int		len_to_semicolon;
 	char	*block;
+	char	*tmp;
 
 	len_to_semicolon = get_len_to_semicolon(&str[*i]);
 	if (len_to_semicolon == -1)
 		return (-1);
-	block = ft_substr(str, *i, len_to_semicolon);
+	tmp = ft_substr(str, *i, len_to_semicolon);
+	block = ft_strtrim(tmp, " \t\n");
+	free(tmp);
 	vec_add(vec, block);
 	*i += len_to_semicolon;
 	if (str[*i] == ';')
