@@ -78,7 +78,7 @@ static t_pipeline
 }
 
 t_pipeline
-	*parser(t_vec_lex *lexes, int *ret_redirect, int *ret_parse, t_vec_env *env)
+	*parser(t_vec_lex *lexes, int *ret, t_vec_env *env)
 {
 	t_pipeline	*pipeline;
 	int			i;
@@ -91,7 +91,7 @@ t_pipeline
 	pipeline->lexes = lexes;
 	pipe_count = count_pipes(lexes);
 	if (lexes->arr[0].token != T_WORD)
-		return (check_start(pipeline, lexes, ret_parse));
+		return (check_start(pipeline, lexes, ret));
 	i = 0;
 	arg = 0;
 	while (i < pipe_count)
@@ -102,7 +102,7 @@ t_pipeline
 		arg += count_args(lexes, arg) + 1;
 		i++;
 	}
-	*ret_redirect = add_redirects(pipeline, lexes);
-	*ret_parse = set_execves(pipeline, lexes, env);
+	*ret = add_redirects(pipeline, lexes);
+	*ret = *ret || set_execves(pipeline, lexes, env);
 	return (pipeline);
 }

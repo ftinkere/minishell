@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-void	free_pipeline(t_pipeline *pipeline)
+int	free_pipeline(t_pipeline *pipeline)
 {
 	int	i;
 

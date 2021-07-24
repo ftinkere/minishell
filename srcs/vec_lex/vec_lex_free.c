@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	vec_lex_free(t_vec_lex *vec)
+int	vec_lex_free(t_vec_lex *vec)
 {
 	int	i;
 
@@ -12,4 +12,5 @@ void	vec_lex_free(t_vec_lex *vec)
 	}
 	free(vec->arr);
 	free(vec);
+	return (1);
 }

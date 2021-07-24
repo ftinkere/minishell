@@ -14,22 +14,20 @@ static int	do_line(char *str, t_vec_env *env, int *code, int ret)
 	t_vec		*blocks;
 	t_pipeline	*pipel;
 	int			i;
-	int			ret_re;
 
 	if (*str == '\0')
 		return (0);
 	blocks = split_semicolon(str);
 	i = 0;
 	ret = 0;
-	while (i < (int)blocks->size)
+	while (i < (int)blocks->size && ret != 0)
 	{
 		if (((char **)blocks->arr)[i++][0] != '\0')
 		{
 			lex = lexer(((char **) blocks->arr)[i - 1]);
-			pipel = parser(expand_env(lex, env, *code), &ret_re, &ret, env);
-			if (ret_re || ret)
-				return (ret_re | ret);
-			ret = executor(pipel, env, code);
+			pipel = parser(expand_env(lex, env, *code), &ret, env);
+			if (ret != 0)
+				ret = executor(pipel, env, code);
 			vec_lex_free(lex);
 		}
 	}
@@ -72,5 +70,6 @@ int	main(int argc, char *argv[], char *env[])
 		free(str);
 		str = readline("msh$ ");
 	}
+	vec_deep_free((t_vec *)ar);
 	return (main_end(str, res));
 }

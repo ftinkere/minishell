@@ -9,7 +9,7 @@ t_vec		*vec_init(void);
 t_vec		*vec_add(t_vec *vec, void *a);
 t_vec		*vec_grow(t_vec *vec);
 void		vec_free(t_vec *vec);
-void		vec_deep_free(t_vec *vec);
+int			vec_deep_free(t_vec *vec);
 
 /*
 ** Vector of lexes
@@ -17,7 +17,7 @@ void		vec_deep_free(t_vec *vec);
 t_vec_lex	*vec_lex_init(void);
 t_vec_lex	*vec_lex_grow(t_vec_lex *vec);
 t_vec_lex	*vec_lex_add(t_vec_lex *vec, t_lex lex);
-void		vec_lex_free(t_vec_lex *vec);
+int			vec_lex_free(t_vec_lex *vec);
 
 /*
 ** Vector of ints
@@ -42,8 +42,7 @@ t_vec		*split_semicolon(char *str);
 /*
 ** Parser
 */
-t_pipeline	*parser(t_vec_lex *lexes, int *ret_redirect, int *ret_parse,
-				t_vec_env *env);
+t_pipeline	*parser(t_vec_lex *lexes, int *ret, t_vec_env *env);
 int			read_lessless__ret_fd(char *end_str);
 int			piper(t_pipeline *pipel, int *pipe_n, t_vec_lex *lex, int i);
 int			add_greategreate(t_execve *ex, t_vec_lex *lex, int i);
@@ -121,7 +120,7 @@ char		*str_key(const char *str);
 */
 void		free_execves(t_vec *execves);
 void		free_split(char **strs);
-void		free_pipeline(t_pipeline *pipeline);
+int			free_pipeline(t_pipeline *pipeline);
 int			free_ret(void *fred, int ret);
 
 /*

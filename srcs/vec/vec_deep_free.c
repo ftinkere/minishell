@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-void	vec_deep_free(t_vec *vec)
+int	vec_deep_free(t_vec *vec)
 {
 	int	i;
 
@@ -9,4 +9,5 @@ void	vec_deep_free(t_vec *vec)
 		free(((void **)vec->arr)[i++]);
 	free(vec->arr);
 	free(vec);
+	return (1);
 }
