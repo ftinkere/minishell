@@ -52,6 +52,7 @@ int			add_less(t_execve *ex, t_vec_lex *lex, int i);
 int			check_err_redirect(t_vec_lex *lex, int i);
 int			count_args(t_vec_lex *lex, int start);
 int			count_pipes(t_vec_lex *lexes);
+void		set_args(t_pipeline *pipel, t_vec_lex *lex, int args_count, int i);
 
 /*
 ** Expander

@@ -55,15 +55,8 @@ static int
 			expand_path(lex->arr[get_args(pipel, i * 2)].str, env);
 		get_execve(pipel, i)->argv = \
 			ft_calloc(args_count + 1, sizeof(char *));
-		j = 0;
-		while (j < args_count)
-		{
-			if (lex->arr[get_args(pipel, i * 2) + j].token == T_WORD)
-				get_execve(pipel, i)->argv[j] = \
-					ft_strdup(lex->arr[get_args(pipel, i * 2) + j].str);
-			j++;
-		}
-		((t_execve **)pipel->execves->arr)[i++]->argv[j] = NULL;
+		set_args(pipel, lex, args_count, i);
+		i++;
 	}
 	return (0);
 }
