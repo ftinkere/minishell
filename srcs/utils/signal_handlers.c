@@ -3,21 +3,24 @@
 
 extern int	g_last_code;
 
-void	sigint_handler(__attribute__((unused)) int status)
+void	sigint_handler(int status)
 {
+	(void)status;
 	g_last_code = 130;
-	printf("\n");
+	printf("\b\b\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
 
-void	sigint_proc_handler(__attribute__((unused)) int status)
+void	sigint_proc_handler(int status)
 {
+	(void)status;
 	printf("\n");
 }
 
-void	sigquit_proc_handler(__attribute__((unused)) int status)
+void	sigquit_proc_handler(int status)
 {
+	(void)status;
 	printf("Quit (core dumped)\n");
 }
