@@ -68,6 +68,15 @@ static int
 	return (0);
 }
 
+static t_pipeline
+	*check_start(t_pipeline *pipel, t_vec_lex *lexes, int *ret_parse)
+{
+	printf("msh: syntax error: next to unexpected token «%s»\n",
+		lexes->arr[1].str);
+	*ret_parse = 1;
+	return (pipel);
+}
+
 t_pipeline
 	*parser(t_vec_lex *lexes, int *ret_redirect, int *ret_parse, t_vec_env *env)
 {
@@ -81,6 +90,8 @@ t_pipeline
 	pipeline = pipeline_init();
 	pipeline->lexes = lexes;
 	pipe_count = count_pipes(lexes);
+	if (lexes->arr[0].token != T_WORD)
+		return (check_start(pipeline, lexes, ret_parse));
 	i = 0;
 	arg = 0;
 	while (i < pipe_count)

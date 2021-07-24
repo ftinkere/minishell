@@ -12,7 +12,7 @@ int	check_err_redirect(t_vec_lex *lex, int i)
 	else if (lex->arr[i + 1].token != T_WORD)
 	{
 		printf("msh: syntax error: next to unexpected token «%s»\n",
-			   lex->arr[i + 1].str);
+			lex->arr[i + 1].str);
 		return (1);
 	}
 	return (0);
