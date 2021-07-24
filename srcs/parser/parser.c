@@ -43,13 +43,12 @@ static int
 {
 	int	args_count;
 	int	i;
-	int	j;
 
 	i = 0;
 	while (i * 2 < (int)pipel->args->size)
 	{
 		args_count = get_args(pipel, i * 2 + 1);
-		if (args_count == 0)
+		if (args_count == 0 || lex->size == 0)
 			return (1);
 		get_execve(pipel, i)->path = \
 			expand_path(lex->arr[get_args(pipel, i * 2)].str, env);
@@ -78,11 +77,11 @@ t_pipeline
 	int			pipe_count;
 	int			arg;
 
-	if (lexes->size < 1)
-		return (NULL);
 	pipeline = pipeline_init();
 	pipeline->lexes = lexes;
 	pipe_count = count_pipes(lexes);
+	if (lexes->size < 1)
+		return (pipeline);
 	if (lexes->arr[0].token != T_WORD)
 		return (check_start(pipeline, lexes, ret));
 	i = 0;
