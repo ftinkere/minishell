@@ -7,7 +7,7 @@ void	sigint_handler(int status)
 {
 	(void)status;
 	g_last_code = 130;
-	printf("\b\b\n");
+	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();

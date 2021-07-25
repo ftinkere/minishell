@@ -63,7 +63,8 @@ int	main(int argc, char *argv[], char *env[])
 	str = readline("msh$ ");
 	while (str != NULL && res >= 0)
 	{
-		add_history(str);
+		if (*str != '\0')
+			add_history(str);
 		res = do_line(str, ar, &g_last_code, 0);
 		if (res < 0)
 			break ;
